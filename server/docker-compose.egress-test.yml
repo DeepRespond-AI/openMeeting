@@ -1,0 +1,44 @@
+# Dedicated acceptance project only: real source + existing dependency images, no production credentials.
+x-test-env: &test-env
+  PYTHONPATH: /workspace/server
+  OPENMEETING_ENV: test
+  OPENMEETING_ADMIN_PASSWORD: EgressTest123!
+  OPENMEETING_SECRET_KEY: egress-isolated-secret
+  OPENMEETING_INTERNAL_SERVICE_TOKEN: egress-fixture-internal
+x-test-volumes: &test-volumes
+  - ../server:/workspace/server:ro
+  - ../tests:/workspace/tests:ro
+  - ../.artifacts/unified-egress:/acceptance
+services:
+  gateway_ms:
+    image: openmeeting-split-gateway_ms:latest
+    environment: *test-env
+    volumes: *test-volumes
+    ports: !override ["127.0.0.1:39710:39110", "127.0.0.1:39711:39111"]
+    command: ["python", "/workspace/tests/e2e/fixtures/egress-services.py", "--service", "gateway"]
+  user_ms:
+    image: openmeeting-split-user_ms:latest
+    environment: *test-env
+    volumes: *test-volumes
+    command: ["python", "/workspace/tests/e2e/fixtures/egress-services.py", "--service", "user"]
+  meeting_ms:
+    image: openmeeting-split-meeting_ms:latest
+    environment: *test-env
+    volumes: *test-volumes
+    command: ["python", "/workspace/tests/e2e/fixtures/egress-services.py", "--service", "meeting"]
+  stt_ms:
+    image: openmeeting-split-stt_ms:latest
+    environment: *test-env
+    volumes: *test-volumes
+    command: ["python", "/workspace/tests/e2e/fixtures/egress-services.py", "--service", "stt"]
+  vendor:
+    image: openmeeting-split-gateway_ms:latest
+    environment: {PYTHONPATH: /workspace/server}
+    volumes: *test-volumes
+    networks:
+      edge:
+        aliases: [fixture-bucket.vendor]
+    ports: ["127.0.0.1:39880:4080", "127.0.0.1:39881:4081"]
+    command: ["python", "/workspace/tests/e2e/fixtures/egress-vendor.py"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:4080/healthz')"]

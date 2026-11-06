@@ -1,0 +1,77 @@
+{
+  "imMessageActions": "Message actions",
+  "@imMessageActions": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageCopy": "Copy",
+  "@imMessageCopy": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageCopied": "Copied",
+  "@imMessageCopied": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageDelete": "Delete",
+  "@imMessageDelete": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageCancel": "Cancel",
+  "@imMessageCancel": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageConfirm": "Confirm",
+  "@imMessageConfirm": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageDeleteTitle": "Delete this message?",
+  "@imMessageDeleteTitle": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageDeleteDescription": "This only removes it from your history. Other participants keep their copy.",
+  "@imMessageDeleteDescription": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageRecalledSelf": "You recalled a message",
+  "@imMessageRecalledSelf": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageRecalledOther": "{name} recalled a message",
+  "@imMessageRecalledOther": {
+    "description": "Chat message layout and actions",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "imMessageRecallExpiredMinutes": "Cannot recall messages sent more than {minutes} minutes ago",
+  "@imMessageRecallExpiredMinutes": {
+    "description": "Chat message layout and actions",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "imMessageRecallExpiredSeconds": "Cannot recall messages sent more than {seconds} seconds ago",
+  "@imMessageRecallExpiredSeconds": {
+    "description": "Chat message layout and actions",
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "imMessageRecallUnavailable": "This message cannot be recalled",
+  "@imMessageRecallUnavailable": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageSending": "Sending…",
+  "@imMessageSending": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageSendFailed": "Failed to send",
+  "@imMessageSendFailed": {
+    "description": "Chat message layout and actions"
+  }
+}

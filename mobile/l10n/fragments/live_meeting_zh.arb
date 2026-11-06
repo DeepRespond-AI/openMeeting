@@ -1,0 +1,657 @@
+{
+  "liveMediaConnectingInBackground": "音视频正在后台连接，可先使用聊天和成员功能",
+  "liveMediaReleasing": "正在等待上一次音视频连接释放…",
+  "liveMediaReleaseTimedOut": "上一次音视频连接仍在释放，请稍后重试；可退出当前会议",
+  "liveMediaJoinTimedOut": "音视频服务未能在入会时限内就绪，请稍后重试；成员控制和聊天仍可使用",
+  "liveChatMessageHint": "发送消息，全体成员可见",
+  "liveChatEmoji": "表情",
+  "liveChatEmojiFaces": "笑脸",
+  "liveChatEmojiGestures": "手势",
+  "liveChatEmojiSymbols": "符号",
+  "liveShareStop": "停止共享",
+  "liveShareStarting": "正在启动共享…",
+  "liveShareSharing": "正在共享屏幕",
+  "liveShareCaptureHint": "共享屏幕期间，其他参会者可以看到你选择的画面",
+  "liveShareDenied": "未获得屏幕采集授权，请重试并允许共享",
+  "liveShareFailed": "屏幕共享失败，请检查连接后重试",
+  "liveShareReplaced": "屏幕共享已被其他参会者替换",
+  "liveShareStopFailed": "画面已停止，请刷新确认共享状态",
+  "liveShareWaiting": "正在接收共享画面…",
+  "liveShareReceiveFailed": "暂未收到共享画面，请刷新重试",
+  "liveShareBy": "共享者：{name}",
+  "@liveShareBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "liveSpeaking": "正在发言",
+  "liveNetwork": "网络质量",
+  "liveNetworkUnknown": "未知",
+  "liveNetworkGood": "良好",
+  "liveNetworkFair": "一般",
+  "liveNetworkPoor": "较差",
+  "liveNetworkScope": "当前设备到会议媒体服务的 RTC 链路指标；无采样时显示未知",
+  "liveNetworkRtt": "往返延迟",
+  "liveNetworkLoss": "丢包率",
+  "liveNetworkNoData": "暂无数据",
+  "liveMinimize": "返回首页，会议保持连接",
+  "liveReturnMeeting": "返回会议",
+  "liveSessionOngoing": "会议进行中，语音与共享保持连接",
+  "liveRoomConflict": "你已在会议中，已返回当前会议；请先离开再加入其他会议。",
+  "imUnknownUser": "用户",
+  "liveRecordingVersionMismatch": "当前服务不支持自动会议录音，请更新服务后重试。",
+  "liveSharedRecord": "参会共享记录 · 只读",
+  "liveSharedSummaryEmpty": "纪要尚未生成，可稍后刷新查看。",
+  "liveDownloadAudio": "云下载",
+  "liveDownloadingAudio": "正在下载录音…",
+  "liveAudioSaved": "录音已保存，可分享或存储到文件。",
+  "liveExportAudio": "分享或存储录音",
+  "liveRecordEndedNotice": "会议已结束，录音正在后台处理。",
+  "liveRecordCompletedNotice": "会议录音与纪要已处理完成。",
+  "liveRecordFailedNotice": "会议记录处理失败，已保存的录音仍可查看。",
+  "liveViewRecord": "查看记录",
+  "liveHome": "首页",
+  "@liveHome": {
+    "description": "Mobile meeting or messaging: liveHome"
+  },
+  "liveHistory": "会议",
+  "@liveHistory": {
+    "description": "Mobile meeting or messaging: liveHistory"
+  },
+  "liveMine": "我的",
+  "@liveMine": {
+    "description": "Mobile meeting or messaging: liveMine"
+  },
+  "liveMessages": "消息",
+  "@liveMessages": {
+    "description": "Mobile meeting or messaging: liveMessages"
+  },
+  "liveWelcome": "开启高效会议",
+  "@liveWelcome": {
+    "description": "Mobile meeting or messaging: liveWelcome"
+  },
+  "liveWelcomeHint": "连接同事，交流想法，留下会议记录",
+  "@liveWelcomeHint": {
+    "description": "Mobile meeting or messaging: liveWelcomeHint"
+  },
+  "liveJoin": "加入会议",
+  "@liveJoin": {
+    "description": "Mobile meeting or messaging: liveJoin"
+  },
+  "liveQuick": "快速会议",
+  "@liveQuick": {
+    "description": "Mobile meeting or messaging: liveQuick"
+  },
+  "liveSchedule": "预定会议",
+  "@liveSchedule": {
+    "description": "Mobile meeting or messaging: liveSchedule"
+  },
+  "liveRecordingHint": "录制现场声音，转写并生成纪要",
+  "@liveRecordingHint": {
+    "description": "Mobile meeting or messaging: liveRecordingHint"
+  },
+  "liveUpcoming": "即将开始",
+  "@liveUpcoming": {
+    "description": "Mobile meeting or messaging: liveUpcoming"
+  },
+  "liveNoSchedules": "暂无预定会议",
+  "@liveNoSchedules": {
+    "description": "Mobile meeting or messaging: liveNoSchedules"
+  },
+  "liveRefresh": "刷新",
+  "@liveRefresh": {
+    "description": "Mobile meeting or messaging: liveRefresh"
+  },
+  "liveCode": "会议号",
+  "@liveCode": {
+    "description": "Mobile meeting or messaging: liveCode"
+  },
+  "liveCodeHint": "请输入 6 位会议号",
+  "@liveCodeHint": {
+    "description": "Mobile meeting or messaging: liveCodeHint"
+  },
+  "liveCodeValue": "会议号：{code}",
+  "@liveCodeValue": {
+    "description": "Mobile meeting or messaging: liveCodeValue",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "livePassword": "入会密码",
+  "@livePassword": {
+    "description": "Mobile meeting or messaging: livePassword"
+  },
+  "livePasswordOptional": "有密码的会议请填写",
+  "@livePasswordOptional": {
+    "description": "Mobile meeting or messaging: livePasswordOptional"
+  },
+  "liveMic": "麦克风",
+  "@liveMic": {
+    "description": "Mobile meeting or messaging: liveMic"
+  },
+  "liveCamera": "摄像头",
+  "@liveCamera": {
+    "description": "Mobile meeting or messaging: liveCamera"
+  },
+  "liveJoinNotice": "入会后可开启音视频。会议可能被录制并生成纪要。",
+  "@liveJoinNotice": {
+    "description": "Mobile meeting or messaging: liveJoinNotice"
+  },
+  "liveTitle": "会议主题",
+  "@liveTitle": {
+    "description": "Mobile meeting or messaging: liveTitle"
+  },
+  "liveTitleRequired": "请输入会议主题",
+  "@liveTitleRequired": {
+    "description": "Mobile meeting or messaging: liveTitleRequired"
+  },
+  "livePasswordInvalid": "密码须为 4–6 位数字",
+  "@livePasswordInvalid": {
+    "description": "Mobile meeting or messaging: livePasswordInvalid"
+  },
+  "liveFutureTime": "开始时间须晚于当前时间",
+  "@liveFutureTime": {
+    "description": "Mobile meeting or messaging: liveFutureTime"
+  },
+  "liveEditSchedule": "修改预定",
+  "@liveEditSchedule": {
+    "description": "Mobile meeting or messaging: liveEditSchedule"
+  },
+  "liveStartTime": "开始时间",
+  "@liveStartTime": {
+    "description": "Mobile meeting or messaging: liveStartTime"
+  },
+  "liveDuration": "会议时长",
+  "@liveDuration": {
+    "description": "Mobile meeting or messaging: liveDuration"
+  },
+  "liveMinutes": "{count} 分钟",
+  "@liveMinutes": {
+    "description": "Mobile meeting or messaging: liveMinutes",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "liveRequirePassword": "启用入会密码",
+  "@liveRequirePassword": {
+    "description": "Mobile meeting or messaging: liveRequirePassword"
+  },
+  "liveWaitingRoom": "等候室",
+  "@liveWaitingRoom": {
+    "description": "Mobile meeting or messaging: liveWaitingRoom"
+  },
+  "liveReminder": "提前{minutes}分钟提醒（应用前台）",
+  "@liveReminder": {
+    "description": "Foreground reminder lead time",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "liveSave": "保存",
+  "@liveSave": {
+    "description": "Mobile meeting or messaging: liveSave"
+  },
+  "liveSaving": "处理中…",
+  "@liveSaving": {
+    "description": "Mobile meeting or messaging: liveSaving"
+  },
+  "liveEdit": "编辑",
+  "@liveEdit": {
+    "description": "Mobile meeting or messaging: liveEdit"
+  },
+  "liveCancelSchedule": "取消预定",
+  "@liveCancelSchedule": {
+    "description": "Mobile meeting or messaging: liveCancelSchedule"
+  },
+  "liveBack": "取消",
+  "@liveBack": {
+    "description": "Mobile meeting or messaging: liveBack"
+  },
+  "liveConfirm": "确认",
+  "@liveConfirm": {
+    "description": "Mobile meeting or messaging: liveConfirm"
+  },
+  "liveRoom": "会议房间",
+  "@liveRoom": {
+    "description": "Mobile meeting or messaging: liveRoom"
+  },
+  "liveJoining": "正在加入会议…",
+  "@liveJoining": {
+    "description": "Mobile meeting or messaging: liveJoining"
+  },
+  "liveWaiting": "请等待主持人准入",
+  "@liveWaiting": {
+    "description": "Mobile meeting or messaging: liveWaiting"
+  },
+  "liveCancelJoin": "取消入会",
+  "@liveCancelJoin": {
+    "description": "Mobile meeting or messaging: liveCancelJoin"
+  },
+  "liveBackHome": "返回首页",
+  "@liveBackHome": {
+    "description": "Mobile meeting or messaging: liveBackHome"
+  },
+  "liveEnded": "会议已结束或已离开",
+  "@liveEnded": {
+    "description": "Mobile meeting or messaging: liveEnded"
+  },
+  "liveViewNotes": "查看会议记录",
+  "@liveViewNotes": {
+    "description": "Mobile meeting or messaging: liveViewNotes"
+  },
+  "liveMembersCount": "{count} 位成员",
+  "@liveMembersCount": {
+    "description": "Mobile meeting or messaging: liveMembersCount",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "liveReconnecting": "连接恢复中，请稍候…",
+  "@liveReconnecting": {
+    "description": "Mobile meeting or messaging: liveReconnecting"
+  },
+  "liveMediaUnavailable": "音视频尚未连接，成员控制和聊天仍可使用",
+  "@liveMediaUnavailable": {
+    "description": "Mobile meeting or messaging: liveMediaUnavailable"
+  },
+  "liveRetry": "重试",
+  "@liveRetry": {
+    "description": "Mobile meeting or messaging: liveRetry"
+  },
+  "liveError": "操作失败",
+  "@liveError": {
+    "description": "Mobile meeting or messaging: liveError"
+  },
+  "liveMe": "我",
+  "@liveMe": {
+    "description": "Mobile meeting or messaging: liveMe"
+  },
+  "liveMembers": "成员",
+  "@liveMembers": {
+    "description": "Mobile meeting or messaging: liveMembers"
+  },
+  "liveChat": "聊天",
+  "@liveChat": {
+    "description": "Mobile meeting or messaging: liveChat"
+  },
+  "liveMore": "更多",
+  "@liveMore": {
+    "description": "Mobile meeting or messaging: liveMore"
+  },
+  "liveLeave": "离开",
+  "@liveLeave": {
+    "description": "Mobile meeting or messaging: liveLeave"
+  },
+  "liveEnd": "结束会议",
+  "@liveEnd": {
+    "description": "Mobile meeting or messaging: liveEnd"
+  },
+  "liveEndHint": "结束前将确认剩余录音上传，随后在后台处理。实际参会者均可查看记录、回放和下载录音。",
+  "@liveEndHint": {
+    "description": "Mobile meeting or messaging: liveEndHint"
+  },
+  "liveLeaveHint": "离开不会结束会议。会议结束后，你仍可在会议记录中查看、回放和下载录音。",
+  "@liveLeaveHint": {
+    "description": "Mobile meeting or messaging: liveLeaveHint"
+  },
+  "liveClose": "关闭",
+  "@liveClose": {
+    "description": "Mobile meeting or messaging: liveClose"
+  },
+  "liveHost": "主持人",
+  "@liveHost": {
+    "description": "Mobile meeting or messaging: liveHost"
+  },
+  "liveMember": "成员",
+  "@liveMember": {
+    "description": "Mobile meeting or messaging: liveMember"
+  },
+  "liveAdmit": "准入",
+  "@liveAdmit": {
+    "description": "Mobile meeting or messaging: liveAdmit"
+  },
+  "liveDeny": "拒绝",
+  "@liveDeny": {
+    "description": "Mobile meeting or messaging: liveDeny"
+  },
+  "liveMuteAll": "全员静音",
+  "@liveMuteAll": {
+    "description": "Mobile meeting or messaging: liveMuteAll"
+  },
+  "liveMute": "静音",
+  "@liveMute": {
+    "description": "Mobile meeting or messaging: liveMute"
+  },
+  "liveUnmute": "解除静音限制",
+  "@liveUnmute": {
+    "description": "Mobile meeting or messaging: liveUnmute"
+  },
+  "liveApproveHand": "同意发言",
+  "@liveApproveHand": {
+    "description": "Mobile meeting or messaging: liveApproveHand"
+  },
+  "liveRemove": "移出",
+  "@liveRemove": {
+    "description": "Mobile meeting or messaging: liveRemove"
+  },
+  "liveTransfer": "转让主持人/群主",
+  "@liveTransfer": {
+    "description": "Mobile meeting or messaging: liveTransfer"
+  },
+  "liveAttach": "添加附件",
+  "@liveAttach": {
+    "description": "Mobile meeting or messaging: liveAttach"
+  },
+  "liveMessage": "输入消息",
+  "@liveMessage": {
+    "description": "Mobile meeting or messaging: liveMessage"
+  },
+  "liveSend": "发送",
+  "@liveSend": {
+    "description": "Mobile meeting or messaging: liveSend"
+  },
+  "liveNoMessages": "暂无消息",
+  "@liveNoMessages": {
+    "description": "Mobile meeting or messaging: liveNoMessages"
+  },
+  "liveRaiseHand": "举手",
+  "@liveRaiseHand": {
+    "description": "Mobile meeting or messaging: liveRaiseHand"
+  },
+  "liveLowerHand": "放下手",
+  "@liveLowerHand": {
+    "description": "Mobile meeting or messaging: liveLowerHand"
+  },
+  "liveSwitchCamera": "切换摄像头",
+  "@liveSwitchCamera": {
+    "description": "Mobile meeting or messaging: liveSwitchCamera"
+  },
+  "liveSpeaker": "使用扬声器",
+  "@liveSpeaker": {
+    "description": "Mobile meeting or messaging: liveSpeaker"
+  },
+  "liveEarpiece": "使用听筒",
+  "@liveEarpiece": {
+    "description": "Mobile meeting or messaging: liveEarpiece"
+  },
+  "liveShare": "屏幕共享",
+  "@liveShare": {
+    "description": "Mobile meeting or messaging: liveShare"
+  },
+  "liveShareUnavailable": "当前移动版本暂不支持屏幕共享",
+  "@liveShareUnavailable": {
+    "description": "Mobile meeting or messaging: liveShareUnavailable"
+  },
+  "liveSettings": "会中设置",
+  "@liveSettings": {
+    "description": "Mobile meeting or messaging: liveSettings"
+  },
+  "liveSettingsHint": "修改对之后入会的成员生效，不会移出当前成员。",
+  "@liveSettingsHint": {
+    "description": "Mobile meeting or messaging: liveSettingsHint"
+  },
+  "liveHostOnly": "仅主持人可以修改会议设置",
+  "@liveHostOnly": {
+    "description": "Mobile meeting or messaging: liveHostOnly"
+  },
+  "liveKeepPassword": "留空保留当前密码",
+  "@liveKeepPassword": {
+    "description": "Mobile meeting or messaging: liveKeepPassword"
+  },
+  "imConversations": "会话",
+  "@imConversations": {
+    "description": "Mobile meeting or messaging: imConversations"
+  },
+  "imContacts": "联系人",
+  "@imContacts": {
+    "description": "Mobile meeting or messaging: imContacts"
+  },
+  "imGroups": "群组",
+  "@imGroups": {
+    "description": "Mobile meeting or messaging: imGroups"
+  },
+  "imNew": "新建会话",
+  "@imNew": {
+    "description": "Mobile meeting or messaging: imNew"
+  },
+  "imEmpty": "暂无内容",
+  "@imEmpty": {
+    "description": "Mobile meeting or messaging: imEmpty"
+  },
+  "imCreateGroup": "新建群聊",
+  "@imCreateGroup": {
+    "description": "Mobile meeting or messaging: imCreateGroup"
+  },
+  "imGroupName": "群名称",
+  "@imGroupName": {
+    "description": "Mobile meeting or messaging: imGroupName"
+  },
+  "imUserId": "用户 ID",
+  "@imUserId": {
+    "description": "Mobile meeting or messaging: imUserId"
+  },
+  "imMemberIds": "成员用户 ID，以逗号或空格分隔",
+  "@imMemberIds": {
+    "description": "Mobile meeting or messaging: imMemberIds"
+  },
+  "imCreate": "创建",
+  "@imCreate": {
+    "description": "Mobile meeting or messaging: imCreate"
+  },
+  "imManageGroup": "群管理",
+  "@imManageGroup": {
+    "description": "Mobile meeting or messaging: imManageGroup"
+  },
+  "imPin": "置顶/取消置顶",
+  "@imPin": {
+    "description": "Mobile meeting or messaging: imPin"
+  },
+  "imLoadOlder": "加载更早消息",
+  "@imLoadOlder": {
+    "description": "Mobile meeting or messaging: imLoadOlder"
+  },
+  "imLoadMore": "加载更多",
+  "@imLoadMore": {
+    "description": "Mobile meeting or messaging: imLoadMore"
+  },
+  "imRecalled": "消息已撤回",
+  "@imRecalled": {
+    "description": "Mobile meeting or messaging: imRecalled"
+  },
+  "imAttachment": "附件消息",
+  "@imAttachment": {
+    "description": "Mobile meeting or messaging: imAttachment"
+  },
+  "imDownload": "下载",
+  "@imDownload": {
+    "description": "Mobile meeting or messaging: imDownload"
+  },
+  "imPlay": "播放",
+  "@imPlay": {
+    "description": "Mobile meeting or messaging: imPlay"
+  },
+  "imRecall": "撤回",
+  "@imRecall": {
+    "description": "Mobile meeting or messaging: imRecall"
+  },
+  "imImage": "图片",
+  "@imImage": {
+    "description": "Mobile meeting or messaging: imImage"
+  },
+  "imVideo": "视频",
+  "@imVideo": {
+    "description": "Mobile meeting or messaging: imVideo"
+  },
+  "imFile": "文件",
+  "@imFile": {
+    "description": "Mobile meeting or messaging: imFile"
+  },
+  "imVoice": "语音",
+  "@imVoice": {
+    "description": "Mobile meeting or messaging: imVoice"
+  },
+  "imStopSend": "结束并发送",
+  "@imStopSend": {
+    "description": "Mobile meeting or messaging: imStopSend"
+  },
+  "imVoiceLimit": "已达到录音时长上限，本次录音已取消",
+  "@imVoiceLimit": {
+    "description": "Mobile meeting or messaging: imVoiceLimit"
+  },
+  "imStopPlayback": "停止播放",
+  "@imStopPlayback": {
+    "description": "Mobile meeting or messaging: imStopPlayback"
+  },
+  "imRequests": "好友申请",
+  "@imRequests": {
+    "description": "Mobile meeting or messaging: imRequests"
+  },
+  "imNoRequests": "暂无待处理申请",
+  "@imNoRequests": {
+    "description": "Mobile meeting or messaging: imNoRequests"
+  },
+  "imAddContact": "添加联系人",
+  "@imAddContact": {
+    "description": "Mobile meeting or messaging: imAddContact"
+  },
+  "imAccept": "接受",
+  "@imAccept": {
+    "description": "Mobile meeting or messaging: imAccept"
+  },
+  "imDecline": "拒绝",
+  "@imDecline": {
+    "description": "Mobile meeting or messaging: imDecline"
+  },
+  "imRemark": "备注",
+  "@imRemark": {
+    "description": "Mobile meeting or messaging: imRemark"
+  },
+  "imRemoveContact": "删除联系人",
+  "@imRemoveContact": {
+    "description": "Mobile meeting or messaging: imRemoveContact"
+  },
+  "imInvitations": "群邀请",
+  "@imInvitations": {
+    "description": "Mobile meeting or messaging: imInvitations"
+  },
+  "imAnnouncement": "群公告",
+  "@imAnnouncement": {
+    "description": "Mobile meeting or messaging: imAnnouncement"
+  },
+  "imInvite": "邀请成员",
+  "@imInvite": {
+    "description": "Mobile meeting or messaging: imInvite"
+  },
+  "imAdminRole": "设置/取消管理员",
+  "@imAdminRole": {
+    "description": "Mobile meeting or messaging: imAdminRole"
+  },
+  "imDismissGroup": "解散群聊",
+  "@imDismissGroup": {
+    "description": "Mobile meeting or messaging: imDismissGroup"
+  },
+  "imLeaveGroup": "退出群聊",
+  "@imLeaveGroup": {
+    "description": "Mobile meeting or messaging: imLeaveGroup"
+  },
+  "liveReminderSoon": "会议即将开始：{title}",
+  "@liveReminderSoon": {
+    "description": "Foreground schedule reminder",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "liveRecordingTitle": "会议录制",
+  "liveRecordingOff": "自动录音尚未激活",
+  "liveRecordingShared": "会议正在共享录制",
+  "liveRecordingActive": "正在录制会议音频",
+  "liveRecordingUploading": "正在上传会议录音",
+  "liveRecordingFailed": "会议录音处理失败",
+  "liveRecordingWaiting": "等待可录制的音轨",
+  "liveRecordingNoFrames": "未收到音频，请检查麦克风权限和音视频连接",
+  "liveRecordingBacklog": "录音上传积压，采集已暂停，请重试上传",
+  "liveRecordingError": "录音失败：{message}",
+  "@liveRecordingError": {
+    "placeholders": {
+      "message": {
+        "type": "String"
+      }
+    }
+  },
+  "liveRoomRecordingHint": "会议自动录音，由主持人设备上传已接收的音轨。结束前确认剩余分片上传；实际参会者（包括提前离开者）均可查看记录和下载录音。没有音轨或上传失败时不会显示录音成功。",
+  "liveRecordingStart": "开始录制",
+  "liveRecordingStop": "停止录制",
+  "liveRecordingRequest": "申请录制",
+  "liveRecordingPending": "等待主持人处理",
+  "liveRecordingApprovals": "录制申请",
+  "liveRecordingNoRequests": "暂无待处理录制申请",
+  "liveRecordingProcessed": "会议录音处理完成",
+  "liveRecordingProcessing": "正在处理录音、转写和纪要",
+  "liveHistoryRecords": "历史会议记录",
+  "liveUpcomingTab": "预定会议",
+  "liveScheduleActive": "正在开会 · 结束当前场次后可编辑或取消",
+  "liveScheduleSearch": "搜索主题、会议号或发起人",
+  "liveScheduleNoMatches": "没有符合条件的预定会议",
+  "liveScheduleHost": "发起人：{name}",
+  "@liveScheduleHost": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "liveScheduleDate": "会议日期",
+  "imPause": "暂停",
+  "liveRecordingTools": "录音转写",
+  "liveRecordingToolsHint": "开始现场录音，或导入已有音频进行转写",
+  "liveToday": "今天",
+  "liveTomorrow": "明天",
+  "liveAgendaOngoing": "进行中",
+  "liveAgendaJoined": "已入会",
+  "liveAgendaDay": "{day} {date}",
+  "liveAgendaTime": "{start}–{end}",
+  "liveInvite": "邀请参会",
+  "liveInvitation": "邀请您参加深应会议\n会议主题：{title}\n会议号：{code}",
+  "@liveAgendaDay": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "@liveAgendaTime": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "@liveInvitation": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "code": {
+        "type": "String"
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+// Base configuration of the BroadcastExtension target.
+// Generated.xcconfig provides FLUTTER_BUILD_NAME / FLUTTER_BUILD_NUMBER, so the extension's
+// version always matches the app's (App Store validation requires it). Pods are NOT included:
+// the extension must not link the app's plugins.
+#include? "../Flutter/Generated.xcconfig"

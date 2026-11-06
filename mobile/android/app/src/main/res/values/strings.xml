@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Launcher display name. Default (non-Chinese devices) = English, matching the in-app locale rule. -->
+<resources>
+    <string name="app_name">DR Meeting</string>
+</resources>

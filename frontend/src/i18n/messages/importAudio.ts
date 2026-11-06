@@ -1,0 +1,103 @@
+import { defineMessages } from '../types';
+
+// Import audio dialog and window drop overlay.
+export default defineMessages({
+  en: {
+    title: 'Import audio',
+    importing: 'Uploading audio…',
+    uploadingHint: 'Once the upload finishes the dialog closes and the server transcribes the file in the background.',
+    uploadStage: 'Uploading',
+    submitting: 'Upload finished, submitting to the server…',
+    uploaded: 'Upload complete',
+    failed: 'Import failed',
+    description: 'Create a new meeting from an audio file. It is uploaded and transcribed by the server.',
+    errorDescription: 'An error occurred during import.',
+    dropzone: {
+      title: 'Choose an audio file',
+      hint: 'You can also drag a file anywhere into the window',
+      select: 'Select file',
+      validating: 'Validating…',
+    },
+    file: {
+      chooseAnother: 'Choose another file',
+      meetingTitle: 'Meeting title',
+      titlePlaceholder: 'Enter a meeting title',
+    },
+    advanced: {
+      toggle: 'Advanced options',
+      language: 'Language',
+      languagePlaceholder: 'Select language',
+      languageHint: "The audio is uploaded to the server and transcribed with the server's current speech model.",
+    },
+    start: 'Import',
+    tryAgain: 'Try again',
+    toast: {
+      uploaded: 'Audio uploaded',
+      uploadedDetail: 'Transcribing in the background — you can keep working.',
+      complete: '"{title}" is transcribed — {n} segments',
+      transcribeFailed: 'Transcribing "{title}" failed',
+      failed: 'Import failed',
+      cancelled: 'Import cancelled',
+      betaDisabled: 'Beta feature disabled',
+      betaDisabledDetail: 'Enable "Import audio & retranscribe" in Settings → Beta to use this feature.',
+      languageNotApplied: 'Could not apply the default summary language',
+      languageNotAppliedDetail: 'The imported meeting was saved, but the default summary language was not applied.',
+    },
+    errors: {
+      validateFailed: 'Failed to validate the file',
+      startFailed: 'Failed to start the import',
+    },
+    drop: {
+      title: 'Drop the audio file to import',
+    },
+  },
+  'zh-CN': {
+    title: '导入音频',
+    importing: '正在上传音频…',
+    uploadingHint: '上传完成后弹窗会自动关闭，服务器将在后台完成转写。',
+    uploadStage: '上传中',
+    submitting: '已上传，正在提交到服务器…',
+    uploaded: '上传完成',
+    failed: '导入失败',
+    description: '从音频文件创建新会议，文件将上传到服务器并完成转写。',
+    errorDescription: '导入过程中出现错误。',
+    dropzone: {
+      title: '选择音频文件',
+      hint: '也可以将文件直接拖入窗口',
+      select: '选择文件',
+      validating: '校验中…',
+    },
+    file: {
+      chooseAnother: '更换文件',
+      meetingTitle: '会议标题',
+      titlePlaceholder: '请输入会议标题',
+    },
+    advanced: {
+      toggle: '高级选项',
+      language: '语言',
+      languagePlaceholder: '选择语言',
+      languageHint: '音频将上传到服务器，并使用服务器当前的语音识别模型转写。',
+    },
+    start: '开始导入',
+    tryAgain: '重试',
+    toast: {
+      uploaded: '音频已上传',
+      uploadedDetail: '正在后台转写，您可以继续其他操作。',
+      complete: '「{title}」转写完成，共 {n} 段',
+      transcribeFailed: '「{title}」转写失败',
+      failed: '导入失败',
+      cancelled: '已取消导入',
+      betaDisabled: '测试功能未开启',
+      betaDisabledDetail: '请在“设置 → 实验功能”中开启“导入音频与重新转写”。',
+      languageNotApplied: '未能应用默认总结语言',
+      languageNotAppliedDetail: '会议已导入，但默认总结语言未能应用。',
+    },
+    errors: {
+      validateFailed: '文件校验失败',
+      startFailed: '无法开始导入',
+    },
+    drop: {
+      title: '松开即可导入音频文件',
+    },
+  },
+});

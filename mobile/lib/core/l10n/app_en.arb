@@ -1,0 +1,1219 @@
+{
+  "@@locale": "en",
+  "authTabLogin": "Sign in",
+  "authTabRegister": "Register",
+  "authPhoneLabel": "Phone number",
+  "authPhoneHint": "11-digit mobile number",
+  "authPhonePrefix": "+86 ",
+  "authPhoneInvalid": "Enter a valid mainland China mobile number",
+  "authCodeLabel": "Verification code",
+  "authCodeHint": "{length}-digit SMS code",
+  "authCodeInvalid": "Enter the {length}-digit code",
+  "authSendCode": "Get code",
+  "authResendCode": "Resend",
+  "authResendIn": "Resend in {seconds}s",
+  "authSending": "Sending…",
+  "authCodeSent": "Code sent. Check your SMS.",
+  "authDevCodeHint": "Dev code: {code} (tap to fill)",
+  "authNameLabel": "Name",
+  "authNameHint": "Your name",
+  "authNameRequired": "Please enter your name",
+  "authNameTooLong": "Name must be at most {max} characters",
+  "authLoginButton": "Sign in",
+  "authRegisterButton": "Register and sign in",
+  "authRegistrationClosed": "Registration is closed on this server. Ask your administrator for an account.",
+  "authSmsNotReady": "SMS is not configured on this server; verification codes cannot be sent yet.",
+  "authConfigLoadFailed": "Could not load the sign-in settings: {detail}",
+  "authServerRequired": "This build has no service configured, so you cannot sign in. Contact your administrator.",
+  "authMethodPassword": "Password",
+  "authMethodCode": "SMS code",
+  "authPasswordLabel": "Password",
+  "authNewPasswordLabel": "New password",
+  "authPasswordHint": "{min}–{max} characters with letters and digits",
+  "@authPasswordHint": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "authConfirmPasswordLabel": "Confirm password",
+  "authConfirmPasswordHint": "Enter the password again",
+  "authPasswordRequired": "Please enter your password",
+  "authPasswordLength": "Password must be {min}–{max} characters",
+  "@authPasswordLength": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "authPasswordSpaces": "Password cannot start or end with a space",
+  "authPasswordLetterDigit": "Password must contain both letters and digits",
+  "authPasswordMismatch": "The two passwords do not match",
+  "authShowPassword": "Show password",
+  "authHidePassword": "Hide password",
+  "authForgotPassword": "Forgot password?",
+  "authBackToLogin": "Back to sign in",
+  "authResetTitle": "Reset password",
+  "authResetHint": "Verify your mobile number with an SMS code, then choose a new password.",
+  "authResetButton": "Reset password and sign in",
+  "imMessageActions": "Message actions",
+  "@imMessageActions": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageCopy": "Copy",
+  "@imMessageCopy": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageCopied": "Copied",
+  "@imMessageCopied": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageDelete": "Delete",
+  "@imMessageDelete": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageCancel": "Cancel",
+  "@imMessageCancel": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageConfirm": "Confirm",
+  "@imMessageConfirm": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageDeleteTitle": "Delete this message?",
+  "@imMessageDeleteTitle": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageDeleteDescription": "This only removes it from your history. Other participants keep their copy.",
+  "@imMessageDeleteDescription": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageRecalledSelf": "You recalled a message",
+  "@imMessageRecalledSelf": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageRecalledOther": "{name} recalled a message",
+  "@imMessageRecalledOther": {
+    "description": "Chat message layout and actions",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "imMessageRecallExpiredMinutes": "Cannot recall messages sent more than {minutes} minutes ago",
+  "@imMessageRecallExpiredMinutes": {
+    "description": "Chat message layout and actions",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "imMessageRecallExpiredSeconds": "Cannot recall messages sent more than {seconds} seconds ago",
+  "@imMessageRecallExpiredSeconds": {
+    "description": "Chat message layout and actions",
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "imMessageRecallUnavailable": "This message cannot be recalled",
+  "@imMessageRecallUnavailable": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageSending": "Sending…",
+  "@imMessageSending": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageSendFailed": "Failed to send",
+  "@imMessageSendFailed": {
+    "description": "Chat message layout and actions"
+  },
+  "appName": "DR Meeting",
+  "appTagline": "AI meeting assistant",
+  "commonOk": "OK",
+  "commonCancel": "Cancel",
+  "commonConfirm": "Confirm",
+  "commonSave": "Save",
+  "commonTextTooLong": "Use at most {max} characters.",
+  "@commonTextTooLong": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "commonSaving": "Saving…",
+  "commonDelete": "Delete",
+  "commonEdit": "Edit",
+  "commonRename": "Rename",
+  "commonClose": "Close",
+  "commonRetry": "Retry",
+  "commonBack": "Back",
+  "commonNext": "Next",
+  "commonContinue": "Continue",
+  "commonDone": "Done",
+  "commonSkip": "Skip",
+  "commonCopy": "Copy",
+  "commonCopied": "Copied",
+  "commonShare": "Share",
+  "commonSearch": "Search",
+  "commonRefresh": "Refresh",
+  "commonStart": "Start",
+  "commonStop": "Stop",
+  "commonLoading": "Loading…",
+  "commonProcessing": "Processing…",
+  "commonEmpty": "Nothing here yet",
+  "commonEnabled": "Enabled",
+  "commonDisabled": "Disabled",
+  "commonComingSoon": "This feature is coming soon",
+  "languageLabel": "Language",
+  "languageSystem": "System default",
+  "languageZh": "简体中文",
+  "languageEn": "English",
+  "timeJustNow": "just now",
+  "timeMinutesAgo": "{count} min ago",
+  "timeHoursAgo": "{count} h ago",
+  "timeDaysAgo": "{count} d ago",
+  "timeToday": "Today",
+  "timeYesterday": "Yesterday",
+  "errorGeneric": "Something went wrong. Please try again.",
+  "errorWithDetail": "Error: {detail}",
+  "errorNetwork": "Cannot reach the server. Check your network or the server address.",
+  "errorTimeout": "The request timed out. Please try again.",
+  "errorBadRequest": "The request was rejected.",
+  "errorUnauthorized": "Your session is no longer valid. Please sign in again.",
+  "errorForbidden": "You are not allowed to do this.",
+  "errorNotFound": "Not found, or it has been deleted.",
+  "errorConflict": "Conflict. Refresh and try again.",
+  "errorPayloadTooLarge": "The content is too large for the server.",
+  "errorInvalidInput": "Invalid input. Please check and try again.",
+  "errorRateLimited": "Too many requests. Please try again later.",
+  "errorUnavailable": "The service is temporarily unavailable.",
+  "errorServer": "Server error. Please try again later.",
+  "errorCancelled": "Cancelled",
+  "errorNotConfigured": "No server address has been set.",
+  "errorUnknown": "An unknown error occurred.",
+  "authSessionExpired": "Your session has expired. Please sign in again.",
+  "navOnboarding": "Welcome",
+  "navLogin": "Sign in",
+  "navMeetings": "Meetings",
+  "navMeetingDetail": "Meeting",
+  "navRecording": "Record",
+  "navImport": "Import audio",
+  "navSettings": "Settings",
+  "onboardingGetStarted": "Get started",
+  "meetingsEmpty": "No meetings yet",
+  "meetingsUntitled": "Untitled meeting",
+  "transcriptionLanguageName": "{code, select, auto{Auto detect} zh{Chinese} en{English} ja{Japanese} ko{Korean} yue{Cantonese} de{German} fr{French} es{Spanish} ru{Russian} other{{code}}}",
+  "liveMediaConnectingInBackground": "Audio/video is connecting in the background. Chat and member controls are available.",
+  "liveMediaReleasing": "Waiting for the previous audio/video connection to close…",
+  "liveMediaReleaseTimedOut": "The previous audio/video connection is still closing. Retry shortly, or leave this meeting.",
+  "liveMediaJoinTimedOut": "The audio/video service was not ready before the join deadline. Try again later; meeting controls and chat remain available.",
+  "liveChatMessageHint": "Message everyone",
+  "liveChatEmoji": "Emoji",
+  "liveChatEmojiFaces": "Faces",
+  "liveChatEmojiGestures": "Gestures",
+  "liveChatEmojiSymbols": "Symbols",
+  "liveShareStop": "Stop sharing",
+  "liveShareStarting": "Starting screen share…",
+  "liveShareSharing": "Sharing your screen",
+  "liveShareCaptureHint": "Participants can see the screen content you choose to share",
+  "liveShareDenied": "Screen capture was not allowed. Try again and allow sharing.",
+  "liveShareFailed": "Screen sharing failed. Check your connection and try again.",
+  "liveShareReplaced": "Another participant replaced your screen share",
+  "liveShareStopFailed": "Capture stopped. Refresh to confirm the sharing state.",
+  "liveShareWaiting": "Receiving shared screen…",
+  "liveShareReceiveFailed": "No shared screen received. Refresh to retry.",
+  "liveShareBy": "Shared by {name}",
+  "@liveShareBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "liveSpeaking": "Speaking",
+  "liveNetwork": "Network quality",
+  "liveNetworkUnknown": "Unknown",
+  "liveNetworkGood": "Good",
+  "liveNetworkFair": "Fair",
+  "liveNetworkPoor": "Poor",
+  "liveNetworkScope": "RTC link metrics between this device and the meeting media service. Unknown when no sample is available.",
+  "liveNetworkRtt": "Round-trip latency",
+  "liveNetworkLoss": "Packet loss",
+  "liveNetworkNoData": "No data",
+  "liveMinimize": "Go home and stay connected",
+  "liveReturnMeeting": "Return to meeting",
+  "liveSessionOngoing": "Meeting in progress; audio and sharing stay connected",
+  "liveRoomConflict": "Returned to your current meeting. Leave it before joining another.",
+  "imUnknownUser": "User",
+  "liveRecordingVersionMismatch": "This server does not support automatic meeting recording. Update it and retry.",
+  "liveSharedRecord": "Shared attendance record · Read only",
+  "liveSharedSummaryEmpty": "The summary is not ready yet. Refresh later to check.",
+  "liveDownloadAudio": "Cloud download",
+  "liveDownloadingAudio": "Downloading recording…",
+  "liveAudioSaved": "Recording saved. You can share or save it to Files.",
+  "liveExportAudio": "Share or save recording",
+  "liveRecordEndedNotice": "Meeting ended. The recording is processing in the background.",
+  "liveRecordCompletedNotice": "The meeting recording and summary are ready.",
+  "liveRecordFailedNotice": "Meeting processing failed. Any saved audio remains available.",
+  "liveViewRecord": "View record",
+  "liveHome": "Home",
+  "@liveHome": {
+    "description": "Mobile meeting or messaging: liveHome"
+  },
+  "liveHistory": "Meetings",
+  "@liveHistory": {
+    "description": "Mobile meeting or messaging: liveHistory"
+  },
+  "liveMine": "Me",
+  "@liveMine": {
+    "description": "Mobile meeting or messaging: liveMine"
+  },
+  "liveMessages": "Messages",
+  "@liveMessages": {
+    "description": "Mobile meeting or messaging: liveMessages"
+  },
+  "liveWelcome": "Meet with purpose",
+  "@liveWelcome": {
+    "description": "Mobile meeting or messaging: liveWelcome"
+  },
+  "liveWelcomeHint": "Connect, share ideas and keep meeting notes",
+  "@liveWelcomeHint": {
+    "description": "Mobile meeting or messaging: liveWelcomeHint"
+  },
+  "liveJoin": "Join",
+  "@liveJoin": {
+    "description": "Mobile meeting or messaging: liveJoin"
+  },
+  "liveQuick": "Meet now",
+  "@liveQuick": {
+    "description": "Mobile meeting or messaging: liveQuick"
+  },
+  "liveSchedule": "Schedule",
+  "@liveSchedule": {
+    "description": "Mobile meeting or messaging: liveSchedule"
+  },
+  "liveRecordingHint": "Record audio, transcribe and create notes",
+  "@liveRecordingHint": {
+    "description": "Mobile meeting or messaging: liveRecordingHint"
+  },
+  "liveUpcoming": "Upcoming",
+  "@liveUpcoming": {
+    "description": "Mobile meeting or messaging: liveUpcoming"
+  },
+  "liveNoSchedules": "No scheduled meetings",
+  "@liveNoSchedules": {
+    "description": "Mobile meeting or messaging: liveNoSchedules"
+  },
+  "liveRefresh": "Refresh",
+  "@liveRefresh": {
+    "description": "Mobile meeting or messaging: liveRefresh"
+  },
+  "liveCode": "Meeting code",
+  "@liveCode": {
+    "description": "Mobile meeting or messaging: liveCode"
+  },
+  "liveCodeHint": "Enter a 6-digit meeting code",
+  "@liveCodeHint": {
+    "description": "Mobile meeting or messaging: liveCodeHint"
+  },
+  "liveCodeValue": "Meeting code: {code}",
+  "@liveCodeValue": {
+    "description": "Mobile meeting or messaging: liveCodeValue",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "livePassword": "Meeting password",
+  "@livePassword": {
+    "description": "Mobile meeting or messaging: livePassword"
+  },
+  "livePasswordOptional": "Required only for protected meetings",
+  "@livePasswordOptional": {
+    "description": "Mobile meeting or messaging: livePasswordOptional"
+  },
+  "liveMic": "Microphone",
+  "@liveMic": {
+    "description": "Mobile meeting or messaging: liveMic"
+  },
+  "liveCamera": "Camera",
+  "@liveCamera": {
+    "description": "Mobile meeting or messaging: liveCamera"
+  },
+  "liveJoinNotice": "You can enable audio and video after joining. This meeting may be recorded.",
+  "@liveJoinNotice": {
+    "description": "Mobile meeting or messaging: liveJoinNotice"
+  },
+  "liveTitle": "Meeting title",
+  "@liveTitle": {
+    "description": "Mobile meeting or messaging: liveTitle"
+  },
+  "liveTitleRequired": "Enter a meeting title",
+  "@liveTitleRequired": {
+    "description": "Mobile meeting or messaging: liveTitleRequired"
+  },
+  "livePasswordInvalid": "Use a 4–6 digit password",
+  "@livePasswordInvalid": {
+    "description": "Mobile meeting or messaging: livePasswordInvalid"
+  },
+  "liveFutureTime": "Choose a future start time",
+  "@liveFutureTime": {
+    "description": "Mobile meeting or messaging: liveFutureTime"
+  },
+  "liveEditSchedule": "Edit schedule",
+  "@liveEditSchedule": {
+    "description": "Mobile meeting or messaging: liveEditSchedule"
+  },
+  "liveStartTime": "Start time",
+  "@liveStartTime": {
+    "description": "Mobile meeting or messaging: liveStartTime"
+  },
+  "liveDuration": "Duration",
+  "@liveDuration": {
+    "description": "Mobile meeting or messaging: liveDuration"
+  },
+  "liveMinutes": "{count} minutes",
+  "@liveMinutes": {
+    "description": "Mobile meeting or messaging: liveMinutes",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "liveRequirePassword": "Require a password",
+  "@liveRequirePassword": {
+    "description": "Mobile meeting or messaging: liveRequirePassword"
+  },
+  "liveWaitingRoom": "Waiting room",
+  "@liveWaitingRoom": {
+    "description": "Mobile meeting or messaging: liveWaitingRoom"
+  },
+  "liveReminder": "Remind {minutes} minutes before (while app is open)",
+  "@liveReminder": {
+    "description": "Foreground reminder lead time",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "liveSave": "Save",
+  "@liveSave": {
+    "description": "Mobile meeting or messaging: liveSave"
+  },
+  "liveSaving": "Working…",
+  "@liveSaving": {
+    "description": "Mobile meeting or messaging: liveSaving"
+  },
+  "liveEdit": "Edit",
+  "@liveEdit": {
+    "description": "Mobile meeting or messaging: liveEdit"
+  },
+  "liveCancelSchedule": "Cancel schedule",
+  "@liveCancelSchedule": {
+    "description": "Mobile meeting or messaging: liveCancelSchedule"
+  },
+  "liveBack": "Cancel",
+  "@liveBack": {
+    "description": "Mobile meeting or messaging: liveBack"
+  },
+  "liveConfirm": "Confirm",
+  "@liveConfirm": {
+    "description": "Mobile meeting or messaging: liveConfirm"
+  },
+  "liveRoom": "Meeting",
+  "@liveRoom": {
+    "description": "Mobile meeting or messaging: liveRoom"
+  },
+  "liveJoining": "Joining meeting…",
+  "@liveJoining": {
+    "description": "Mobile meeting or messaging: liveJoining"
+  },
+  "liveWaiting": "Waiting for the host to admit you",
+  "@liveWaiting": {
+    "description": "Mobile meeting or messaging: liveWaiting"
+  },
+  "liveCancelJoin": "Cancel joining",
+  "@liveCancelJoin": {
+    "description": "Mobile meeting or messaging: liveCancelJoin"
+  },
+  "liveBackHome": "Back to home",
+  "@liveBackHome": {
+    "description": "Mobile meeting or messaging: liveBackHome"
+  },
+  "liveEnded": "Meeting ended or left",
+  "@liveEnded": {
+    "description": "Mobile meeting or messaging: liveEnded"
+  },
+  "liveViewNotes": "View meeting notes",
+  "@liveViewNotes": {
+    "description": "Mobile meeting or messaging: liveViewNotes"
+  },
+  "liveMembersCount": "{count} members",
+  "@liveMembersCount": {
+    "description": "Mobile meeting or messaging: liveMembersCount",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "liveReconnecting": "Reconnecting…",
+  "@liveReconnecting": {
+    "description": "Mobile meeting or messaging: liveReconnecting"
+  },
+  "liveMediaUnavailable": "Audio/video is not connected. Room controls and chat remain available.",
+  "@liveMediaUnavailable": {
+    "description": "Mobile meeting or messaging: liveMediaUnavailable"
+  },
+  "liveRetry": "Retry",
+  "@liveRetry": {
+    "description": "Mobile meeting or messaging: liveRetry"
+  },
+  "liveError": "Operation failed",
+  "@liveError": {
+    "description": "Mobile meeting or messaging: liveError"
+  },
+  "liveMe": "Me",
+  "@liveMe": {
+    "description": "Mobile meeting or messaging: liveMe"
+  },
+  "liveMembers": "Members",
+  "@liveMembers": {
+    "description": "Mobile meeting or messaging: liveMembers"
+  },
+  "liveChat": "Chat",
+  "@liveChat": {
+    "description": "Mobile meeting or messaging: liveChat"
+  },
+  "liveMore": "More",
+  "@liveMore": {
+    "description": "Mobile meeting or messaging: liveMore"
+  },
+  "liveLeave": "Leave",
+  "@liveLeave": {
+    "description": "Mobile meeting or messaging: liveLeave"
+  },
+  "liveEnd": "End meeting",
+  "@liveEnd": {
+    "description": "Mobile meeting or messaging: liveEnd"
+  },
+  "liveEndHint": "Remaining audio uploads are confirmed before ending. Processing continues in the background, and all actual attendees can view, play and download the record.",
+  "@liveEndHint": {
+    "description": "Mobile meeting or messaging: liveEndHint"
+  },
+  "liveLeaveHint": "Leaving does not end the meeting. You can still view, play and download the recording after the meeting ends.",
+  "@liveLeaveHint": {
+    "description": "Mobile meeting or messaging: liveLeaveHint"
+  },
+  "liveClose": "Close",
+  "@liveClose": {
+    "description": "Mobile meeting or messaging: liveClose"
+  },
+  "liveHost": "Host",
+  "@liveHost": {
+    "description": "Mobile meeting or messaging: liveHost"
+  },
+  "liveMember": "Member",
+  "@liveMember": {
+    "description": "Mobile meeting or messaging: liveMember"
+  },
+  "liveAdmit": "Admit",
+  "@liveAdmit": {
+    "description": "Mobile meeting or messaging: liveAdmit"
+  },
+  "liveDeny": "Deny",
+  "@liveDeny": {
+    "description": "Mobile meeting or messaging: liveDeny"
+  },
+  "liveMuteAll": "Mute all",
+  "@liveMuteAll": {
+    "description": "Mobile meeting or messaging: liveMuteAll"
+  },
+  "liveMute": "Mute",
+  "@liveMute": {
+    "description": "Mobile meeting or messaging: liveMute"
+  },
+  "liveUnmute": "Allow unmute",
+  "@liveUnmute": {
+    "description": "Mobile meeting or messaging: liveUnmute"
+  },
+  "liveApproveHand": "Approve hand",
+  "@liveApproveHand": {
+    "description": "Mobile meeting or messaging: liveApproveHand"
+  },
+  "liveRemove": "Remove",
+  "@liveRemove": {
+    "description": "Mobile meeting or messaging: liveRemove"
+  },
+  "liveTransfer": "Transfer ownership",
+  "@liveTransfer": {
+    "description": "Mobile meeting or messaging: liveTransfer"
+  },
+  "liveAttach": "Attach file",
+  "@liveAttach": {
+    "description": "Mobile meeting or messaging: liveAttach"
+  },
+  "liveMessage": "Message",
+  "@liveMessage": {
+    "description": "Mobile meeting or messaging: liveMessage"
+  },
+  "liveSend": "Send",
+  "@liveSend": {
+    "description": "Mobile meeting or messaging: liveSend"
+  },
+  "liveNoMessages": "No messages yet",
+  "@liveNoMessages": {
+    "description": "Mobile meeting or messaging: liveNoMessages"
+  },
+  "liveRaiseHand": "Raise hand",
+  "@liveRaiseHand": {
+    "description": "Mobile meeting or messaging: liveRaiseHand"
+  },
+  "liveLowerHand": "Lower hand",
+  "@liveLowerHand": {
+    "description": "Mobile meeting or messaging: liveLowerHand"
+  },
+  "liveSwitchCamera": "Switch camera",
+  "@liveSwitchCamera": {
+    "description": "Mobile meeting or messaging: liveSwitchCamera"
+  },
+  "liveSpeaker": "Use speakerphone",
+  "@liveSpeaker": {
+    "description": "Mobile meeting or messaging: liveSpeaker"
+  },
+  "liveEarpiece": "Use earpiece",
+  "@liveEarpiece": {
+    "description": "Mobile meeting or messaging: liveEarpiece"
+  },
+  "liveShare": "Share screen",
+  "@liveShare": {
+    "description": "Mobile meeting or messaging: liveShare"
+  },
+  "liveShareUnavailable": "Screen sharing is not available in this mobile version",
+  "@liveShareUnavailable": {
+    "description": "Mobile meeting or messaging: liveShareUnavailable"
+  },
+  "liveSettings": "Meeting settings",
+  "@liveSettings": {
+    "description": "Mobile meeting or messaging: liveSettings"
+  },
+  "liveSettingsHint": "Changes apply to future joins without removing current members.",
+  "@liveSettingsHint": {
+    "description": "Mobile meeting or messaging: liveSettingsHint"
+  },
+  "liveHostOnly": "Only the host can edit meeting settings",
+  "@liveHostOnly": {
+    "description": "Mobile meeting or messaging: liveHostOnly"
+  },
+  "liveKeepPassword": "Leave blank to keep the current password",
+  "@liveKeepPassword": {
+    "description": "Mobile meeting or messaging: liveKeepPassword"
+  },
+  "imConversations": "Conversations",
+  "@imConversations": {
+    "description": "Mobile meeting or messaging: imConversations"
+  },
+  "imContacts": "Contacts",
+  "@imContacts": {
+    "description": "Mobile meeting or messaging: imContacts"
+  },
+  "imGroups": "Groups",
+  "@imGroups": {
+    "description": "Mobile meeting or messaging: imGroups"
+  },
+  "imNew": "New conversation",
+  "@imNew": {
+    "description": "Mobile meeting or messaging: imNew"
+  },
+  "imEmpty": "Nothing here yet",
+  "@imEmpty": {
+    "description": "Mobile meeting or messaging: imEmpty"
+  },
+  "imCreateGroup": "Create group",
+  "@imCreateGroup": {
+    "description": "Mobile meeting or messaging: imCreateGroup"
+  },
+  "imGroupName": "Group name",
+  "@imGroupName": {
+    "description": "Mobile meeting or messaging: imGroupName"
+  },
+  "imUserId": "User ID",
+  "@imUserId": {
+    "description": "Mobile meeting or messaging: imUserId"
+  },
+  "imMemberIds": "User IDs separated by commas or spaces",
+  "@imMemberIds": {
+    "description": "Mobile meeting or messaging: imMemberIds"
+  },
+  "imCreate": "Create",
+  "@imCreate": {
+    "description": "Mobile meeting or messaging: imCreate"
+  },
+  "imManageGroup": "Manage group",
+  "@imManageGroup": {
+    "description": "Mobile meeting or messaging: imManageGroup"
+  },
+  "imPin": "Pin / unpin",
+  "@imPin": {
+    "description": "Mobile meeting or messaging: imPin"
+  },
+  "imLoadOlder": "Load earlier messages",
+  "@imLoadOlder": {
+    "description": "Mobile meeting or messaging: imLoadOlder"
+  },
+  "imLoadMore": "Load more",
+  "@imLoadMore": {
+    "description": "Mobile meeting or messaging: imLoadMore"
+  },
+  "imRecalled": "Message recalled",
+  "@imRecalled": {
+    "description": "Mobile meeting or messaging: imRecalled"
+  },
+  "imAttachment": "Attachment",
+  "@imAttachment": {
+    "description": "Mobile meeting or messaging: imAttachment"
+  },
+  "imDownload": "Download",
+  "@imDownload": {
+    "description": "Mobile meeting or messaging: imDownload"
+  },
+  "imPlay": "Play",
+  "@imPlay": {
+    "description": "Mobile meeting or messaging: imPlay"
+  },
+  "imRecall": "Recall",
+  "@imRecall": {
+    "description": "Mobile meeting or messaging: imRecall"
+  },
+  "imImage": "Image",
+  "@imImage": {
+    "description": "Mobile meeting or messaging: imImage"
+  },
+  "imVideo": "Video",
+  "@imVideo": {
+    "description": "Mobile meeting or messaging: imVideo"
+  },
+  "imFile": "File",
+  "@imFile": {
+    "description": "Mobile meeting or messaging: imFile"
+  },
+  "imVoice": "Voice",
+  "@imVoice": {
+    "description": "Mobile meeting or messaging: imVoice"
+  },
+  "imStopSend": "Stop and send",
+  "@imStopSend": {
+    "description": "Mobile meeting or messaging: imStopSend"
+  },
+  "imVoiceLimit": "Recording limit reached; this recording was cancelled",
+  "@imVoiceLimit": {
+    "description": "Mobile meeting or messaging: imVoiceLimit"
+  },
+  "imStopPlayback": "Stop playback",
+  "@imStopPlayback": {
+    "description": "Mobile meeting or messaging: imStopPlayback"
+  },
+  "imRequests": "Friend requests",
+  "@imRequests": {
+    "description": "Mobile meeting or messaging: imRequests"
+  },
+  "imNoRequests": "No pending requests",
+  "@imNoRequests": {
+    "description": "Mobile meeting or messaging: imNoRequests"
+  },
+  "imAddContact": "Add contact",
+  "@imAddContact": {
+    "description": "Mobile meeting or messaging: imAddContact"
+  },
+  "imAccept": "Accept",
+  "@imAccept": {
+    "description": "Mobile meeting or messaging: imAccept"
+  },
+  "imDecline": "Decline",
+  "@imDecline": {
+    "description": "Mobile meeting or messaging: imDecline"
+  },
+  "imRemark": "Remark",
+  "@imRemark": {
+    "description": "Mobile meeting or messaging: imRemark"
+  },
+  "imRemoveContact": "Remove contact",
+  "@imRemoveContact": {
+    "description": "Mobile meeting or messaging: imRemoveContact"
+  },
+  "imInvitations": "Group invitations",
+  "@imInvitations": {
+    "description": "Mobile meeting or messaging: imInvitations"
+  },
+  "imAnnouncement": "Announcement",
+  "@imAnnouncement": {
+    "description": "Mobile meeting or messaging: imAnnouncement"
+  },
+  "imInvite": "Invite members",
+  "@imInvite": {
+    "description": "Mobile meeting or messaging: imInvite"
+  },
+  "imAdminRole": "Toggle administrator",
+  "@imAdminRole": {
+    "description": "Mobile meeting or messaging: imAdminRole"
+  },
+  "imDismissGroup": "Dismiss group",
+  "@imDismissGroup": {
+    "description": "Mobile meeting or messaging: imDismissGroup"
+  },
+  "imLeaveGroup": "Leave group",
+  "@imLeaveGroup": {
+    "description": "Mobile meeting or messaging: imLeaveGroup"
+  },
+  "liveReminderSoon": "Meeting starts soon: {title}",
+  "@liveReminderSoon": {
+    "description": "Foreground schedule reminder",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "liveRecordingTitle": "Meeting recording",
+  "liveRecordingOff": "Automatic recording is not active yet",
+  "liveRecordingShared": "Shared meeting recording is active",
+  "liveRecordingActive": "Recording meeting audio",
+  "liveRecordingUploading": "Uploading meeting audio",
+  "liveRecordingFailed": "Meeting recording failed",
+  "liveRecordingWaiting": "Waiting for recordable audio tracks",
+  "liveRecordingNoFrames": "No audio frames received. Check microphone permissions and media connection.",
+  "liveRecordingBacklog": "Recording upload queue is full. Capture is paused; retry the upload.",
+  "liveRecordingError": "Recording failed: {message}",
+  "@liveRecordingError": {
+    "placeholders": {
+      "message": {
+        "type": "String"
+      }
+    }
+  },
+  "liveRoomRecordingHint": "Meetings record automatically. The host uploads received audio tracks and confirms remaining chunks before ending. All actual attendees, including early leavers, can view and download the record. Missing tracks or upload failures are never reported as recording success.",
+  "liveRecordingStart": "Start recording",
+  "liveRecordingStop": "Stop recording",
+  "liveRecordingRequest": "Request recording",
+  "liveRecordingPending": "Awaiting host approval",
+  "liveRecordingApprovals": "Recording requests",
+  "liveRecordingNoRequests": "No pending recording requests",
+  "liveRecordingProcessed": "Meeting recording processed",
+  "liveRecordingProcessing": "Processing recording, transcript and minutes",
+  "liveHistoryRecords": "Meeting history",
+  "liveUpcomingTab": "Scheduled meetings",
+  "liveScheduleActive": "In progress · end the current session before editing or cancelling",
+  "liveScheduleSearch": "Search title, meeting number or host",
+  "liveScheduleNoMatches": "No matching scheduled meetings",
+  "liveScheduleHost": "Host: {name}",
+  "@liveScheduleHost": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "liveScheduleDate": "Meeting date",
+  "imPause": "Pause",
+  "liveRecordingTools": "Record & transcribe",
+  "liveRecordingToolsHint": "Record live audio or import an audio file to transcribe",
+  "liveToday": "Today",
+  "liveTomorrow": "Tomorrow",
+  "liveAgendaOngoing": "In progress",
+  "liveAgendaJoined": "Joined",
+  "liveAgendaDay": "{day} {date}",
+  "liveAgendaTime": "{start}–{end}",
+  "liveInvite": "Invite participants",
+  "liveInvitation": "You are invited to a DR Meeting\nTopic: {title}\nMeeting code: {code}",
+  "@liveAgendaDay": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "@liveAgendaTime": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "@liveInvitation": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "meetingsSearchHint": "Search meeting titles or transcripts",
+  "meetingsSearchEmpty": "No matching meetings",
+  "meetingsSearchClear": "Clear search",
+  "meetingsSearchPartialWarning": "Transcript search is temporarily unavailable. Showing title matches only.",
+  "meetingsEmptyHint": "Tap \"Start recording\" to capture your first meeting",
+  "meetingsStartRecording": "Start recording",
+  "meetingsImportAudio": "Import audio",
+  "meetingsDeleteTitle": "Delete this meeting?",
+  "meetingsDeleteMessage": "\"{title}\" and its transcript, summary and recording will be permanently removed. This cannot be undone.",
+  "meetingsDeleted": "Meeting deleted",
+  "meetingsDeleteFailed": "Failed to delete meeting: {error}",
+  "meetingsSttNotReady": "Speech recognition is temporarily unavailable",
+  "meetingsLlmNotReady": "Meeting summaries are temporarily unavailable",
+  "meetingsOffline": "Cannot reach the service; what you see may be out of date",
+  "meetingsTitleHint": "Meeting title",
+  "meetingsTitleEmpty": "Meeting title cannot be empty",
+  "meetingsRenamed": "Meeting renamed",
+  "meetingsRenameFailed": "Failed to rename meeting: {error}",
+  "meetingsCreatedAt": "Created {date}",
+  "meetingsDuration": "Duration {duration}",
+  "meetingsTabInfo": "Meeting info",
+  "meetingsTabTranscript": "Transcript",
+  "meetingsTabSummary": "AI summary",
+  "meetingsActions": "More actions",
+  "meetingsTranscriptEmpty": "No transcript",
+  "meetingsTranscriptEmptyHint": "No speech was transcribed for this meeting.",
+  "meetingsTranscriptProcessing": "Processing meeting recording…",
+  "meetingsTranscriptChecking": "Checking meeting processing status…",
+  "meetingsTranscriptIncompleteHint": "The transcript is not ready. Check the processing status; saved recordings remain available.",
+  "meetingsTranscriptStatusUnavailable": "Unable to confirm transcript status",
+  "meetingsTranscriptProcessingFailed": "Transcript processing did not complete",
+  "meetingsTranscriptProcessingHint": "The transcript appears here automatically when it is ready.",
+  "meetingsTranscriptLoadingMore": "Loading more…",
+  "meetingsTranscriptShowing": "Showing {loaded} of {total} segments",
+  "meetingsTranscriptLoadMoreFailed": "Failed to load, tap to retry",
+  "meetingsPlayFrom": "Play from {time}",
+  "meetingsAudioLoading": "Loading recording…",
+  "meetingsAudioUnavailable": "This meeting has no recording",
+  "meetingsAudioLoadFailed": "Failed to load recording",
+  "meetingsAudioPlay": "Play",
+  "meetingsAudioPause": "Pause",
+  "meetingsAudioBack": "Back {seconds} seconds",
+  "meetingsAudioForward": "Forward {seconds} seconds",
+  "meetingsAudioSpeed": "Playback speed",
+  "meetingsAudioSpeedValue": "{speed}×",
+  "meetingsAudioPosition": "Playback position",
+  "meetingsActionCopyTranscript": "Copy transcript",
+  "meetingsActionShare": "Share as Markdown",
+  "meetingsActionRetranscribe": "Retranscribe",
+  "meetingsActionDelete": "Delete meeting",
+  "meetingsTranscriptCopied": "Transcript copied to clipboard",
+  "meetingsTranscriptCopyEmpty": "No transcript to copy",
+  "meetingsShareEmpty": "Nothing to share yet",
+  "meetingsExportFailed": "Export failed: {error}",
+  "meetingsMdTranscriptTitle": "Transcript: {title}",
+  "meetingsMdSummaryTitle": "Meeting summary: {title}",
+  "meetingsMdDate": "Date",
+  "meetingsMdDuration": "Duration",
+  "meetingsMdMeetingId": "Meeting ID",
+  "meetingsMdSummary": "Summary",
+  "meetingsMdTranscript": "Transcript",
+  "meetingsMdNoSummary": "(No summary yet)",
+  "meetingsRetranscribeTitle": "Retranscribe meeting",
+  "meetingsRetranscribeDescription": "Re-process the recording with different language settings. The current transcript will be replaced.",
+  "meetingsRetranscribeHint": "The server's current speech model will be used. Choosing the language improves accuracy.",
+  "meetingsRetranscribeStart": "Start retranscription",
+  "meetingsRetranscribeRunning": "Retranscribing…",
+  "meetingsRetranscribeComplete": "Retranscription complete — {count} segments created",
+  "meetingsRetranscribeCancelled": "Retranscription cancelled",
+  "meetingsRetranscribeAlreadyRunning": "A transcription job is already running for this meeting",
+  "meetingsTranscriptionLanguage": "Transcription language",
+  "meetingsLanguageName": "{code, select, auto{Auto detect (original language)} zh{Chinese} en{English} ja{Japanese} ko{Korean} yue{Cantonese} de{German} fr{French} es{Spanish} ru{Russian} it{Italian} pt{Portuguese} other{{code}}}",
+  "meetingsJobProgress": "{percent}%",
+  "summaryCustomPromptLabel": "Additional context (optional)",
+  "summaryCustomPromptHint": "Participants, meeting goal, background… helps the AI write a better summary.",
+  "summaryGenerate": "Generate summary",
+  "summaryRegenerate": "Regenerate",
+  "summaryStop": "Stop",
+  "summaryGenerating": "Generating summary…",
+  "summaryGeneratingHint": "Long meetings may take a minute. You can keep reading the transcript meanwhile.",
+  "summaryEmptyTitle": "No summary yet",
+  "summaryEmptyDescription": "Generate an AI summary to get key points, decisions and action items from this meeting.",
+  "summaryLlmNotReady": "Meeting summaries are temporarily unavailable. Please try again later or contact your administrator.",
+  "summaryFailedGeneration": "Summary generation failed",
+  "summaryFailedGenerationDetail": "Summary generation failed: {error}",
+  "summaryFailedEmpty": "The generated summary has no visible content. Please try again.",
+  "summaryFailedTimeout": "Summary generation is taking too long. Check again later.",
+  "summaryCompleted": "Summary generated",
+  "summaryStopped": "Summary generation stopped",
+  "summaryStopFailed": "Failed to stop: {error}",
+  "summaryEdit": "Edit summary",
+  "summaryEditTab": "Edit",
+  "summaryPreviewTab": "Preview",
+  "summaryEditHint": "Edit the summary in Markdown",
+  "summarySaved": "Summary saved",
+  "summarySaveFailed": "Failed to save: {error}",
+  "summaryDiscardTitle": "Discard unsaved changes?",
+  "summaryDiscard": "Discard",
+  "summaryCopied": "Summary copied to clipboard",
+  "summaryCopyEmpty": "No summary content to copy",
+  "summaryAutoStarted": "Summary generation started automatically",
+  "importDescription": "Create a new meeting from an audio file. It is uploaded and transcribed by the server.",
+  "importPickFile": "Choose an audio file",
+  "importSupportedFormats": "Supported formats: {formats}",
+  "importChangeFile": "Choose another file",
+  "importMeetingTitle": "Meeting title",
+  "importTitleHint": "Enter a meeting title",
+  "importLanguageHint": "The audio is uploaded to the server and transcribed with the server's current speech model.",
+  "importStart": "Import",
+  "importUploading": "Uploading audio…",
+  "importSubmitting": "Upload finished, submitting to the server…",
+  "importUploadedBackground": "Audio uploaded — transcribing in the background",
+  "importBackgroundHint": "You can leave this page once the upload finishes; the server transcribes the file in the background.",
+  "importTranscribed": "\"{title}\" is transcribed — {count} segments",
+  "@importTranscribed": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "importTranscribeFailed": "Transcribing \"{title}\" failed: {message}",
+  "@importTranscribeFailed": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "message": {
+        "type": "String"
+      }
+    }
+  },
+  "importTranscribeLost": "Could not follow the transcription of \"{title}\". Check the meeting list later.",
+  "@importTranscribeLost": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "importCancelled": "Import cancelled",
+  "importDisabled": "Audio import is disabled",
+  "importFileSize": "{size} MB · Choose another file",
+  "importFailedDetail": "Import failed: {error}",
+  "onboardingStepProgress": "{current}/{total}",
+  "onboardingWelcomeTitle": "Welcome to DR Meeting",
+  "onboardingWelcomeBody": "Record, transcribe live and get AI meeting notes in one app. First, pick your language.",
+  "onboardingAccountTitle": "Sign in or register",
+  "onboardingAccountBody": "Use your phone number and an SMS code. New users can register right here.",
+  "onboardingSignedInAs": "Signed in as {name}",
+  "onboardingSwitchAccount": "Use another account",
+  "onboardingMicTitle": "Allow microphone access",
+  "onboardingMicBody": "Recording meetings needs the microphone. Audio is only sent to your server for transcription and notes. You can also allow it later when you record.",
+  "onboardingMicAllow": "Allow microphone",
+  "onboardingMicGranted": "Microphone access granted",
+  "onboardingMicDenied": "Microphone access was denied. Turn it on in the system settings.",
+  "onboardingMicOpenSettings": "Open system settings",
+  "onboardingMicSkip": "Skip for now",
+  "recordingMeetingTitle": "Meeting {timestamp}",
+  "recordingNewTitle": "New recording",
+  "recordingTitleHint": "Meeting title",
+  "recordingRename": "Edit title",
+  "recordingStatusIdle": "Ready",
+  "recordingStatusPreparing": "Preparing…",
+  "recordingStatusRecording": "Recording",
+  "recordingStatusPaused": "Paused",
+  "recordingStatusInterrupted": "Interrupted",
+  "recordingStatusStopping": "Finishing…",
+  "recordingStatusDone": "Done",
+  "recordingStatusError": "Error",
+  "recordingStart": "Start recording",
+  "recordingStop": "Stop recording",
+  "recordingPause": "Pause",
+  "recordingResume": "Resume",
+  "recordingInterruptedHint": "Recording was interrupted by a call or another app. Tap Resume to continue.",
+  "recordingStoppingHint": "Saving the recording…",
+  "recordingPendingUploads": "{count} segments waiting to upload; they will be sent when the network is back",
+  "recordingTranscriptTitle": "Live transcript",
+  "recordingTranscriptEmpty": "The transcript appears here in real time once you start recording",
+  "recordingSourceLabel": "Audio source",
+  "recordingSourceMicrophone": "Microphone",
+  "recordingSourceSystem": "System audio",
+  "recordingSourceUnsupported": "System audio is not supported on this device",
+  "recordingSourceNeedsPermission": "Permission required on first use",
+  "recordingSourceLimitationsLink": "About system audio",
+  "recordingLimitationsTitle": "About system audio",
+  "recordingLimitationsMix": "System audio records what the phone plays together with the microphone — for online meetings or videos played on the speaker.",
+  "recordingLimitationsCalls": "The OS does not allow recording the other side of voice calls (e.g. WeChat or Tencent Meeting calls), and some apps forbid capture. In those cases turn on the speakerphone and record with the microphone.",
+  "recordingLimitationsConsent": "Starting system audio asks for screen recording / broadcast permission, and the system shows a recording indicator while it runs.",
+  "recordingLimitationsDevice": "Some OS versions or devices cannot capture system audio; only the microphone is available there.",
+  "recordingErrorPermission": "Microphone access is off. Allow DR Meeting to use the microphone in system settings.",
+  "recordingErrorCancelled": "Permission was declined; recording did not start.",
+  "recordingErrorUnsupported": "The selected audio source is not supported on this device.",
+  "recordingErrorBusy": "The recording device is in use by another app. Try again later.",
+  "recordingErrorPlatform": "Could not start recording. Please try again.",
+  "recordingErrorStartTitle": "Could not start recording",
+  "recordingErrorUploadTitle": "Audio upload failed",
+  "recordingRetryUpload": "Upload again",
+  "recordingUseMicrophone": "Use microphone",
+  "recordingSettingsAction": "Open settings",
+  "recordingNotificationChannel": "Recording",
+  "recordingNotificationTitle": "DR Meeting is recording",
+  "recordingNotificationText": "Recorded {elapsed}",
+  "recordingBusyLeaveHint": "Recording in progress — stop it here or from the notification",
+  "recordingLanguageLabel": "Transcription language",
+  "settingsChangeAvatar": "Change avatar",
+  "settingsAvatarPicking": "Selecting image…",
+  "settingsAvatarUploading": "Uploading avatar…",
+  "settingsAvatarSaving": "Saving avatar…",
+  "settingsAvatarSaved": "Avatar updated",
+  "settingsAvatarHint": "PNG, JPG or WebP, up to {megabytes} MB",
+  "@settingsAvatarHint": {
+    "placeholders": {
+      "megabytes": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsAvatarSize": "Choose an image no larger than {megabytes} MB.",
+  "@settingsAvatarSize": {
+    "placeholders": {
+      "megabytes": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsAvatarType": "Choose a valid PNG, JPG or WebP image.",
+  "settingsAvatarPickFailed": "Unable to read the image. Check permissions and try again.",
+  "settingsAvatarUploadFailed": "Upload failed. Your previous avatar is unchanged. Try again.",
+  "settingsAvatarSaveFailed": "Save failed. Your previous avatar is unchanged. Try again.",
+  "settingsAccountSection": "Account",
+  "settingsEditName": "Edit name",
+  "settingsLogout": "Sign out",
+  "settingsLogoutConfirmTitle": "Sign out?",
+  "settingsLogoutConfirmBody": "You will need your password or an SMS code to sign in again.",
+  "settingsLockedWhileRecording": "Not available while recording",
+  "settingsPreferencesSection": "Preferences",
+  "settingsDefaultSource": "Default recording source",
+  "settingsSourceMicrophone": "Microphone only",
+  "settingsSourceMicrophoneHint": "For in-person meetings: records the room.",
+  "settingsSourceSystem": "Device audio + microphone",
+  "settingsSourceSystemHintAndroid": "Needs Android 10+ and the screen-capture prompt when recording starts. Voice-call audio (e.g. WeChat or VooV calls) and apps that forbid capture cannot be recorded — use the speaker and the microphone instead.",
+  "settingsSourceSystemHintIos": "Uses iOS screen broadcast; the status bar turns red while recording. Call audio of some apps and protected content are muted by the system. Not available in the simulator.",
+  "settingsTranscriptionLanguage": "Transcription language",
+  "settingsAutoSummary": "Auto-generate summary",
+  "settingsAutoSummaryHint": "Create AI meeting notes after a recording or import finishes",
+  "settingsKeepLocalAudio": "Keep local recordings",
+  "settingsKeepLocalAudioHint": "Keep the audio file on this device after it was uploaded",
+  "settingsAboutSection": "About",
+  "settingsVersion": "Version {version}",
+  "settingsPassword": "Password",
+  "settingsPasswordIsSet": "Set",
+  "settingsPasswordNotSet": "Not set — SMS code sign-in only",
+  "settingsSetPassword": "Set password",
+  "settingsChangePassword": "Change password",
+  "settingsSetPasswordHint": "After setting a password you can sign in with your mobile number and password; SMS codes keep working.",
+  "settingsChangePasswordHint": "Other devices signed in to this account will be signed out. Forgot your current password? Sign out and use “Forgot password?”.",
+  "settingsOldPassword": "Current password",
+  "settingsOldPasswordRequired": "Please enter your current password",
+  "settingsPasswordSaved": "Password set. You can now sign in with it.",
+  "settingsPasswordChanged": "Password changed. Other devices have been signed out.",
+  "settingsPasswordFailed": "Failed to save the password: {detail}",
+  "@settingsPasswordFailed": {
+    "placeholders": {
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
+  "systemAudioNotificationChannelName": "System audio capture",
+  "systemAudioNotificationTitle": "DR Meeting is capturing system audio",
+  "systemAudioNotificationText": "Recording what your phone plays. Tap to return to the app.",
+  "systemAudioBroadcastStoppedByApp": "Recording finished. The system audio broadcast has stopped.",
+  "systemAudioBroadcastNotStartedFromApp": "Choose \"Allow system audio\" on the DR Meeting recording screen and start recording before starting the broadcast.",
+  "systemAudioAndroidConsentTitle": "Allow system audio",
+  "systemAudioAndroidConsentBody": "Android will now ask whether DR Meeting may record or cast your screen. Choose \"Entire screen\" and tap \"Start\". DR Meeting only captures sound, never the picture. A notification is shown while capturing.",
+  "systemAudioAndroidLimitations": "The other party's voice in calls (e.g. WeChat or Tencent Meeting voice/video calls) and apps that forbid capture cannot be recorded. In those cases turn on the speakerphone so the microphone picks it up.",
+  "systemAudioAndroidUnsupported": "System audio capture requires Android 10 or later.",
+  "systemAudioIosHowToStart": "In the system sheet, choose \"DR Meeting\" and tap \"Start Broadcast\". Capture begins after the countdown, and the status bar turns red while recording.",
+  "systemAudioIosMicHint": "To include your own voice, turn on the microphone in the sheet.",
+  "systemAudioIosLimitations": "iOS mutes call audio of some apps and protected content, so it cannot be captured. In those cases turn on the speakerphone so the microphone picks it up.",
+  "systemAudioIosStopHint": "Stop recording in DR Meeting, or tap the red status bar indicator to stop the broadcast.",
+  "systemAudioIosSimulatorUnsupported": "System audio capture is not available in the simulator. Use a real device.",
+  "systemAudioErrorUserCancelled": "System audio capture was not allowed.",
+  "systemAudioErrorPermissionDenied": "Microphone permission is required for system audio capture. Allow it in Settings.",
+  "systemAudioErrorUnsupported": "This device does not support system audio capture.",
+  "systemAudioErrorBusy": "System audio capture is busy or could not start. Please try again.",
+  "systemAudioErrorPlatform": "System audio capture failed: {detail}",
+  "systemAudioStoppedExternally": "System audio capture was stopped by the system. Recording has ended.",
+  "systemAudioFallbackToMicrophone": "Record with microphone only",
+  "updateDialogTitle": "New version {version}",
+  "@updateDialogTitle": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "updateCurrentVersion": "Current version {version}",
+  "@updateCurrentVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "updateNotes": "What's new",
+  "updateLater": "Later",
+  "updateNow": "Update now",
+  "updateGoToStore": "Update in the app store",
+  "updateGoToAppStore": "Update in the App Store",
+  "updateDownloading": "Downloading… {percent}%",
+  "@updateDownloading": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "updateDownloadingUnknown": "Downloading…",
+  "updateInstalling": "Opening the installer…",
+  "updateForceTitle": "Update required",
+  "updateForceMessage": "Version {current} is no longer supported. Update to {version} to keep using the app.",
+  "@updateForceMessage": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "updateCheck": "Check for updates",
+  "updateUpToDate": "You are using the latest version",
+  "updateCheckFailed": "Could not check for updates. Try again later.",
+  "updateFailedDownload": "Download failed. Check your network and try again.",
+  "updateFailedChecksum": "The downloaded package is damaged. Try again.",
+  "updateFailedPermission": "Allow this app to install unknown apps in system settings, then tap \"Update now\" again.",
+  "updateFailedInstall": "Could not open the installer. Try again.",
+  "updateFailedStore": "Could not open the app store",
+  "updateFailedSyncing": "Meetings are still syncing in the background. Update a little later."
+}

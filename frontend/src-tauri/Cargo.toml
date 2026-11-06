@@ -1,0 +1,148 @@
+[package]
+name = "openmeeting"
+version = "0.1.1"
+description = "A Tauri App for meeting minutes"
+authors = ["Sujith S"]
+license = "MIT"
+repository = "https://github.com/Zackriya-Solutions/meeting-minutes"
+edition = "2021"
+rust-version = "1.90"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+name = "app_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+
+# NOTE: Local inference (whisper-rs / ONNX Runtime / llama) has been removed.
+# Transcription and summarization now run on the remote OpenMeeting server, so there
+# are no GPU/BLAS Cargo features anymore. Build with plain `cargo build`.
+
+[build-dependencies]
+tauri-build = { version = "2.6", features = [] }
+reqwest = { version = "0.11", features = ["blocking", "multipart", "json", "stream"] }
+which = "6.0.1"
+zip = "2.2"           # ZIP extraction (Windows, macOS)
+tar = "0.4"           # TAR extraction (Linux)
+xz2 = "0.1"           # XZ decompression (Linux)
+sha2 = "0.10"
+
+
+[dependencies]
+sha2 = "0.10"
+md-5 = "0.10"
+base64 = "0.22"
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+anyhow = "1.0"
+once_cell = "1.17.1"
+uuid = { version = "1.0", features = ["v4", "serde"] }
+posthog-rs = "0.3.7"
+
+# Cross-platform audio capture
+cpal = "0.15.3"
+
+# Wav encoding - now using manual WAV creation instead of hound
+# hound = "3.5"
+
+# Dates
+chrono = { version = "0.4.31", features = ["serde"] }
+
+# Log
+log = "0.4"
+env_logger = "0.11"
+tracing = "0.1.40"
+which = "6.0.1"
+
+# Bytes
+bytemuck = "1.16.1"
+
+# EBU R128 loudness normalization (professional broadcast standard)
+ebur128 = "0.1"
+
+
+# Async utilities and local VAD (speech segmentation before upload)
+futures-util = "0.3"
+tokio-tungstenite = { version = "0.21", features = ["rustls-tls-native-roots"] }
+silero_rs = { git = "https://github.com/emotechlab/silero-rs", rev = "26a6460", package = "silero" }
+
+thiserror = "2.0.16"
+
+# Async
+tokio = { version = "1.32.0", features = ["full", "tracing"] }
+async-trait = "0.1"  # Trait abstraction for async methods
+tokio-util = { version = "0.7", features = ["io"] }  # ReaderStream for streamed audio upload
+
+reqwest = { version = "0.11", default-features = false, features = ["multipart", "json", "stream", "rustls-tls"] }
+
+
+# Directories
+dirs = "5.0.1"
+
+# Additional dependencies for notification system
+url = "2.5.0"
+
+lazy_static = { version = "1.4.0" }
+realfft = "3.4.0"
+regex = "1.11.0"
+bytes = { version = "1.9.0", features = ["serde"] }
+
+symphonia = { version = "0.5.4", features = ["aac", "isomp4", "mp3", "flac", "ogg", "vorbis", "pcm", "wav", "opt-simd"] }
+rayon = "1.10"
+rubato = "0.15.0"
+ringbuf = "0.4.8"
+tempfile = "3.3.0"
+whatlang = "0.16.4"
+
+ffmpeg-sidecar = { git = "https://github.com/nathanbabcock/ffmpeg-sidecar", branch = "main" }
+
+
+# Common Tauri configuration
+tauri = { version = "2.12", features = [ "macos-private-api", "protocol-asset", "tray-icon"] }
+tauri-plugin-fs = "2.5"
+tauri-plugin-dialog = "2.7"
+tauri-plugin-store = "2.4"
+tauri-plugin-notification = "2.3"
+tauri-plugin-updater = "2.10"
+tauri-plugin-process = "2.3"
+# DeepRespond IM SDK: version must match npm @deeprespond/im-tauri exactly
+tauri-plugin-deeprespond-im = "=1.0.0-alpha"
+tauri-plugin-os = "2"
+
+# Desktop-only single instance guard
+[target.'cfg(any(target_os = "macos", windows, target_os = "linux"))'.dependencies]
+tauri-plugin-single-instance = "2.3"
+
+# macOS-specific dependencies
+[target.'cfg(target_os = "macos")'.dependencies]
+tauri = { version = "2.12", features = ["protocol-asset", "macos-private-api", "tray-icon"] }
+once_cell = "1.17.1"
+objc = "0.2.7"
+tauri-plugin-log = { version = "2.6.0", features = ["colored"] }
+anyhow = "1.0"
+time = { version = "0.3", features = ["formatting"] }
+core-graphics = "0.23"
+cidre = { git = "https://github.com/yury/cidre", rev = "a9587fa", features = ["av"] }
+dasp = "0.11.0"
+futures-channel = "0.3.31"
+
+# Windows-specific dependencies
+[target.'cfg(target_os = "windows")'.dependencies]
+futures-channel = "0.3.31"
+
+# Linux-specific dependencies
+[target.'cfg(target_os = "linux")'.dependencies]
+futures-channel = "0.3.31"
+
+[dev-dependencies]
+tempfile = "3.3.0"
+infer = "0.15"
+criterion = { version = "0.5.1", features = ["async_tokio"] }
+memory-stats = "1.0"
+strsim = "0.10.0"
+futures = "0.3.31"
+tracing-subscriber = "0.3.16"
+
+[patch.crates-io]
+cpal = { git = "https://github.com/RustAudio/cpal", rev = "51c3b43" }

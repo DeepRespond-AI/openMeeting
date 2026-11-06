@@ -1,0 +1,48 @@
+# Static analysis for the DR Meeting app. See DEVELOPMENT.md for the coding rules these enforce.
+include: package:flutter_lints/flutter.yaml
+
+formatter:
+  page_width: 100
+
+analyzer:
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - lib/core/l10n/gen/**
+  errors:
+    # freezed puts @JsonKey on factory constructor parameters.
+    invalid_annotation_target: ignore
+
+# riverpod_lint is an analysis_server_plugin (riverpod_lint >= 3): its rules run
+# inside `flutter analyze` / `dart analyze` and the IDE — no separate custom_lint step.
+plugins:
+  riverpod_lint: ^3.1.9
+
+linter:
+  rules:
+    - always_declare_return_types
+    - avoid_dynamic_calls
+    - avoid_print
+    - avoid_slow_async_io
+    - avoid_type_to_string
+    - cancel_subscriptions
+    - close_sinks
+    - directives_ordering
+    - prefer_const_constructors
+    - prefer_const_declarations
+    - prefer_final_fields
+    - prefer_final_locals
+    - prefer_single_quotes
+    - require_trailing_commas
+    - sort_child_properties_last
+    - unawaited_futures
+    - unnecessary_lambdas
+    - unnecessary_parenthesis
+    - use_super_parameters

@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>deeprespond-im-engine</title>
+  </head>
+  <body>
+    <!--
+      IM 引擎页（不显示的窗口，Rust 侧 engine_url("im/engine.html") 指向本文件）。
+      engine.js（`pnpm build:im-engine` 生成，已 gitignore）先经 Rust im_get_ticket
+      动态获取 appKey/apiUrl（server/API.md §1.11），未登录/未配置时等待 server-status 后重试。
+      本页不引入应用框架。
+    -->
+    <script type="module" src="./engine.js"></script>
+  </body>
+</html>

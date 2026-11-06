@@ -1,0 +1,3 @@
+# Compatibility entrypoint generated from the shared uv.lock.
+# Local speech engines: uv sync --locked --extra stt-cpu (or stt-cuda).
+-r ../requirements.lock

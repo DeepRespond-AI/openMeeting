@@ -1,0 +1,229 @@
+import React, { useContext, useState, useEffect } from 'react';
+import { Switch } from '@/components/ui/switch';
+import { Button } from '@/components/ui/button';
+import { Info, Loader2, Copy, Check } from 'lucide-react';
+import { AnalyticsContext } from './AnalyticsProvider';
+import { load } from '@tauri-apps/plugin-store';
+import { invoke } from '@tauri-apps/api/core';
+import { Analytics } from '@/lib/analytics';
+import AnalyticsDataModal from './AnalyticsDataModal';
+import { useT } from '@/i18n';
+
+const ANALYTICS_DEFAULT_OFF_MIGRATION_KEY = 'analyticsDefaultOffMigrationV1';
+
+export default function AnalyticsConsentSwitch() {
+  const { setIsAnalyticsOptedIn, isAnalyticsOptedIn } = useContext(AnalyticsContext);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isConfigured, setIsConfigured] = useState(false);
+  useEffect(() => {
+    let active = true;
+    void Analytics.isConfigured().then(value => { if (active) setIsConfigured(value); });
+    return () => { active = false; };
+  }, []);
+  const [showModal, setShowModal] = useState(false);
+  const [userId, setUserId] = useState<string>('');
+  const [isCopied, setIsCopied] = useState(false);
+  const t = useT();
+
+  // Note: Store loading is handled by AnalyticsProvider to avoid race conditions
+
+  useEffect(() => {
+    const loadUserId = async () => {
+      if (isAnalyticsOptedIn) {
+        try {
+          const id = await Analytics.getPersistentUserId();
+          setUserId(id);
+        } catch (error) {
+          console.error('Failed to load user ID:', error);
+        }
+      } else {
+        setUserId('');
+      }
+    };
+    loadUserId();
+  }, [isAnalyticsOptedIn]);
+
+  const handleCopyUserId = async () => {
+    if (!userId) return;
+
+    try {
+      await navigator.clipboard.writeText(userId);
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
+
+      // Track that user copied their ID
+      await Analytics.track('user_id_copied', {
+        user_id: userId
+      });
+    } catch (error) {
+      console.error('Failed to copy user ID:', error);
+    }
+  };
+
+  const handleToggle = async (enabled: boolean) => {
+    // If user is trying to DISABLE, show the modal first
+    if (!enabled) {
+      setShowModal(true);
+      // Track that user viewed the transparency modal
+      try {
+        await invoke('track_analytics_transparency_viewed');
+      } catch (error) {
+        console.error('Failed to track transparency view:', error);
+      }
+      return; // Don't disable yet, wait for modal confirmation
+    }
+
+    // If ENABLING, proceed immediately
+    await performToggle(enabled);
+  };
+
+  const performToggle = async (enabled: boolean) => {
+    // Optimistic update - immediately update UI state
+    setIsAnalyticsOptedIn(enabled);
+    setIsProcessing(true);
+
+    try {
+      const store = await load('analytics.json', {
+        autoSave: false,
+        defaults: {
+          analyticsOptedIn: false
+        }
+      });
+      await store.set('analyticsOptedIn', enabled);
+      await store.set(ANALYTICS_DEFAULT_OFF_MIGRATION_KEY, true);
+      await store.save();
+
+      if (enabled) {
+        // Full analytics initialization (same as AnalyticsProvider)
+        const userId = await Analytics.getPersistentUserId();
+
+        // Initialize analytics
+        await Analytics.init();
+
+        // Identify user with enhanced properties immediately after init
+        await Analytics.identify(userId, {
+          app_version: '0.1.0',
+          platform: 'tauri',
+          first_seen: new Date().toISOString(),
+          os: navigator.platform,
+        });
+
+        // Start analytics session with the same user ID
+        await Analytics.startSession(userId);
+
+        // Track app started (re-enabled)
+        await Analytics.trackAppStarted();
+
+        // Track that user enabled analytics
+        try {
+          await invoke('track_analytics_enabled');
+        } catch (error) {
+          console.error('Failed to track analytics enabled:', error);
+        }
+
+        console.log('Analytics re-enabled successfully');
+      } else {
+        // Track that user disabled analytics BEFORE disabling
+        try {
+          await invoke('track_analytics_disabled');
+        } catch (error) {
+          console.error('Failed to track analytics disabled:', error);
+        }
+
+        await Analytics.disable();
+        console.log('Analytics disabled successfully');
+      }
+    } catch (error) {
+      console.error('Failed to toggle analytics:', error);
+      // Revert the optimistic update on error
+      setIsAnalyticsOptedIn(!enabled);
+      // You could also show a toast notification here to inform the user
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleConfirmDisable = async () => {
+    setShowModal(false);
+    await performToggle(false);
+  };
+
+  const handleCancelDisable = () => {
+    setShowModal(false);
+    // Keep analytics enabled, no state change needed
+  };
+
+  return (
+    <>
+      <div className="space-y-4">
+        <div>
+          <h3 className="text-base font-semibold text-foreground">{t('settings.analytics.title')}</h3>
+          <p className="text-xs text-muted-foreground mt-1">{t('settings.analytics.description')}</p>
+        </div>
+
+        <div className="flex items-center justify-between gap-4 rounded-lg border border-border bg-muted/50 p-4">
+          <div className="min-w-0">
+            <h4 className="text-sm font-medium text-foreground">{t('settings.analytics.enable')}</h4>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              {!isConfigured ? t('settings.analytics.notConfigured') : isProcessing ? t('settings.analytics.updating') : t('settings.analytics.offByDefault')}
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            {isProcessing && (
+              <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+            )}
+            <Switch
+              checked={isAnalyticsOptedIn}
+              onCheckedChange={handleToggle}
+              disabled={isProcessing || !isConfigured}
+            />
+          </div>
+        </div>
+
+        {/* User ID Display */}
+        {isAnalyticsOptedIn && userId && (
+          <div className="rounded-lg border border-border bg-muted/50 p-4">
+            <div className="text-sm font-medium text-foreground mb-1">{t('settings.analytics.userIdTitle')}</div>
+            <p className="text-xs text-muted-foreground mb-2">{t('settings.analytics.userIdDescription')}</p>
+            <div className="flex items-center gap-2">
+              <code className="flex-1 truncate rounded-md border border-border bg-card px-2 py-1 font-mono text-xs text-foreground" title={userId}>
+                {userId}
+              </code>
+              <Button
+                onClick={handleCopyUserId}
+                variant="outline"
+                size="sm"
+                className="flex-shrink-0"
+                title={t('settings.analytics.copyUserId')}
+              >
+                {isCopied ? (
+                  <>
+                    <Check className="h-3.5 w-3.5 text-success" />
+                    <span className="text-success">{t('common.actions.copied')}</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-3.5 w-3.5" />
+                    <span>{t('common.actions.copy')}</span>
+                  </>
+                )}
+              </Button>
+            </div>
+          </div>
+        )}
+
+        <div className="flex items-start gap-2 rounded-lg bg-accent px-3 py-2.5">
+          <Info className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+          <p className="text-xs text-accent-foreground">{t('settings.analytics.privacyNote')}</p>
+        </div>
+      </div>
+
+      {/* 2-Step Opt-Out Modal */}
+      <AnalyticsDataModal
+        isOpen={showModal}
+        onClose={handleCancelDisable}
+        onConfirmDisable={handleConfirmDisable}
+      />
+    </>
+  );
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Huawei AGS3 Android 10: repeated shared-video textures caused a fatal
+         Impeller GLES blit assertion. Use the supported Skia fallback. -->
+    <bool name="meeting_enable_impeller">false</bool>
+</resources>

@@ -1,0 +1,54 @@
+{
+  "updateDialogTitle": "New version {version}",
+  "@updateDialogTitle": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "updateCurrentVersion": "Current version {version}",
+  "@updateCurrentVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "updateNotes": "What's new",
+  "updateLater": "Later",
+  "updateNow": "Update now",
+  "updateGoToStore": "Update in the app store",
+  "updateGoToAppStore": "Update in the App Store",
+  "updateDownloading": "Downloading… {percent}%",
+  "@updateDownloading": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "updateDownloadingUnknown": "Downloading…",
+  "updateInstalling": "Opening the installer…",
+  "updateForceTitle": "Update required",
+  "updateForceMessage": "Version {current} is no longer supported. Update to {version} to keep using the app.",
+  "@updateForceMessage": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "updateCheck": "Check for updates",
+  "updateUpToDate": "You are using the latest version",
+  "updateCheckFailed": "Could not check for updates. Try again later.",
+  "updateFailedDownload": "Download failed. Check your network and try again.",
+  "updateFailedChecksum": "The downloaded package is damaged. Try again.",
+  "updateFailedPermission": "Allow this app to install unknown apps in system settings, then tap \"Update now\" again.",
+  "updateFailedInstall": "Could not open the installer. Try again.",
+  "updateFailedStore": "Could not open the app store",
+  "updateFailedSyncing": "Meetings are still syncing in the background. Update a little later."
+}

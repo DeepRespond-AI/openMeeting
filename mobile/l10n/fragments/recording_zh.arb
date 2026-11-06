@@ -1,0 +1,71 @@
+{
+  "recordingMeetingTitle": "会议 {timestamp}",
+  "@recordingMeetingTitle": {
+    "description": "Generated meeting title; timestamp formatted with AppConfig.recording.titleFormat",
+    "placeholders": {
+      "timestamp": {
+        "type": "String"
+      }
+    }
+  },
+  "recordingNewTitle": "新录音",
+  "recordingTitleHint": "会议标题",
+  "recordingRename": "修改标题",
+  "recordingStatusIdle": "准备就绪",
+  "recordingStatusPreparing": "准备中…",
+  "recordingStatusRecording": "录音中",
+  "recordingStatusPaused": "已暂停",
+  "recordingStatusInterrupted": "已中断",
+  "recordingStatusStopping": "正在结束…",
+  "recordingStatusDone": "已完成",
+  "recordingStatusError": "出错",
+  "recordingStart": "开始录音",
+  "recordingStop": "停止录音",
+  "recordingPause": "暂停",
+  "recordingResume": "继续",
+  "recordingInterruptedHint": "录音被来电或其他应用中断，点击「继续」恢复录音",
+  "recordingStoppingHint": "正在保存录音…",
+  "recordingPendingUploads": "{count} 段语音待上传，网络恢复后会自动补传",
+  "@recordingPendingUploads": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recordingTranscriptTitle": "实时转写",
+  "recordingTranscriptEmpty": "开始录音后，转写内容会实时显示在这里",
+  "recordingSourceLabel": "录音来源",
+  "recordingSourceMicrophone": "麦克风",
+  "recordingSourceSystem": "内录",
+  "recordingSourceUnsupported": "当前设备不支持内录",
+  "recordingSourceNeedsPermission": "首次使用需要授权",
+  "recordingSourceLimitationsLink": "内录说明",
+  "recordingLimitationsTitle": "关于内录",
+  "recordingLimitationsMix": "内录会把手机播放的声音和麦克风一起录下来，适合外放的线上会议、视频等场景。",
+  "recordingLimitationsCalls": "系统不允许录制语音通话中对方的声音（例如微信、腾讯会议的通话），部分应用也禁止被录制。遇到这类场景，请打开免提，改用麦克风收音。",
+  "recordingLimitationsConsent": "开始内录时系统会请求屏幕录制或直播授权，录制期间系统会显示录制提示。",
+  "recordingLimitationsDevice": "部分系统版本或设备不支持内录，此时只能使用麦克风。",
+  "recordingErrorPermission": "没有麦克风权限，请在系统设置中允许「深应会议」使用麦克风。",
+  "recordingErrorCancelled": "已取消授权，录音未开始。",
+  "recordingErrorUnsupported": "当前设备不支持所选的录音来源。",
+  "recordingErrorBusy": "录音设备正被其他应用占用，请稍后再试。",
+  "recordingErrorPlatform": "无法启动录音，请重试。",
+  "recordingErrorStartTitle": "无法开始录音",
+  "recordingErrorUploadTitle": "录音文件上传失败",
+  "recordingRetryUpload": "重新上传",
+  "recordingUseMicrophone": "改用麦克风",
+  "recordingSettingsAction": "打开设置",
+  "recordingNotificationChannel": "录音",
+  "recordingNotificationTitle": "深应会议正在录音",
+  "recordingNotificationText": "已录制 {elapsed}",
+  "@recordingNotificationText": {
+    "placeholders": {
+      "elapsed": {
+        "type": "String"
+      }
+    }
+  },
+  "recordingBusyLeaveHint": "录音进行中，可在通知栏或本页停止录音",
+  "recordingLanguageLabel": "转写语言"
+}

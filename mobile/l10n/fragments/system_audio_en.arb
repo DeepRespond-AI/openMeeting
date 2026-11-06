@@ -1,0 +1,23 @@
+{
+  "systemAudioNotificationChannelName": "System audio capture",
+  "systemAudioNotificationTitle": "DR Meeting is capturing system audio",
+  "systemAudioNotificationText": "Recording what your phone plays. Tap to return to the app.",
+  "systemAudioBroadcastStoppedByApp": "Recording finished. The system audio broadcast has stopped.",
+  "systemAudioBroadcastNotStartedFromApp": "Choose \"Allow system audio\" on the DR Meeting recording screen and start recording before starting the broadcast.",
+  "systemAudioAndroidConsentTitle": "Allow system audio",
+  "systemAudioAndroidConsentBody": "Android will now ask whether DR Meeting may record or cast your screen. Choose \"Entire screen\" and tap \"Start\". DR Meeting only captures sound, never the picture. A notification is shown while capturing.",
+  "systemAudioAndroidLimitations": "The other party's voice in calls (e.g. WeChat or Tencent Meeting voice/video calls) and apps that forbid capture cannot be recorded. In those cases turn on the speakerphone so the microphone picks it up.",
+  "systemAudioAndroidUnsupported": "System audio capture requires Android 10 or later.",
+  "systemAudioIosHowToStart": "In the system sheet, choose \"DR Meeting\" and tap \"Start Broadcast\". Capture begins after the countdown, and the status bar turns red while recording.",
+  "systemAudioIosMicHint": "To include your own voice, turn on the microphone in the sheet.",
+  "systemAudioIosLimitations": "iOS mutes call audio of some apps and protected content, so it cannot be captured. In those cases turn on the speakerphone so the microphone picks it up.",
+  "systemAudioIosStopHint": "Stop recording in DR Meeting, or tap the red status bar indicator to stop the broadcast.",
+  "systemAudioIosSimulatorUnsupported": "System audio capture is not available in the simulator. Use a real device.",
+  "systemAudioErrorUserCancelled": "System audio capture was not allowed.",
+  "systemAudioErrorPermissionDenied": "Microphone permission is required for system audio capture. Allow it in Settings.",
+  "systemAudioErrorUnsupported": "This device does not support system audio capture.",
+  "systemAudioErrorBusy": "System audio capture is busy or could not start. Please try again.",
+  "systemAudioErrorPlatform": "System audio capture failed: {detail}",
+  "systemAudioStoppedExternally": "System audio capture was stopped by the system. Recording has ended.",
+  "systemAudioFallbackToMicrophone": "Record with microphone only"
+}

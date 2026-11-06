@@ -1,0 +1,108 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+/experiments
+# Retired sources stay local and are not included in the current repository.
+/legacy/
+# Internal plans and acceptance evidence remain available only in local workspaces.
+/docs/development/
+/docs/testing/archive/
+/docs/testing/runs/
+# Unreferenced legacy demos and screenshots are local reference material.
+/docs/assets/
+/docs/testing/reorganization.md
+/docs/testing/resilience-merge.md
+/frontend/P1_MOCK_PLAN.md
+/mobile/CORE_PARITY.md
+/mobile/DESKTOP_PARITY.md
+/worktrees/
+/.artifacts/
+/.archify/
+/.pytest_cache/
+/local.stat
+/frontend/local.stat
+/frontend/src-tauri/tauri.ci.json
+/server/docker-compose.override.yml
+
+# dependencies
+/node_modules
+**/models
+# Dart API models of the mobile app are source code, not model weights.
+!mobile/lib/core/api/models/
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+*.mp4
+
+# testing
+/Agent测试/
+/coverage
+/dist
+
+# next.js
+/.next/
+/frontend/.next*/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Local credentials and environment files; keep sanitized templates tracked.
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Audio files
+*.wav
+
+# Large media files
+docs/demo.mov
+docs/demo.gif
+
+
+meeting_minutes.db
+
+# Added by Task Master AI
+# Logs
+logs
+*.log
+dev-debug.log
+# Dependency directories
+node_modules/
+.pnpm-store/
+# Environment variables
+.env
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+experiments/
+.cursor/
+target/
+
+frontend/src-tauri/binaries/

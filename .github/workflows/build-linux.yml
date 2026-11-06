@@ -1,0 +1,249 @@
+name: "Build and Test - Linux"
+
+on:
+  workflow_dispatch:
+    inputs:
+      server-url:
+        description: 'Client-accessible gateway URL (HTTPS for signed updates)'
+        type: string
+        required: true
+      sign-updater:
+        description: 'Sign updater artifacts using configured updater keys'
+        type: boolean
+        required: false
+        default: false
+      build-type:
+        description: 'Build type'
+        required: true
+        type: choice
+        options:
+          - debug
+          - release
+        default: release
+      ubuntu-version:
+        description: 'Ubuntu version'
+        required: true
+        type: choice
+        options:
+          - ubuntu-22.04
+          - ubuntu-24.04
+        default: ubuntu-22.04
+      bundle-type:
+        description: 'Bundle type'
+        required: true
+        type: choice
+        options:
+          - deb
+          - appimage
+          - rpm
+          - all
+        default: all
+      sign-build:
+        description: 'Sign the build'
+        required: true
+        type: boolean
+        default: false
+      upload-artifacts:
+        description: 'Upload build artifacts'
+        required: true
+        type: boolean
+        default: true
+
+# Cancel duplicate workflow runs
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  OPENMEETING_SERVER_URL: ${{ inputs.server-url }}
+  OPENMEETING_ANALYTICS_KEY: ${{ vars.OPENMEETING_ANALYTICS_KEY }}
+  OPENMEETING_ANALYTICS_HOST: ${{ vars.OPENMEETING_ANALYTICS_HOST }}
+  RUST_BACKTRACE: 1
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build-linux:
+    name: Build Linux (x64)
+    runs-on: ${{ github.event.inputs.ubuntu-version || 'ubuntu-22.04' }}
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get version from tauri.conf.json
+        id: get-version
+        shell: bash
+        run: |
+          VERSION=$(grep -o '"version": "[^"]*"' frontend/src-tauri/tauri.conf.json | cut -d'"' -f4)
+          echo "Application version: $VERSION"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Determine build profile and bundle args
+        id: build-profile
+        shell: bash
+        run: |
+          # Determine build profile
+          if [[ "${{ github.event.inputs.build-type }}" == "debug" ]]; then
+            echo "profile=debug" >> "$GITHUB_OUTPUT"
+            echo "Build profile: debug"
+          else
+            echo "profile=release" >> "$GITHUB_OUTPUT"
+            echo "Build profile: release"
+          fi
+
+          # Determine bundle arguments
+          BUNDLE_TYPE="${{ github.event.inputs.bundle-type }}"
+          if [[ "$BUNDLE_TYPE" == "all" ]] || [[ -z "$BUNDLE_TYPE" ]]; then
+            # Default based on Ubuntu version
+            if [[ "${{ github.event.inputs.ubuntu-version }}" == "ubuntu-24.04" ]]; then
+              BUNDLES="appimage,rpm"
+            else
+              BUNDLES="deb"
+            fi
+          else
+            BUNDLES="$BUNDLE_TYPE"
+          fi
+
+          if [[ "${{ github.event.inputs.build-type }}" == "debug" ]]; then
+            echo "args=--debug --bundles $BUNDLES" >> "$GITHUB_OUTPUT"
+          else
+            echo "args=--bundles $BUNDLES" >> "$GITHUB_OUTPUT"
+          fi
+          echo "Bundle types: $BUNDLES"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 12.14.0
+          run_install: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> "$GITHUB_ENV"
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-unknown-linux-gnu
+
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: ". -> target"
+          key: ${{ github.event.inputs.ubuntu-version || 'ubuntu-22.04' }}-x86_64-unknown-linux-gnu
+
+      - name: Install dependencies (Ubuntu 24.04)
+        if: github.event.inputs.ubuntu-version == 'ubuntu-24.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev patchelf libasound2-dev libx11-dev libxtst-dev libxrandr-dev libfuse2t64
+
+      - name: Install dependencies (Ubuntu 22.04)
+        if: github.event.inputs.ubuntu-version == 'ubuntu-22.04' || github.event.inputs.ubuntu-version == ''
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev patchelf libasound2-dev libx11-dev libxtst-dev libxrandr-dev libfuse2
+
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          pnpm install --frozen-lockfile
+
+      - name: Prepare explicit updater and gateway configuration
+        run: node frontend/scripts/prepare-ci-build.mjs
+        env:
+          OPENMEETING_SIGN_UPDATER: ${{ inputs.sign-updater }}
+          OPENMEETING_SIGN_BINARIES: ${{ inputs.sign-build }}
+          TAURI_SIGNING_PUBLIC_KEY: ${{ vars.TAURI_SIGNING_PUBLIC_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ inputs.sign-updater && secrets.TAURI_SIGNING_PRIVATE_KEY || '' }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ inputs.sign-updater && secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD || '' }}
+
+      - name: Build Tauri app
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Updater signing is independent of OS code signing.
+          TAURI_SIGNING_PRIVATE_KEY: ${{ inputs.sign-updater && secrets.TAURI_SIGNING_PRIVATE_KEY || '' }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ inputs.sign-updater && secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD || '' }}
+        with:
+          projectPath: frontend
+          args: --target x86_64-unknown-linux-gnu ${{ steps.build-profile.outputs.args }} --config src-tauri/tauri.ci.json
+
+      - name: Verify build artifacts
+        run: |
+          echo "Build artifacts:"
+          find target/x86_64-unknown-linux-gnu/${{ steps.build-profile.outputs.profile }}/bundle -type f
+
+      - name: Verify DEB package
+        if: contains(steps.build-profile.outputs.args, 'deb')
+        run: |
+          DEB_PATH=$(find target/x86_64-unknown-linux-gnu/${{ steps.build-profile.outputs.profile }}/bundle/deb -name "*.deb" | head -1)
+          if [ -n "$DEB_PATH" ]; then
+            echo "Verifying DEB package: $DEB_PATH"
+            dpkg-deb --info "$DEB_PATH"
+            dpkg-deb --contents "$DEB_PATH" | head -20
+            echo "DEB package is valid"
+          else
+            echo "No DEB package found to verify"
+          fi
+
+      - name: Verify RPM package
+        if: contains(steps.build-profile.outputs.args, 'rpm')
+        run: |
+          RPM_PATH=$(find target/x86_64-unknown-linux-gnu/${{ steps.build-profile.outputs.profile }}/bundle/rpm -name "*.rpm" | head -1)
+          if [ -n "$RPM_PATH" ]; then
+            echo "Verifying RPM package: $RPM_PATH"
+            sudo apt-get install -y rpm
+            rpm -qip "$RPM_PATH"
+            echo "RPM package is valid"
+          else
+            echo "No RPM package found to verify"
+          fi
+
+      - name: Verify AppImage
+        if: contains(steps.build-profile.outputs.args, 'appimage')
+        run: |
+          APPIMAGE_PATH=$(find target/x86_64-unknown-linux-gnu/${{ steps.build-profile.outputs.profile }}/bundle/appimage -name "*.AppImage" | head -1)
+          if [ -n "$APPIMAGE_PATH" ]; then
+            echo "Verifying AppImage: $APPIMAGE_PATH"
+            chmod +x "$APPIMAGE_PATH"
+            "$APPIMAGE_PATH" --appimage-help
+            echo "AppImage is valid"
+          else
+            echo "No AppImage found to verify"
+          fi
+
+      - name: Upload artifacts
+        if: ${{ github.event.inputs.upload-artifacts == 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: openmeeting-linux-${{ github.event.inputs.ubuntu-version || 'ubuntu-22.04' }}-x64-${{ steps.build-profile.outputs.profile }}-${{ steps.get-version.outputs.version }}
+          path: |
+            target/x86_64-unknown-linux-gnu/${{ steps.build-profile.outputs.profile }}/bundle/deb/*.deb
+            target/x86_64-unknown-linux-gnu/${{ steps.build-profile.outputs.profile }}/bundle/appimage/*.AppImage
+            target/x86_64-unknown-linux-gnu/${{ steps.build-profile.outputs.profile }}/bundle/rpm/*.rpm
+          retention-days: 30
+
+      - name: Generate build summary
+        env:
+          BUILD_PROFILE: ${{ steps.build-profile.outputs.profile }}
+          BUILD_TARGET: x86_64-unknown-linux-gnu
+        run: node scripts/ci/build-summary.mjs

@@ -1,0 +1,326 @@
+# 微服务编排：每个业务 ms 独立 PostgreSQL 容器和数据卷 + 四个应用服务
+#
+# CPU:  docker compose up -d --build
+# GPU:  docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d --build
+#       （需要宿主机安装 NVIDIA Container Toolkit；仅 stt_ms 使用 GPU）
+#
+# 端口：gateway 39110（唯一对外入口）、user_ms 39113、meeting_ms 39107、stt_ms 39109
+#
+# 固定 Compose 项目名：不带 -p 执行时项目名默认取目录名（server），会与旧单体栈同名冲突
+# （误复用旧数据卷、重建旧容器）。写死后直接 `docker compose up -d --build` 即可。
+name: openmeeting-split
+
+x-python-build-args: &python-build-args
+  DEBIAN_MIRROR: ${OPENMEETING_DEBIAN_MIRROR:-https://deb.debian.org}
+
+x-shared-env: &shared-env
+  OPENMEETING_INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:?set INTERNAL_SERVICE_TOKEN in .env (any long random string)}
+  # dev 模式启用不安全默认（默认管理密码、验证码走 dev_code），仅本地调试用；默认 production
+  OPENMEETING_ENV: ${OPENMEETING_ENV:-}
+  OPENMEETING_SECRET_KEY: ${OPENMEETING_SECRET_KEY:-}
+  OPENMEETING_LOG_LEVEL: ${OPENMEETING_LOG_LEVEL:-INFO}
+  OPENMEETING_CORS_ORIGINS: ${OPENMEETING_CORS_ORIGINS:-}
+
+services:
+  minio:
+    build: { context: ., dockerfile: minio/Dockerfile }
+    profiles: [minio]
+    restart: unless-stopped
+    environment:
+      MINIO_ROOT_USER: ${OPENMEETING_MINIO_ACCESS_KEY_ID:-openmeeting}
+      MINIO_ROOT_PASSWORD: ${OPENMEETING_MINIO_ACCESS_KEY_SECRET:-change-me-minio-password}
+    command: ["server", "/data", "--console-address", ":9001"]
+    ports:
+      - "${OPENMEETING_MINIO_API_PORT:-39120}:9000"
+      - "127.0.0.1:${OPENMEETING_MINIO_CONSOLE_PORT:-39121}:9001"
+    volumes:
+      - minio_data:/data
+    # S3 预签名下载需通过发布端口供客户端访问；业务服务仍只经网关代理访问内部网络。
+    networks: [storage-backend, storage-public]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:9000/minio/health/ready', timeout=3)"]
+      interval: 5s
+      timeout: 4s
+      retries: 30
+      start_period: 10s
+
+  minio-init:
+    build: { context: ., dockerfile: meeting_ms/Dockerfile, args: *python-build-args }
+    profiles: [minio]
+    restart: "no"
+    command: ["python", "-m", "service_net.minio_init"]
+    environment:
+      OPENMEETING_MINIO_ENDPOINT: ${OPENMEETING_MINIO_ENDPOINT:-http://minio:9000}
+      OPENMEETING_MINIO_REGION: ${OPENMEETING_MINIO_REGION:-us-east-1}
+      OPENMEETING_MINIO_BUCKET: ${OPENMEETING_MINIO_BUCKET:-openmeeting}
+      OPENMEETING_MINIO_ACCESS_KEY_ID: ${OPENMEETING_MINIO_ACCESS_KEY_ID:-openmeeting}
+      OPENMEETING_MINIO_ACCESS_KEY_SECRET: ${OPENMEETING_MINIO_ACCESS_KEY_SECRET:-change-me-minio-password}
+    networks: [storage-backend]
+    depends_on:
+      minio:
+        condition: service_healthy
+
+  user-postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: openmeeting
+      POSTGRES_PASSWORD: ${USER_POSTGRES_PASSWORD:-${POSTGRES_PASSWORD:-openmeeting}}
+      POSTGRES_DB: openmeeting_user
+    volumes:
+      - user_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U openmeeting -d openmeeting_user"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks: [user-backend]
+
+  meeting-postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: openmeeting
+      POSTGRES_PASSWORD: ${MEETING_POSTGRES_PASSWORD:-${POSTGRES_PASSWORD:-openmeeting}}
+      POSTGRES_DB: openmeeting_meeting
+    volumes:
+      - meeting_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U openmeeting -d openmeeting_meeting"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks: [meeting-backend]
+
+  stt-postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: openmeeting
+      POSTGRES_PASSWORD: ${STT_POSTGRES_PASSWORD:-${POSTGRES_PASSWORD:-openmeeting}}
+      POSTGRES_DB: openmeeting_stt
+    volumes:
+      - stt_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U openmeeting -d openmeeting_stt"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks: [stt-backend]
+
+  # ---- 一次性数据库迁移（各自 ms 镜像内自带 alembic 脚本） ----
+  user-migrate:
+    build: { context: ., dockerfile: user_ms/Dockerfile, args: *python-build-args }
+    restart: "no"
+    profiles: [migrate]
+    networks: [user-backend]
+    environment:
+      <<: *shared-env
+      OPENMEETING_DATABASE_URL: postgresql+asyncpg://openmeeting:${USER_POSTGRES_PASSWORD:-${POSTGRES_PASSWORD:-openmeeting}}@user-postgres:5432/openmeeting_user
+      OPENMEETING_ADMIN_PASSWORD: ${OPENMEETING_ADMIN_PASSWORD:-unused}
+    command: ["python", "-c",
+      "from user_ms.db.session import run_migrations; import asyncio; asyncio.run(run_migrations(__import__('os').environ['OPENMEETING_DATABASE_URL']))"]
+    depends_on:
+      user-postgres:
+        condition: service_healthy
+
+  meeting-migrate:
+    build: { context: ., dockerfile: meeting_ms/Dockerfile, args: *python-build-args }
+    restart: "no"
+    profiles: [migrate]
+    networks: [meeting-backend]
+    environment:
+      <<: *shared-env
+      OPENMEETING_DATABASE_URL: postgresql+asyncpg://openmeeting:${MEETING_POSTGRES_PASSWORD:-${POSTGRES_PASSWORD:-openmeeting}}@meeting-postgres:5432/openmeeting_meeting
+    command: ["python", "-c",
+      "from meeting_ms.db.session import run_migrations; import asyncio; asyncio.run(run_migrations(__import__('os').environ['OPENMEETING_DATABASE_URL']))"]
+    depends_on:
+      meeting-postgres:
+        condition: service_healthy
+
+  stt-migrate:
+    build: { context: ., dockerfile: stt_ms/Dockerfile, args: *python-build-args }
+    restart: "no"
+    profiles: [migrate]
+    networks: [stt-backend]
+    environment:
+      <<: *shared-env
+      OPENMEETING_DATABASE_URL: postgresql+asyncpg://openmeeting:${STT_POSTGRES_PASSWORD:-${POSTGRES_PASSWORD:-openmeeting}}@stt-postgres:5432/openmeeting_stt
+    command: ["python", "-c",
+      "from stt_ms.db.session import run_migrations; import asyncio; asyncio.run(run_migrations(__import__('os').environ['OPENMEETING_DATABASE_URL']))"]
+    depends_on:
+      stt-postgres:
+        condition: service_healthy
+
+  # ---- 业务服务 ----
+  gateway_ms:
+    build: { context: ., dockerfile: gateway_ms/Dockerfile, args: *python-build-args }
+    restart: unless-stopped
+    networks: [edge, user-backend, meeting-backend, stt-backend, storage-backend]
+    environment:
+      <<: *shared-env
+      OPENMEETING_ADMIN_PASSWORD: ${OPENMEETING_ADMIN_PASSWORD:?set OPENMEETING_ADMIN_PASSWORD in .env}
+      OPENMEETING_DATABASE_URL: postgresql+asyncpg://openmeeting:${USER_POSTGRES_PASSWORD:-${POSTGRES_PASSWORD:-openmeeting}}@user-postgres:5432/openmeeting_user
+      OPENMEETING_TRUSTED_PROXIES: ${OPENMEETING_TRUSTED_PROXIES:-}
+      OPENMEETING_USER_MS_URL: http://user_ms:39113
+      OPENMEETING_MEETING_MS_URL: http://meeting_ms:39107
+      OPENMEETING_STT_MS_URL: http://stt_ms:39109
+      OPENMEETING_EGRESS_ENABLED: "true"
+      OPENMEETING_EGRESS_ALLOWED_HOSTS: ${OPENMEETING_EGRESS_ALLOWED_HOSTS:-[]}
+      OPENMEETING_EGRESS_ALLOWED_PORTS: ${OPENMEETING_EGRESS_ALLOWED_PORTS:-[80,443]}
+      OPENMEETING_EGRESS_PRIVATE_HOSTS: ${OPENMEETING_EGRESS_PRIVATE_HOSTS:-[]}
+    expose: ["39111"]
+    ports:
+      - "${OPENMEETING_PORT:-39110}:39110"
+    depends_on:
+      user-postgres:
+        condition: service_healthy
+      user_ms:
+        condition: service_healthy
+      meeting_ms:
+        condition: service_healthy
+      stt_ms:
+        condition: service_healthy
+
+  user_ms:
+    build: { context: ., dockerfile: user_ms/Dockerfile, args: *python-build-args }
+    restart: unless-stopped
+    networks: [user-backend]
+    cap_drop: [NET_ADMIN, NET_RAW]
+    environment:
+      <<: *shared-env
+      OPENMEETING_ADMIN_PASSWORD: ${OPENMEETING_ADMIN_PASSWORD:?set OPENMEETING_ADMIN_PASSWORD in .env}
+      OPENMEETING_DATABASE_URL: postgresql+asyncpg://openmeeting:${USER_POSTGRES_PASSWORD:-${POSTGRES_PASSWORD:-openmeeting}}@user-postgres:5432/openmeeting_user
+      OPENMEETING_TRUSTED_PROXIES: ${OPENMEETING_TRUSTED_PROXIES:-172.16.0.0/12}
+      # Uvicorn must recognize the gateway's forwarded HTTPS scheme for updater URLs.
+      FORWARDED_ALLOW_IPS: ${OPENMEETING_TRUSTED_PROXIES:-172.16.0.0/12}
+      OPENMEETING_GATEWAY_MS_URL: http://gateway_ms:39110
+      OPENMEETING_EGRESS_PROXY_URL: http://gateway_ms:39111
+      OPENMEETING_STORAGE_PROVIDER: ${OPENMEETING_STORAGE_PROVIDER:-auto}
+      OPENMEETING_OSS_DOWNLOAD_DOMAIN: ${OPENMEETING_OSS_DOWNLOAD_DOMAIN:-}
+      # 阿里云短信（可选；覆盖管理端保存的配置）
+      OPENMEETING_SMS_ACCESS_KEY_ID: ${OPENMEETING_SMS_ACCESS_KEY_ID:-}
+      OPENMEETING_SMS_ACCESS_KEY_SECRET: ${OPENMEETING_SMS_ACCESS_KEY_SECRET:-}
+      OPENMEETING_SMS_SIGN_NAME: ${OPENMEETING_SMS_SIGN_NAME:-}
+      OPENMEETING_SMS_TEMPLATE_CODE: ${OPENMEETING_SMS_TEMPLATE_CODE:-}
+      OPENMEETING_SMS_TEMPLATE_PARAM: ${OPENMEETING_SMS_TEMPLATE_PARAM:-}
+      OPENMEETING_SMS_ENDPOINT: ${OPENMEETING_SMS_ENDPOINT:-}
+      # deeprespond IM（可选；SDK 制品发布后按控制台应用信息配置，置 true 启用）
+      OPENMEETING_IM_ENABLED: ${OPENMEETING_IM_ENABLED:-false}
+      OPENMEETING_IM_BASE_URL: ${OPENMEETING_IM_BASE_URL:-}
+      OPENMEETING_IM_ORG_NAME: ${OPENMEETING_IM_ORG_NAME:-}
+      OPENMEETING_IM_APP_NAME: ${OPENMEETING_IM_APP_NAME:-}
+      OPENMEETING_IM_CLIENT_ID: ${OPENMEETING_IM_CLIENT_ID:-}
+      OPENMEETING_IM_CLIENT_SECRET: ${OPENMEETING_IM_CLIENT_SECRET:-}
+      OPENMEETING_IM_TIMEOUT_SECONDS: ${OPENMEETING_IM_TIMEOUT_SECONDS:-10}
+    volumes:
+      - user_data:/data
+    expose: ["39113"]
+    depends_on:
+      user-postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:39113/healthz || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+  meeting_ms:
+    build: { context: ., dockerfile: meeting_ms/Dockerfile, args: *python-build-args }
+    restart: unless-stopped
+    networks: [meeting-backend]
+    cap_drop: [NET_ADMIN, NET_RAW]
+    environment:
+      <<: *shared-env
+      OPENMEETING_DATABASE_URL: postgresql+asyncpg://openmeeting:${MEETING_POSTGRES_PASSWORD:-${POSTGRES_PASSWORD:-openmeeting}}@meeting-postgres:5432/openmeeting_meeting
+      OPENMEETING_JOB_WORKERS: ${OPENMEETING_JOB_WORKERS:-1}
+      OPENMEETING_RECORDING_CHUNK_RETENTION_DAYS: ${OPENMEETING_RECORDING_CHUNK_RETENTION_DAYS:-3}
+      OPENMEETING_RECORDING_CHUNK_MAINTENANCE_INTERVAL_SECONDS: ${OPENMEETING_RECORDING_CHUNK_MAINTENANCE_INTERVAL_SECONDS:-60}
+      OPENMEETING_SCREEN_SHARE_ICE_SERVERS: ${OPENMEETING_SCREEN_SHARE_ICE_SERVERS:-[]}
+      OPENMEETING_GATEWAY_MS_URL: http://gateway_ms:39110
+      OPENMEETING_EGRESS_PROXY_URL: http://gateway_ms:39111
+      OPENMEETING_STORAGE_PROVIDER: ${OPENMEETING_STORAGE_PROVIDER:-auto}
+      OPENMEETING_TRUSTED_PROXIES: ${OPENMEETING_TRUSTED_PROXIES:-172.16.0.0/12}
+      # 阿里云 OSS（可选；覆盖管理端保存的配置）
+      OPENMEETING_OSS_ENDPOINT: ${OPENMEETING_OSS_ENDPOINT:-}
+      OPENMEETING_OSS_REGION: ${OPENMEETING_OSS_REGION:-}
+      OPENMEETING_OSS_BUCKET: ${OPENMEETING_OSS_BUCKET:-}
+      OPENMEETING_OSS_ACCESS_KEY_ID: ${OPENMEETING_OSS_ACCESS_KEY_ID:-}
+      OPENMEETING_OSS_ACCESS_KEY_SECRET: ${OPENMEETING_OSS_ACCESS_KEY_SECRET:-}
+      OPENMEETING_OSS_PREFIX: ${OPENMEETING_OSS_PREFIX:-}
+      OPENMEETING_MINIO_ENDPOINT: ${OPENMEETING_MINIO_ENDPOINT:-http://minio:9000}
+      OPENMEETING_MINIO_PUBLIC_ENDPOINT: ${OPENMEETING_MINIO_PUBLIC_ENDPOINT:-http://localhost:39120}
+      OPENMEETING_MINIO_REGION: ${OPENMEETING_MINIO_REGION:-us-east-1}
+      OPENMEETING_MINIO_BUCKET: ${OPENMEETING_MINIO_BUCKET:-openmeeting}
+      OPENMEETING_MINIO_ACCESS_KEY_ID: ${OPENMEETING_MINIO_ACCESS_KEY_ID:-openmeeting}
+      OPENMEETING_MINIO_ACCESS_KEY_SECRET: ${OPENMEETING_MINIO_ACCESS_KEY_SECRET:-}
+      OPENMEETING_MINIO_PREFIX: ${OPENMEETING_MINIO_PREFIX:-openmeeting}
+    volumes:
+      - audio:/data/audio
+      - appdata:/data
+    expose: ["39107"]
+    depends_on:
+      meeting-postgres:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+        required: false
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:39107/healthz || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+  stt_ms:
+    build:
+      context: .
+      dockerfile: stt_ms/Dockerfile
+      args:
+        <<: *python-build-args
+        STT_EXTRA: ${OPENMEETING_STT_RUNTIME:-stt-cpu}
+    restart: unless-stopped
+    networks: [stt-backend]
+    cap_drop: [NET_ADMIN, NET_RAW]
+    environment:
+      <<: *shared-env
+      OPENMEETING_DATABASE_URL: postgresql+asyncpg://openmeeting:${STT_POSTGRES_PASSWORD:-${POSTGRES_PASSWORD:-openmeeting}}@stt-postgres:5432/openmeeting_stt
+      OPENMEETING_STT_CONCURRENCY: ${OPENMEETING_STT_CONCURRENCY:-1}
+      OPENMEETING_EGRESS_PROXY_URL: http://gateway_ms:39111
+      HF_ENDPOINT: ${HF_ENDPOINT:-}
+    volumes:
+      - models:/data/models
+      - appdata:/data
+    expose: ["39109"]
+    depends_on:
+      stt-postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:39109/healthz || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+volumes:
+  user_pgdata:
+  meeting_pgdata:
+  stt_pgdata:
+  models:
+  audio:
+  user_data:
+  appdata:
+  minio_data:
+
+networks:
+  edge: {}
+  user-backend:
+    internal: true
+  meeting-backend:
+    internal: true
+  stt-backend:
+    internal: true
+  storage-backend:
+    internal: true
+  storage-public: {}

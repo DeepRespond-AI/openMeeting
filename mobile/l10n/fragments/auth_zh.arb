@@ -1,0 +1,118 @@
+{
+  "authTabLogin": "登录",
+  "@authTabLogin": {
+    "description": "Phone auth form tab"
+  },
+  "authTabRegister": "注册",
+  "@authTabRegister": {
+    "description": "Phone auth form tab"
+  },
+  "authPhoneLabel": "手机号",
+  "authPhoneHint": "请输入 11 位手机号",
+  "authPhonePrefix": "+86 ",
+  "@authPhonePrefix": {
+    "description": "Country code shown before the phone field (mainland China only)"
+  },
+  "authPhoneInvalid": "请输入正确的手机号",
+  "authCodeLabel": "验证码",
+  "authCodeHint": "{length} 位短信验证码",
+  "@authCodeHint": {
+    "placeholders": {
+      "length": {
+        "type": "int"
+      }
+    }
+  },
+  "authCodeInvalid": "请输入 {length} 位数字验证码",
+  "@authCodeInvalid": {
+    "placeholders": {
+      "length": {
+        "type": "int"
+      }
+    }
+  },
+  "authSendCode": "获取验证码",
+  "authResendCode": "重新获取",
+  "authResendIn": "{seconds} 秒后重发",
+  "@authResendIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "authSending": "发送中…",
+  "authCodeSent": "验证码已发送，请注意查收短信",
+  "authDevCodeHint": "开发模式验证码：{code}（点击填入）",
+  "@authDevCodeHint": {
+    "description": "Only shown against dev servers",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "authNameLabel": "姓名",
+  "authNameHint": "你的姓名或昵称",
+  "authNameRequired": "请输入姓名",
+  "authNameTooLong": "姓名不能超过 {max} 个字",
+  "@authNameTooLong": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "authLoginButton": "登录",
+  "authRegisterButton": "注册并登录",
+  "authRegistrationClosed": "该服务器暂未开放注册，请联系管理员开通账号。",
+  "authSmsNotReady": "服务器短信服务尚未配置，暂时无法获取验证码。",
+  "authConfigLoadFailed": "无法获取服务器登录配置：{detail}",
+  "@authConfigLoadFailed": {
+    "placeholders": {
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
+  "authServerRequired": "当前版本未配置服务，暂时无法登录，请联系管理员。",
+  "authMethodPassword": "密码登录",
+  "authMethodCode": "验证码登录",
+  "authPasswordLabel": "密码",
+  "authNewPasswordLabel": "新密码",
+  "authPasswordHint": "{min}-{max} 位，需包含字母和数字",
+  "@authPasswordHint": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "authConfirmPasswordLabel": "确认密码",
+  "authConfirmPasswordHint": "请再次输入密码",
+  "authPasswordRequired": "请输入密码",
+  "authPasswordLength": "密码长度需为 {min}-{max} 位",
+  "@authPasswordLength": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "authPasswordSpaces": "密码首尾不能有空格",
+  "authPasswordLetterDigit": "密码需同时包含字母和数字",
+  "authPasswordMismatch": "两次输入的密码不一致",
+  "authShowPassword": "显示密码",
+  "authHidePassword": "隐藏密码",
+  "authForgotPassword": "忘记密码？",
+  "authBackToLogin": "返回登录",
+  "authResetTitle": "重置密码",
+  "authResetHint": "通过短信验证码验证手机号，然后设置新密码。",
+  "authResetButton": "重置密码并登录"
+}

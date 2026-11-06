@@ -1,0 +1,61 @@
+{
+  "settingsChangeAvatar": "修改头像",
+  "settingsAvatarPicking": "正在选择图片…",
+  "settingsAvatarUploading": "正在上传头像…",
+  "settingsAvatarSaving": "正在保存头像…",
+  "settingsAvatarSaved": "头像已更新",
+  "settingsAvatarHint": "支持 PNG、JPG、WebP，最大 {megabytes} MB",
+  "@settingsAvatarHint": {"placeholders": {"megabytes": {"type": "int"}}},
+  "settingsAvatarSize": "图片不能超过 {megabytes} MB，请重新选择。",
+  "@settingsAvatarSize": {"placeholders": {"megabytes": {"type": "int"}}},
+  "settingsAvatarType": "请选择有效的 PNG、JPG 或 WebP 图片。",
+  "settingsAvatarPickFailed": "无法读取图片，请检查权限后重新选择。",
+  "settingsAvatarUploadFailed": "头像上传失败，原头像已保留，请重试。",
+  "settingsAvatarSaveFailed": "头像保存失败，原头像已保留，请重试。",
+  "settingsAccountSection": "账号",
+  "settingsEditName": "修改姓名",
+  "settingsLogout": "退出登录",
+  "settingsLogoutConfirmTitle": "退出登录？",
+  "settingsLogoutConfirmBody": "退出后需要使用密码或短信验证码重新登录。",
+  "settingsLockedWhileRecording": "正在录音，结束后才能操作",
+  "settingsPreferencesSection": "偏好",
+  "settingsDefaultSource": "默认录音来源",
+  "settingsSourceMicrophone": "仅麦克风",
+  "settingsSourceMicrophoneHint": "适合线下会议，录制现场声音。",
+  "settingsSourceSystem": "允许内录（系统声音 + 麦克风）",
+  "settingsSourceSystemHintAndroid": "需要 Android 10 及以上，开始录音时需授权录屏。系统不允许录制语音通话中对方的声音（如微信、腾讯会议通话）以及禁止内录的 App，这类场景请开免提用麦克风收音。",
+  "settingsSourceSystemHintIos": "通过系统「屏幕直播」录制，录音期间状态栏会变红。部分 App 的通话音频和受保护内容会被系统静音；模拟器不支持。",
+  "settingsTranscriptionLanguage": "转写语言",
+  "settingsAutoSummary": "自动生成纪要",
+  "settingsAutoSummaryHint": "录音或导入完成后自动生成 AI 会议纪要",
+  "settingsKeepLocalAudio": "保留本地录音",
+  "settingsKeepLocalAudioHint": "上传成功后仍在手机上保留音频文件",
+  "settingsAboutSection": "关于",
+  "settingsVersion": "版本 {version}",
+  "@settingsVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsPassword": "登录密码",
+  "settingsPasswordIsSet": "已设置",
+  "settingsPasswordNotSet": "未设置，目前仅可用验证码登录",
+  "settingsSetPassword": "设置密码",
+  "settingsChangePassword": "修改密码",
+  "settingsSetPasswordHint": "设置后可以使用手机号 + 密码登录，验证码登录仍然可用。",
+  "settingsChangePasswordHint": "修改后，登录此账号的其他设备将退出登录。忘记原密码可退出登录后在登录页「忘记密码？」重置。",
+  "settingsOldPassword": "原密码",
+  "settingsOldPasswordRequired": "请输入原密码",
+  "settingsPasswordSaved": "密码已设置，之后可以使用密码登录",
+  "settingsPasswordChanged": "密码已修改，其他设备已退出登录",
+  "settingsPasswordFailed": "密码保存失败：{detail}",
+  "@settingsPasswordFailed": {
+    "placeholders": {
+      "detail": {
+        "type": "String"
+      }
+    }
+  }
+}

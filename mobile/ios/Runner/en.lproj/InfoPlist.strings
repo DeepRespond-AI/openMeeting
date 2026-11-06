@@ -1,0 +1,5 @@
+/* Localized Info.plist values (registered in the Xcode project as a variant group). */
+"CFBundleDisplayName" = "DR Meeting";
+"CFBundleName" = "DR Meeting";
+"NSCameraUsageDescription" = "DR Meeting uses the camera for video meetings.";
+"NSMicrophoneUsageDescription" = "DR Meeting uses the microphone to record meeting audio for live transcription and meeting summaries.";

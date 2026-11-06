@@ -1,0 +1,10 @@
+{
+  "audio": true,
+  "video": true,
+  "chat": true,
+  "screenShare": true,
+  "members": true,
+  "handRaise": true,
+  "recording": true,
+  "settings": true
+}

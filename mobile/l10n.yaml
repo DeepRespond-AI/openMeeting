@@ -1,0 +1,7 @@
+# Flutter gen-l10n. Template locale is Chinese; English must have the same keys.
+arb-dir: lib/core/l10n
+template-arb-file: app_zh.arb
+output-localization-file: app_localizations.dart
+output-class: AppLocalizations
+output-dir: lib/core/l10n/gen
+nullable-getter: false

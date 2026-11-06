@@ -1,0 +1,657 @@
+{
+  "liveMediaConnectingInBackground": "Audio/video is connecting in the background. Chat and member controls are available.",
+  "liveMediaReleasing": "Waiting for the previous audio/video connection to close…",
+  "liveMediaReleaseTimedOut": "The previous audio/video connection is still closing. Retry shortly, or leave this meeting.",
+  "liveMediaJoinTimedOut": "The audio/video service was not ready before the join deadline. Try again later; meeting controls and chat remain available.",
+  "liveChatMessageHint": "Message everyone",
+  "liveChatEmoji": "Emoji",
+  "liveChatEmojiFaces": "Faces",
+  "liveChatEmojiGestures": "Gestures",
+  "liveChatEmojiSymbols": "Symbols",
+  "liveShareStop": "Stop sharing",
+  "liveShareStarting": "Starting screen share…",
+  "liveShareSharing": "Sharing your screen",
+  "liveShareCaptureHint": "Participants can see the screen content you choose to share",
+  "liveShareDenied": "Screen capture was not allowed. Try again and allow sharing.",
+  "liveShareFailed": "Screen sharing failed. Check your connection and try again.",
+  "liveShareReplaced": "Another participant replaced your screen share",
+  "liveShareStopFailed": "Capture stopped. Refresh to confirm the sharing state.",
+  "liveShareWaiting": "Receiving shared screen…",
+  "liveShareReceiveFailed": "No shared screen received. Refresh to retry.",
+  "liveShareBy": "Shared by {name}",
+  "@liveShareBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "liveSpeaking": "Speaking",
+  "liveNetwork": "Network quality",
+  "liveNetworkUnknown": "Unknown",
+  "liveNetworkGood": "Good",
+  "liveNetworkFair": "Fair",
+  "liveNetworkPoor": "Poor",
+  "liveNetworkScope": "RTC link metrics between this device and the meeting media service. Unknown when no sample is available.",
+  "liveNetworkRtt": "Round-trip latency",
+  "liveNetworkLoss": "Packet loss",
+  "liveNetworkNoData": "No data",
+  "liveMinimize": "Go home and stay connected",
+  "liveReturnMeeting": "Return to meeting",
+  "liveSessionOngoing": "Meeting in progress; audio and sharing stay connected",
+  "liveRoomConflict": "Returned to your current meeting. Leave it before joining another.",
+  "imUnknownUser": "User",
+  "liveRecordingVersionMismatch": "This server does not support automatic meeting recording. Update it and retry.",
+  "liveSharedRecord": "Shared attendance record · Read only",
+  "liveSharedSummaryEmpty": "The summary is not ready yet. Refresh later to check.",
+  "liveDownloadAudio": "Cloud download",
+  "liveDownloadingAudio": "Downloading recording…",
+  "liveAudioSaved": "Recording saved. You can share or save it to Files.",
+  "liveExportAudio": "Share or save recording",
+  "liveRecordEndedNotice": "Meeting ended. The recording is processing in the background.",
+  "liveRecordCompletedNotice": "The meeting recording and summary are ready.",
+  "liveRecordFailedNotice": "Meeting processing failed. Any saved audio remains available.",
+  "liveViewRecord": "View record",
+  "liveHome": "Home",
+  "@liveHome": {
+    "description": "Mobile meeting or messaging: liveHome"
+  },
+  "liveHistory": "Meetings",
+  "@liveHistory": {
+    "description": "Mobile meeting or messaging: liveHistory"
+  },
+  "liveMine": "Me",
+  "@liveMine": {
+    "description": "Mobile meeting or messaging: liveMine"
+  },
+  "liveMessages": "Messages",
+  "@liveMessages": {
+    "description": "Mobile meeting or messaging: liveMessages"
+  },
+  "liveWelcome": "Meet with purpose",
+  "@liveWelcome": {
+    "description": "Mobile meeting or messaging: liveWelcome"
+  },
+  "liveWelcomeHint": "Connect, share ideas and keep meeting notes",
+  "@liveWelcomeHint": {
+    "description": "Mobile meeting or messaging: liveWelcomeHint"
+  },
+  "liveJoin": "Join",
+  "@liveJoin": {
+    "description": "Mobile meeting or messaging: liveJoin"
+  },
+  "liveQuick": "Meet now",
+  "@liveQuick": {
+    "description": "Mobile meeting or messaging: liveQuick"
+  },
+  "liveSchedule": "Schedule",
+  "@liveSchedule": {
+    "description": "Mobile meeting or messaging: liveSchedule"
+  },
+  "liveRecordingHint": "Record audio, transcribe and create notes",
+  "@liveRecordingHint": {
+    "description": "Mobile meeting or messaging: liveRecordingHint"
+  },
+  "liveUpcoming": "Upcoming",
+  "@liveUpcoming": {
+    "description": "Mobile meeting or messaging: liveUpcoming"
+  },
+  "liveNoSchedules": "No scheduled meetings",
+  "@liveNoSchedules": {
+    "description": "Mobile meeting or messaging: liveNoSchedules"
+  },
+  "liveRefresh": "Refresh",
+  "@liveRefresh": {
+    "description": "Mobile meeting or messaging: liveRefresh"
+  },
+  "liveCode": "Meeting code",
+  "@liveCode": {
+    "description": "Mobile meeting or messaging: liveCode"
+  },
+  "liveCodeHint": "Enter a 6-digit meeting code",
+  "@liveCodeHint": {
+    "description": "Mobile meeting or messaging: liveCodeHint"
+  },
+  "liveCodeValue": "Meeting code: {code}",
+  "@liveCodeValue": {
+    "description": "Mobile meeting or messaging: liveCodeValue",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "livePassword": "Meeting password",
+  "@livePassword": {
+    "description": "Mobile meeting or messaging: livePassword"
+  },
+  "livePasswordOptional": "Required only for protected meetings",
+  "@livePasswordOptional": {
+    "description": "Mobile meeting or messaging: livePasswordOptional"
+  },
+  "liveMic": "Microphone",
+  "@liveMic": {
+    "description": "Mobile meeting or messaging: liveMic"
+  },
+  "liveCamera": "Camera",
+  "@liveCamera": {
+    "description": "Mobile meeting or messaging: liveCamera"
+  },
+  "liveJoinNotice": "You can enable audio and video after joining. This meeting may be recorded.",
+  "@liveJoinNotice": {
+    "description": "Mobile meeting or messaging: liveJoinNotice"
+  },
+  "liveTitle": "Meeting title",
+  "@liveTitle": {
+    "description": "Mobile meeting or messaging: liveTitle"
+  },
+  "liveTitleRequired": "Enter a meeting title",
+  "@liveTitleRequired": {
+    "description": "Mobile meeting or messaging: liveTitleRequired"
+  },
+  "livePasswordInvalid": "Use a 4–6 digit password",
+  "@livePasswordInvalid": {
+    "description": "Mobile meeting or messaging: livePasswordInvalid"
+  },
+  "liveFutureTime": "Choose a future start time",
+  "@liveFutureTime": {
+    "description": "Mobile meeting or messaging: liveFutureTime"
+  },
+  "liveEditSchedule": "Edit schedule",
+  "@liveEditSchedule": {
+    "description": "Mobile meeting or messaging: liveEditSchedule"
+  },
+  "liveStartTime": "Start time",
+  "@liveStartTime": {
+    "description": "Mobile meeting or messaging: liveStartTime"
+  },
+  "liveDuration": "Duration",
+  "@liveDuration": {
+    "description": "Mobile meeting or messaging: liveDuration"
+  },
+  "liveMinutes": "{count} minutes",
+  "@liveMinutes": {
+    "description": "Mobile meeting or messaging: liveMinutes",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "liveRequirePassword": "Require a password",
+  "@liveRequirePassword": {
+    "description": "Mobile meeting or messaging: liveRequirePassword"
+  },
+  "liveWaitingRoom": "Waiting room",
+  "@liveWaitingRoom": {
+    "description": "Mobile meeting or messaging: liveWaitingRoom"
+  },
+  "liveReminder": "Remind {minutes} minutes before (while app is open)",
+  "@liveReminder": {
+    "description": "Foreground reminder lead time",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "liveSave": "Save",
+  "@liveSave": {
+    "description": "Mobile meeting or messaging: liveSave"
+  },
+  "liveSaving": "Working…",
+  "@liveSaving": {
+    "description": "Mobile meeting or messaging: liveSaving"
+  },
+  "liveEdit": "Edit",
+  "@liveEdit": {
+    "description": "Mobile meeting or messaging: liveEdit"
+  },
+  "liveCancelSchedule": "Cancel schedule",
+  "@liveCancelSchedule": {
+    "description": "Mobile meeting or messaging: liveCancelSchedule"
+  },
+  "liveBack": "Cancel",
+  "@liveBack": {
+    "description": "Mobile meeting or messaging: liveBack"
+  },
+  "liveConfirm": "Confirm",
+  "@liveConfirm": {
+    "description": "Mobile meeting or messaging: liveConfirm"
+  },
+  "liveRoom": "Meeting",
+  "@liveRoom": {
+    "description": "Mobile meeting or messaging: liveRoom"
+  },
+  "liveJoining": "Joining meeting…",
+  "@liveJoining": {
+    "description": "Mobile meeting or messaging: liveJoining"
+  },
+  "liveWaiting": "Waiting for the host to admit you",
+  "@liveWaiting": {
+    "description": "Mobile meeting or messaging: liveWaiting"
+  },
+  "liveCancelJoin": "Cancel joining",
+  "@liveCancelJoin": {
+    "description": "Mobile meeting or messaging: liveCancelJoin"
+  },
+  "liveBackHome": "Back to home",
+  "@liveBackHome": {
+    "description": "Mobile meeting or messaging: liveBackHome"
+  },
+  "liveEnded": "Meeting ended or left",
+  "@liveEnded": {
+    "description": "Mobile meeting or messaging: liveEnded"
+  },
+  "liveViewNotes": "View meeting notes",
+  "@liveViewNotes": {
+    "description": "Mobile meeting or messaging: liveViewNotes"
+  },
+  "liveMembersCount": "{count} members",
+  "@liveMembersCount": {
+    "description": "Mobile meeting or messaging: liveMembersCount",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "liveReconnecting": "Reconnecting…",
+  "@liveReconnecting": {
+    "description": "Mobile meeting or messaging: liveReconnecting"
+  },
+  "liveMediaUnavailable": "Audio/video is not connected. Room controls and chat remain available.",
+  "@liveMediaUnavailable": {
+    "description": "Mobile meeting or messaging: liveMediaUnavailable"
+  },
+  "liveRetry": "Retry",
+  "@liveRetry": {
+    "description": "Mobile meeting or messaging: liveRetry"
+  },
+  "liveError": "Operation failed",
+  "@liveError": {
+    "description": "Mobile meeting or messaging: liveError"
+  },
+  "liveMe": "Me",
+  "@liveMe": {
+    "description": "Mobile meeting or messaging: liveMe"
+  },
+  "liveMembers": "Members",
+  "@liveMembers": {
+    "description": "Mobile meeting or messaging: liveMembers"
+  },
+  "liveChat": "Chat",
+  "@liveChat": {
+    "description": "Mobile meeting or messaging: liveChat"
+  },
+  "liveMore": "More",
+  "@liveMore": {
+    "description": "Mobile meeting or messaging: liveMore"
+  },
+  "liveLeave": "Leave",
+  "@liveLeave": {
+    "description": "Mobile meeting or messaging: liveLeave"
+  },
+  "liveEnd": "End meeting",
+  "@liveEnd": {
+    "description": "Mobile meeting or messaging: liveEnd"
+  },
+  "liveEndHint": "Remaining audio uploads are confirmed before ending. Processing continues in the background, and all actual attendees can view, play and download the record.",
+  "@liveEndHint": {
+    "description": "Mobile meeting or messaging: liveEndHint"
+  },
+  "liveLeaveHint": "Leaving does not end the meeting. You can still view, play and download the recording after the meeting ends.",
+  "@liveLeaveHint": {
+    "description": "Mobile meeting or messaging: liveLeaveHint"
+  },
+  "liveClose": "Close",
+  "@liveClose": {
+    "description": "Mobile meeting or messaging: liveClose"
+  },
+  "liveHost": "Host",
+  "@liveHost": {
+    "description": "Mobile meeting or messaging: liveHost"
+  },
+  "liveMember": "Member",
+  "@liveMember": {
+    "description": "Mobile meeting or messaging: liveMember"
+  },
+  "liveAdmit": "Admit",
+  "@liveAdmit": {
+    "description": "Mobile meeting or messaging: liveAdmit"
+  },
+  "liveDeny": "Deny",
+  "@liveDeny": {
+    "description": "Mobile meeting or messaging: liveDeny"
+  },
+  "liveMuteAll": "Mute all",
+  "@liveMuteAll": {
+    "description": "Mobile meeting or messaging: liveMuteAll"
+  },
+  "liveMute": "Mute",
+  "@liveMute": {
+    "description": "Mobile meeting or messaging: liveMute"
+  },
+  "liveUnmute": "Allow unmute",
+  "@liveUnmute": {
+    "description": "Mobile meeting or messaging: liveUnmute"
+  },
+  "liveApproveHand": "Approve hand",
+  "@liveApproveHand": {
+    "description": "Mobile meeting or messaging: liveApproveHand"
+  },
+  "liveRemove": "Remove",
+  "@liveRemove": {
+    "description": "Mobile meeting or messaging: liveRemove"
+  },
+  "liveTransfer": "Transfer ownership",
+  "@liveTransfer": {
+    "description": "Mobile meeting or messaging: liveTransfer"
+  },
+  "liveAttach": "Attach file",
+  "@liveAttach": {
+    "description": "Mobile meeting or messaging: liveAttach"
+  },
+  "liveMessage": "Message",
+  "@liveMessage": {
+    "description": "Mobile meeting or messaging: liveMessage"
+  },
+  "liveSend": "Send",
+  "@liveSend": {
+    "description": "Mobile meeting or messaging: liveSend"
+  },
+  "liveNoMessages": "No messages yet",
+  "@liveNoMessages": {
+    "description": "Mobile meeting or messaging: liveNoMessages"
+  },
+  "liveRaiseHand": "Raise hand",
+  "@liveRaiseHand": {
+    "description": "Mobile meeting or messaging: liveRaiseHand"
+  },
+  "liveLowerHand": "Lower hand",
+  "@liveLowerHand": {
+    "description": "Mobile meeting or messaging: liveLowerHand"
+  },
+  "liveSwitchCamera": "Switch camera",
+  "@liveSwitchCamera": {
+    "description": "Mobile meeting or messaging: liveSwitchCamera"
+  },
+  "liveSpeaker": "Use speakerphone",
+  "@liveSpeaker": {
+    "description": "Mobile meeting or messaging: liveSpeaker"
+  },
+  "liveEarpiece": "Use earpiece",
+  "@liveEarpiece": {
+    "description": "Mobile meeting or messaging: liveEarpiece"
+  },
+  "liveShare": "Share screen",
+  "@liveShare": {
+    "description": "Mobile meeting or messaging: liveShare"
+  },
+  "liveShareUnavailable": "Screen sharing is not available in this mobile version",
+  "@liveShareUnavailable": {
+    "description": "Mobile meeting or messaging: liveShareUnavailable"
+  },
+  "liveSettings": "Meeting settings",
+  "@liveSettings": {
+    "description": "Mobile meeting or messaging: liveSettings"
+  },
+  "liveSettingsHint": "Changes apply to future joins without removing current members.",
+  "@liveSettingsHint": {
+    "description": "Mobile meeting or messaging: liveSettingsHint"
+  },
+  "liveHostOnly": "Only the host can edit meeting settings",
+  "@liveHostOnly": {
+    "description": "Mobile meeting or messaging: liveHostOnly"
+  },
+  "liveKeepPassword": "Leave blank to keep the current password",
+  "@liveKeepPassword": {
+    "description": "Mobile meeting or messaging: liveKeepPassword"
+  },
+  "imConversations": "Conversations",
+  "@imConversations": {
+    "description": "Mobile meeting or messaging: imConversations"
+  },
+  "imContacts": "Contacts",
+  "@imContacts": {
+    "description": "Mobile meeting or messaging: imContacts"
+  },
+  "imGroups": "Groups",
+  "@imGroups": {
+    "description": "Mobile meeting or messaging: imGroups"
+  },
+  "imNew": "New conversation",
+  "@imNew": {
+    "description": "Mobile meeting or messaging: imNew"
+  },
+  "imEmpty": "Nothing here yet",
+  "@imEmpty": {
+    "description": "Mobile meeting or messaging: imEmpty"
+  },
+  "imCreateGroup": "Create group",
+  "@imCreateGroup": {
+    "description": "Mobile meeting or messaging: imCreateGroup"
+  },
+  "imGroupName": "Group name",
+  "@imGroupName": {
+    "description": "Mobile meeting or messaging: imGroupName"
+  },
+  "imUserId": "User ID",
+  "@imUserId": {
+    "description": "Mobile meeting or messaging: imUserId"
+  },
+  "imMemberIds": "User IDs separated by commas or spaces",
+  "@imMemberIds": {
+    "description": "Mobile meeting or messaging: imMemberIds"
+  },
+  "imCreate": "Create",
+  "@imCreate": {
+    "description": "Mobile meeting or messaging: imCreate"
+  },
+  "imManageGroup": "Manage group",
+  "@imManageGroup": {
+    "description": "Mobile meeting or messaging: imManageGroup"
+  },
+  "imPin": "Pin / unpin",
+  "@imPin": {
+    "description": "Mobile meeting or messaging: imPin"
+  },
+  "imLoadOlder": "Load earlier messages",
+  "@imLoadOlder": {
+    "description": "Mobile meeting or messaging: imLoadOlder"
+  },
+  "imLoadMore": "Load more",
+  "@imLoadMore": {
+    "description": "Mobile meeting or messaging: imLoadMore"
+  },
+  "imRecalled": "Message recalled",
+  "@imRecalled": {
+    "description": "Mobile meeting or messaging: imRecalled"
+  },
+  "imAttachment": "Attachment",
+  "@imAttachment": {
+    "description": "Mobile meeting or messaging: imAttachment"
+  },
+  "imDownload": "Download",
+  "@imDownload": {
+    "description": "Mobile meeting or messaging: imDownload"
+  },
+  "imPlay": "Play",
+  "@imPlay": {
+    "description": "Mobile meeting or messaging: imPlay"
+  },
+  "imRecall": "Recall",
+  "@imRecall": {
+    "description": "Mobile meeting or messaging: imRecall"
+  },
+  "imImage": "Image",
+  "@imImage": {
+    "description": "Mobile meeting or messaging: imImage"
+  },
+  "imVideo": "Video",
+  "@imVideo": {
+    "description": "Mobile meeting or messaging: imVideo"
+  },
+  "imFile": "File",
+  "@imFile": {
+    "description": "Mobile meeting or messaging: imFile"
+  },
+  "imVoice": "Voice",
+  "@imVoice": {
+    "description": "Mobile meeting or messaging: imVoice"
+  },
+  "imStopSend": "Stop and send",
+  "@imStopSend": {
+    "description": "Mobile meeting or messaging: imStopSend"
+  },
+  "imVoiceLimit": "Recording limit reached; this recording was cancelled",
+  "@imVoiceLimit": {
+    "description": "Mobile meeting or messaging: imVoiceLimit"
+  },
+  "imStopPlayback": "Stop playback",
+  "@imStopPlayback": {
+    "description": "Mobile meeting or messaging: imStopPlayback"
+  },
+  "imRequests": "Friend requests",
+  "@imRequests": {
+    "description": "Mobile meeting or messaging: imRequests"
+  },
+  "imNoRequests": "No pending requests",
+  "@imNoRequests": {
+    "description": "Mobile meeting or messaging: imNoRequests"
+  },
+  "imAddContact": "Add contact",
+  "@imAddContact": {
+    "description": "Mobile meeting or messaging: imAddContact"
+  },
+  "imAccept": "Accept",
+  "@imAccept": {
+    "description": "Mobile meeting or messaging: imAccept"
+  },
+  "imDecline": "Decline",
+  "@imDecline": {
+    "description": "Mobile meeting or messaging: imDecline"
+  },
+  "imRemark": "Remark",
+  "@imRemark": {
+    "description": "Mobile meeting or messaging: imRemark"
+  },
+  "imRemoveContact": "Remove contact",
+  "@imRemoveContact": {
+    "description": "Mobile meeting or messaging: imRemoveContact"
+  },
+  "imInvitations": "Group invitations",
+  "@imInvitations": {
+    "description": "Mobile meeting or messaging: imInvitations"
+  },
+  "imAnnouncement": "Announcement",
+  "@imAnnouncement": {
+    "description": "Mobile meeting or messaging: imAnnouncement"
+  },
+  "imInvite": "Invite members",
+  "@imInvite": {
+    "description": "Mobile meeting or messaging: imInvite"
+  },
+  "imAdminRole": "Toggle administrator",
+  "@imAdminRole": {
+    "description": "Mobile meeting or messaging: imAdminRole"
+  },
+  "imDismissGroup": "Dismiss group",
+  "@imDismissGroup": {
+    "description": "Mobile meeting or messaging: imDismissGroup"
+  },
+  "imLeaveGroup": "Leave group",
+  "@imLeaveGroup": {
+    "description": "Mobile meeting or messaging: imLeaveGroup"
+  },
+  "liveReminderSoon": "Meeting starts soon: {title}",
+  "@liveReminderSoon": {
+    "description": "Foreground schedule reminder",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "liveRecordingTitle": "Meeting recording",
+  "liveRecordingOff": "Automatic recording is not active yet",
+  "liveRecordingShared": "Shared meeting recording is active",
+  "liveRecordingActive": "Recording meeting audio",
+  "liveRecordingUploading": "Uploading meeting audio",
+  "liveRecordingFailed": "Meeting recording failed",
+  "liveRecordingWaiting": "Waiting for recordable audio tracks",
+  "liveRecordingNoFrames": "No audio frames received. Check microphone permissions and media connection.",
+  "liveRecordingBacklog": "Recording upload queue is full. Capture is paused; retry the upload.",
+  "liveRecordingError": "Recording failed: {message}",
+  "@liveRecordingError": {
+    "placeholders": {
+      "message": {
+        "type": "String"
+      }
+    }
+  },
+  "liveRoomRecordingHint": "Meetings record automatically. The host uploads received audio tracks and confirms remaining chunks before ending. All actual attendees, including early leavers, can view and download the record. Missing tracks or upload failures are never reported as recording success.",
+  "liveRecordingStart": "Start recording",
+  "liveRecordingStop": "Stop recording",
+  "liveRecordingRequest": "Request recording",
+  "liveRecordingPending": "Awaiting host approval",
+  "liveRecordingApprovals": "Recording requests",
+  "liveRecordingNoRequests": "No pending recording requests",
+  "liveRecordingProcessed": "Meeting recording processed",
+  "liveRecordingProcessing": "Processing recording, transcript and minutes",
+  "liveHistoryRecords": "Meeting history",
+  "liveUpcomingTab": "Scheduled meetings",
+  "liveScheduleActive": "In progress · end the current session before editing or cancelling",
+  "liveScheduleSearch": "Search title, meeting number or host",
+  "liveScheduleNoMatches": "No matching scheduled meetings",
+  "liveScheduleHost": "Host: {name}",
+  "@liveScheduleHost": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "liveScheduleDate": "Meeting date",
+  "imPause": "Pause",
+  "liveRecordingTools": "Record & transcribe",
+  "liveRecordingToolsHint": "Record live audio or import an audio file to transcribe",
+  "liveToday": "Today",
+  "liveTomorrow": "Tomorrow",
+  "liveAgendaOngoing": "In progress",
+  "liveAgendaJoined": "Joined",
+  "liveAgendaDay": "{day} {date}",
+  "liveAgendaTime": "{start}–{end}",
+  "liveInvite": "Invite participants",
+  "liveInvitation": "You are invited to a DR Meeting\nTopic: {title}\nMeeting code: {code}",
+  "@liveAgendaDay": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "@liveAgendaTime": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "@liveInvitation": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "code": {
+        "type": "String"
+      }
+    }
+  }
+}

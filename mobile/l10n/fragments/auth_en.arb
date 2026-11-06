@@ -1,0 +1,66 @@
+{
+  "authTabLogin": "Sign in",
+  "authTabRegister": "Register",
+  "authPhoneLabel": "Phone number",
+  "authPhoneHint": "11-digit mobile number",
+  "authPhonePrefix": "+86 ",
+  "authPhoneInvalid": "Enter a valid mainland China mobile number",
+  "authCodeLabel": "Verification code",
+  "authCodeHint": "{length}-digit SMS code",
+  "authCodeInvalid": "Enter the {length}-digit code",
+  "authSendCode": "Get code",
+  "authResendCode": "Resend",
+  "authResendIn": "Resend in {seconds}s",
+  "authSending": "Sending…",
+  "authCodeSent": "Code sent. Check your SMS.",
+  "authDevCodeHint": "Dev code: {code} (tap to fill)",
+  "authNameLabel": "Name",
+  "authNameHint": "Your name",
+  "authNameRequired": "Please enter your name",
+  "authNameTooLong": "Name must be at most {max} characters",
+  "authLoginButton": "Sign in",
+  "authRegisterButton": "Register and sign in",
+  "authRegistrationClosed": "Registration is closed on this server. Ask your administrator for an account.",
+  "authSmsNotReady": "SMS is not configured on this server; verification codes cannot be sent yet.",
+  "authConfigLoadFailed": "Could not load the sign-in settings: {detail}",
+  "authServerRequired": "This build has no service configured, so you cannot sign in. Contact your administrator.",
+  "authMethodPassword": "Password",
+  "authMethodCode": "SMS code",
+  "authPasswordLabel": "Password",
+  "authNewPasswordLabel": "New password",
+  "authPasswordHint": "{min}–{max} characters with letters and digits",
+  "@authPasswordHint": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "authConfirmPasswordLabel": "Confirm password",
+  "authConfirmPasswordHint": "Enter the password again",
+  "authPasswordRequired": "Please enter your password",
+  "authPasswordLength": "Password must be {min}–{max} characters",
+  "@authPasswordLength": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "authPasswordSpaces": "Password cannot start or end with a space",
+  "authPasswordLetterDigit": "Password must contain both letters and digits",
+  "authPasswordMismatch": "The two passwords do not match",
+  "authShowPassword": "Show password",
+  "authHidePassword": "Hide password",
+  "authForgotPassword": "Forgot password?",
+  "authBackToLogin": "Back to sign in",
+  "authResetTitle": "Reset password",
+  "authResetHint": "Verify your mobile number with an SMS code, then choose a new password.",
+  "authResetButton": "Reset password and sign in"
+}

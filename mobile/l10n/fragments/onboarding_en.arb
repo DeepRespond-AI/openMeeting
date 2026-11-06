@@ -1,0 +1,16 @@
+{
+  "onboardingStepProgress": "{current}/{total}",
+  "onboardingWelcomeTitle": "Welcome to DR Meeting",
+  "onboardingWelcomeBody": "Record, transcribe live and get AI meeting notes in one app. First, pick your language.",
+  "onboardingAccountTitle": "Sign in or register",
+  "onboardingAccountBody": "Use your phone number and an SMS code. New users can register right here.",
+  "onboardingSignedInAs": "Signed in as {name}",
+  "onboardingSwitchAccount": "Use another account",
+  "onboardingMicTitle": "Allow microphone access",
+  "onboardingMicBody": "Recording meetings needs the microphone. Audio is only sent to your server for transcription and notes. You can also allow it later when you record.",
+  "onboardingMicAllow": "Allow microphone",
+  "onboardingMicGranted": "Microphone access granted",
+  "onboardingMicDenied": "Microphone access was denied. Turn it on in the system settings.",
+  "onboardingMicOpenSettings": "Open system settings",
+  "onboardingMicSkip": "Skip for now"
+}

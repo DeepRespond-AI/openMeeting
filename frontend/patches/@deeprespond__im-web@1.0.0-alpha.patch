@@ -1,0 +1,289 @@
+diff --git a/dist/chunk-V6CUZXOG.js b/dist/chunk-V6CUZXOG.js
+index 2240bcdf5eac2e7fc50dbbba5620b5d7eb560be4..59078e9ec116138cdd49d0c24c4e27835906da29 100644
+--- a/dist/chunk-V6CUZXOG.js
++++ b/dist/chunk-V6CUZXOG.js
+@@ -487,6 +487,8 @@ var ChannelHandleImpl = class {
+         session_id: sid,
+         username: member ? member.username : __privateGet(this, _snapshot).session.username,
+         kind: pending.kind,
++        source: pending.source,
++        publicationName: pending.publicationName,
+         track: native,
+         local: pending.local
+       };
+@@ -568,6 +570,8 @@ var ChannelHandleImpl = class {
+         __privateGet(this, _pendingTracks).set(p.track, {
+           identity: p.identity,
+           kind: p.kind,
++          source: p.source,
++          publicationName: p.publicationName,
+           track: p.track,
+           local: p.local
+         });
+@@ -705,6 +709,21 @@ var ChannelHandleImpl = class {
+   async setMicrophoneEnabled(enabled) {
+     await this.requirePublisher().setMicrophoneEnabled(enabled);
+   }
++  async setMicrophoneDevice(deviceId) {
++    const media = this.requirePublisher();
++    if (typeof media.setMicrophoneDevice !== "function")
++      throw localError("unsupported", { reason: "microphone_selection_unavailable" });
++    await media.setMicrophoneDevice(deviceId);
++  }
++  async publishScreenTrack(track, options) {
++    const media = this.requirePublisher(true);
++    if (typeof media.publishScreenTrack !== "function")
++      throw localError("unsupported", { reason: "screen_share_unavailable" });
++    await media.publishScreenTrack(track, options);
++  }
++  async stopScreenShare() {
++    await __privateGet(this, _media)?.stopScreenShare?.();
++  }
+   async setCameraEnabled(enabled) {
+     await this.requirePublisher(true).setCameraEnabled(enabled);
+   }
+diff --git a/dist/chunk-ZFSVU4RW.js b/dist/chunk-ZFSVU4RW.js
+index 0347ac784d7981d0f455953ca562744f4899949d..47601cb7404d1d0c13ae0cb9fe72ca971113b68f 100644
+--- a/dist/chunk-ZFSVU4RW.js
++++ b/dist/chunk-ZFSVU4RW.js
+@@ -5056,7 +5056,9 @@ function contains(ranges, seq) {
+ function extendIfAdjacent(ranges, seq) {
+   if (contains(ranges, seq)) return ranges;
+   const index = ranges.findIndex(([, b]) => b + 1 === seq);
+-  if (index < 0) return ranges;
++  // A confirmed live/send-ack message is visible even when history is empty or
++  // discontinuous. Cover only this sequence; never claim intervening history.
++  if (index < 0) return addRange(ranges, seq, seq);
+   const next = ranges.map((r) => [r[0], r[1]]);
+   next[index][1] = seq;
+   return normalize(next);
+diff --git a/dist/chunk-ZJJYLYLW.js b/dist/chunk-ZJJYLYLW.js
+index c27f79cf9d2cec9763fad98d95dcbcb4d514377a..b2adbe072cf61c8a3d4674b1ccd44d90b8ce90ba 100644
+--- a/dist/chunk-ZJJYLYLW.js
++++ b/dist/chunk-ZJJYLYLW.js
+@@ -745,7 +745,7 @@ function livekitProvider() {
+       const url = media.url;
+       if (!url)
+         throw localError("unsupported", { reason: "media_url_missing" });
+-      const room = new L.Room({ adaptiveStream: true, dynacast: true });
++      const room = new L.Room({ adaptiveStream: false, dynacast: true });
+       let token = String(media.token ?? "");
+       const initialTracks = /* @__PURE__ */ new Map();
+       const listeners = /* @__PURE__ */ new Map();
+@@ -759,12 +759,18 @@ function livekitProvider() {
+       };
+       const uid = (identity) => p.identityToUid?.(identity) ?? 0;
+       const kindOf = (t) => t.kind === L.Track.Kind.Video ? "video" : "audio";
++      const isScreenPublication = (pub) => kindOf(pub) === "video" && (/^screen:[a-zA-Z0-9-]{1,64}$/.test(pub?.trackName ?? "") || (L.Track.Source?.ScreenShare && pub?.source === L.Track.Source.ScreenShare));
++      const details = (pub) => ({
++        source: isScreenPublication(pub) ? "screen" : kindOf(pub) === "video" ? "camera" : "microphone",
++        publicationName: pub?.trackName
++      });
+       room.on(L.RoomEvent.TrackSubscribed, (track, _pub, participant) => {
+         if (track.mediaStreamTrack)
+           emit("track", {
+             identity: participant.identity,
+             media_uid: uid(participant.identity),
+             kind: kindOf(track),
++            ...details(_pub),
+             track: track.mediaStreamTrack,
+             local: false
+           });
+@@ -774,6 +780,7 @@ function livekitProvider() {
+             identity: participant.identity,
+             media_uid: uid(participant.identity),
+             kind: kindOf(track),
++            ...details(_pub),
+             track: track.mediaStreamTrack,
+             local: false
+           });
+@@ -784,6 +791,7 @@ function livekitProvider() {
+             identity: room.localParticipant.identity,
+             media_uid: uid(room.localParticipant.identity),
+             kind: kindOf(pub),
++            ...details(pub),
+             track: t,
+             local: true
+           });
+@@ -794,6 +802,7 @@ function livekitProvider() {
+             identity: room.localParticipant.identity,
+             media_uid: uid(room.localParticipant.identity),
+             kind: kindOf(pub),
++            ...details(pub),
+             track: t,
+             local: true
+           });
+@@ -850,12 +859,105 @@ function livekitProvider() {
+       } finally {
+         p.signal?.removeEventListener("abort", cancel);
+       }
++      let microphoneDeviceId = "default";
++      let screenPublication = null, screenGeneration = 0;
++      let screenPending = Promise.resolve();
++      let cameraPending = Promise.resolve(), closing = false;
++      const cameraPublications = () => [...room.localParticipant.videoTrackPublications.values()].filter(pub => !isScreenPublication(pub));
++      const unpublishScreen = async (pub) => {
++        if (!pub) return;
++        // Full RTC reconnect replaces publications while preserving their names.
++        pub = [...room.localParticipant.videoTrackPublications.values()].find(current => isScreenPublication(current) && current.trackName === pub.trackName) ?? pub;
++        if (!pub?.track) return;
++        const native = pub.track.mediaStreamTrack;
++        native?.stop();
++        try { await room.localParticipant.unpublishTrack(pub.track, true); }
++        finally {
++          if (native) emit("trackRemoved", {identity: room.localParticipant.identity, media_uid: uid(room.localParticipant.identity), kind: "video", source: "screen", publicationName: pub.trackName, track: native, local: true});
++        }
++      };
+       const session = {
++        publishScreenTrack: (track, options) => {
++          if (closing || p.media !== "video" || track.kind !== "video" || track.readyState !== "live" || !/^screen:[a-zA-Z0-9-]{1,64}$/.test(options?.name ?? ""))
++            return Promise.reject(localError("invalid_argument", {reason: "screen_track_invalid"}));
++          const generation = ++screenGeneration;
++          screenPending = screenPending.catch(() => {}).then(async () => {
++            if (closing || generation !== screenGeneration) { track.stop(); return; }
++            const previous = screenPublication; screenPublication = null;
++            await unpublishScreen(previous);
++            let pub;
++            try {
++              pub = await room.localParticipant.publishTrack(track, {
++                // The IM channel contract grants ordinary camera video only.
++                // Keep business screen identity in the publication name.
++                source: L.Track.Source.Camera, name: options.name,
++                simulcast: false, degradationPreference: "maintain-resolution", videoEncoding: {maxBitrate: 3000000, maxFramerate: 15}
++              });
++            } catch (error) { track.stop(); throw error; }
++            if (closing || generation !== screenGeneration || track.readyState !== "live") {
++              await unpublishScreen(pub); return;
++            }
++            screenPublication = pub;
++          });
++          return screenPending;
++        },
++        stopScreenShare: async () => {
++          ++screenGeneration;
++          const pub = screenPublication; screenPublication = null;
++          await Promise.all([unpublishScreen(pub), screenPending.catch(() => {})]);
++        },
++        setMicrophoneDevice: async (deviceId) => {
++          if (deviceId === microphoneDeviceId) return;
++          const previous = microphoneDeviceId;
++          const publications = [...room.localParticipant.audioTrackPublications.values()];
++          const tracks = new Map(publications.map(pub => [pub, pub.track?.mediaStreamTrack]));
++          try {
++            const changed = await room.switchActiveDevice("audioinput", deviceId);
++            if (!changed) throw localError("unsupported", { reason: "microphone_selection_failed" });
++            microphoneDeviceId = deviceId;
++          } catch (error) {
++            await room.switchActiveDevice("audioinput", previous).catch(() => {});
++            throw error;
++          } finally {
++            // LiveKit restarts the native track without a publish/unpublish event.
++            for (const pub of publications) {
++              const oldTrack = tracks.get(pub), nextTrack = pub.track?.mediaStreamTrack;
++              if (oldTrack === nextTrack) continue;
++              const base = { identity: room.localParticipant.identity, media_uid: uid(room.localParticipant.identity), kind: "audio", local: true };
++              if (oldTrack) emit("trackRemoved", { ...base, track: oldTrack });
++              if (nextTrack) emit("track", { ...base, track: nextTrack });
++            }
++          }
++        },
+         setMicrophoneEnabled: async (on) => {
+           await room.localParticipant.setMicrophoneEnabled(on);
+         },
+-        setCameraEnabled: async (on) => {
+-          await room.localParticipant.setCameraEnabled(on);
+-        },
++        setCameraEnabled: (on) => {
++          cameraPending = cameraPending.catch(() => {}).then(async () => {
++            if (closing) return;
++            const publications = cameraPublications();
++            const previous = publications.map(pub => pub.track?.mediaStreamTrack).filter(Boolean);
++            if (on) {
++              const existing = publications[0];
++              if (existing) await existing.unmute();
++              else {
++                // Source-only setCameraEnabled would select a screen-first Camera publication.
++                const tracks = await room.localParticipant.createTracks({video: true, audio: false});
++                if (closing) { tracks.forEach(track => track.stop()); return; }
++                const camera = tracks.find(track => track.kind === L.Track.Kind.Video);
++                if (!camera) { tracks.forEach(track => track.stop()); throw localError("device_error"); }
++                try {
++                  const pub = await room.localParticipant.publishTrack(camera, {source: L.Track.Source.Camera, name: "camera"});
++                  if (closing) { camera.stop(); await room.localParticipant.unpublishTrack(pub.track, true); }
++                } catch (error) { camera.stop(); throw error; }
++              }
++            } else for (const pub of publications) await pub.mute();
++            const current = cameraPublications().map(pub => pub.track?.mediaStreamTrack).filter(track => track && track.readyState !== "ended");
++            const base = {identity: room.localParticipant.identity, media_uid: uid(room.localParticipant.identity), kind: "video", source: "camera", publicationName: "camera", local: true};
++            for (const track of previous) if (!current.includes(track)) emit("trackRemoved", {...base, track});
++            if (on) for (const track of current) emit("track", {...base, track});
++          });
++          return cameraPending;
++        },
+         // LiveKit 在下次完整重连时使用新令牌
+         renew: async (next) => {
+@@ -869,6 +971,8 @@ function livekitProvider() {
+           );
+         },
+         disconnect: async () => {
++          closing = true;
++          await session.stopScreenShare().catch(() => {});
+           await room.disconnect();
+         },
+         on: (event, l) => {
+diff --git a/dist/types-CJGvOLEJ.d.ts b/dist/types-CJGvOLEJ.d.ts
+index 3c90df8840aefab975b64cb01033d1e1d99b5963..446de9adb46b3bef10e5b02c71b795a59aa7e723 100644
+--- a/dist/types-CJGvOLEJ.d.ts
++++ b/dist/types-CJGvOLEJ.d.ts
+@@ -165,6 +165,9 @@ interface MediaProviderAdapter<Track = MediaStreamTrack> {
+     }): Promise<MediaSession<Track>>;
+ }
+ interface MediaSession<Track = MediaStreamTrack> {
++    publishScreenTrack?(track: Track, options: {name: string}): Promise<void>;
++    stopScreenShare?(): Promise<void>;
++    setMicrophoneDevice?(deviceId: string): Promise<void>;
+     /** Native watchdog: only successful HTTP control extends this deadline. */
+     controlLease?(expiresAt: number): Promise<void>;
+     /** Native subscription allowlist derived from confirmed HTTP participants. */
+@@ -180,6 +183,8 @@ interface MediaSession<Track = MediaStreamTrack> {
+         kind: "audio" | "video";
+         track: Track;
+         local: boolean;
++        source?: "camera" | "microphone" | "screen";
++        publicationName?: string;
+     }) => void): () => void;
+     on(e: "mute", l: (p: {
+         identity?: string;
+@@ -243,6 +248,8 @@ interface CallHandle<Track = MediaStreamTrack> {
+         kind: "audio" | "video";
+         track: Track;
+         local: boolean;
++        source?: "camera" | "microphone" | "screen";
++        publicationName?: string;
+     }) => void): () => void;
+     on(event: "data", listener: (p: {
+         username: string | null;
+diff --git a/dist/types-H4hGqgOp.d.ts b/dist/types-H4hGqgOp.d.ts
+index 09c46aa4fa5e7082071700623a2af8d955560b20..891bdaa7f5cb43c4bd3253699698ef334d80e249 100644
+--- a/dist/types-H4hGqgOp.d.ts
++++ b/dist/types-H4hGqgOp.d.ts
+@@ -134,6 +134,8 @@ interface ChannelSnapshot {
+     error: DRError | null;
+ }
+ interface ChannelTrack<Track = MediaStreamTrack> {
++    source?: "camera" | "microphone" | "screen";
++    publicationName?: string;
+     session_id: string;
+     username: string | null;
+     kind: "audio" | "video";
+@@ -168,7 +170,10 @@ interface ChannelHandle<Track = MediaStreamTrack> {
+     subscribe(listener: () => void): () => void;
+     on<E extends keyof ChannelEvents<Track>>(event: E, listener: (value: ChannelEvents<Track>[E]) => void): () => void;
+     setMicrophoneEnabled(enabled: boolean): Promise<void>;
++    setMicrophoneDevice(deviceId: string): Promise<void>;
+     setCameraEnabled(enabled: boolean): Promise<void>;
++    publishScreenTrack(track: Track, options: {name: string}): Promise<void>;
++    stopScreenShare(): Promise<void>;
+     refresh(): Promise<void>;
+     leave(): Promise<void>;
+ }

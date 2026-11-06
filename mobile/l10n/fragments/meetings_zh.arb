@@ -1,0 +1,306 @@
+{
+  "meetingsSearchHint": "搜索会议标题或转写内容",
+  "meetingsSearchEmpty": "没有找到匹配的内容",
+  "meetingsSearchClear": "清除搜索",
+  "meetingsSearchPartialWarning": "转写内容暂时无法搜索，当前仅显示标题匹配结果",
+  "meetingsEmptyHint": "点击「开始录音」记录你的第一场会议",
+  "meetingsStartRecording": "开始录音",
+  "meetingsImportAudio": "导入音频",
+  "meetingsDeleteTitle": "删除该会议？",
+  "meetingsDeleteMessage": "“{title}”及其转写、总结和录音将被永久删除，且无法恢复。",
+  "@meetingsDeleteMessage": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "meetingsDeleted": "会议已删除",
+  "meetingsDeleteFailed": "删除会议失败：{error}",
+  "@meetingsDeleteFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "meetingsSttNotReady": "语音识别暂不可用，暂时无法转写",
+  "meetingsLlmNotReady": "会议总结暂不可用",
+  "meetingsOffline": "无法连接服务，显示的可能不是最新内容",
+  "meetingsTitleHint": "会议标题",
+  "meetingsTitleEmpty": "会议标题不能为空",
+  "meetingsRenamed": "会议已重命名",
+  "meetingsRenameFailed": "重命名失败：{error}",
+  "@meetingsRenameFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "meetingsCreatedAt": "创建时间 {date}",
+  "@meetingsCreatedAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "meetingsDuration": "时长 {duration}",
+  "@meetingsDuration": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "meetingsTabInfo": "会议信息",
+  "meetingsTabTranscript": "转写",
+  "meetingsTabSummary": "AI 总结",
+  "meetingsActions": "更多操作",
+  "meetingsTranscriptEmpty": "暂无转写",
+  "meetingsTranscriptEmptyHint": "该会议没有识别到语音内容。",
+  "meetingsTranscriptProcessing": "正在处理会议录音…",
+  "meetingsTranscriptChecking": "正在确认会后处理状态…",
+  "meetingsTranscriptIncompleteHint": "转写尚未就绪，请查看会后处理状态；已保存的录音仍可下载。",
+  "meetingsTranscriptStatusUnavailable": "暂时无法确认转写状态",
+  "meetingsTranscriptProcessingFailed": "会议转写处理未完成",
+  "meetingsTranscriptProcessingHint": "转写完成后会自动显示在这里。",
+  "meetingsTranscriptLoadingMore": "正在加载更多…",
+  "meetingsTranscriptShowing": "已显示 {loaded} / {total} 段",
+  "@meetingsTranscriptShowing": {
+    "placeholders": {
+      "loaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "meetingsTranscriptLoadMoreFailed": "加载失败，点击重试",
+  "meetingsPlayFrom": "从 {time} 开始播放",
+  "@meetingsPlayFrom": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "meetingsAudioLoading": "正在加载录音…",
+  "meetingsAudioUnavailable": "该会议没有录音",
+  "meetingsAudioLoadFailed": "录音加载失败",
+  "meetingsAudioPlay": "播放",
+  "meetingsAudioPause": "暂停",
+  "meetingsAudioBack": "后退 {seconds} 秒",
+  "@meetingsAudioBack": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "meetingsAudioForward": "前进 {seconds} 秒",
+  "@meetingsAudioForward": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "meetingsAudioSpeed": "播放速度",
+  "meetingsAudioSpeedValue": "{speed}×",
+  "@meetingsAudioSpeedValue": {
+    "placeholders": {
+      "speed": {
+        "type": "String"
+      }
+    }
+  },
+  "meetingsAudioPosition": "播放进度",
+  "meetingsActionCopyTranscript": "复制转写",
+  "meetingsActionShare": "分享（Markdown）",
+  "meetingsActionRetranscribe": "重新转写",
+  "meetingsActionDelete": "删除会议",
+  "meetingsTranscriptCopied": "转写内容已复制",
+  "meetingsTranscriptCopyEmpty": "没有可复制的转写内容",
+  "meetingsShareEmpty": "没有可分享的内容",
+  "meetingsExportFailed": "导出失败：{error}",
+  "@meetingsExportFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "meetingsMdTranscriptTitle": "会议转写：{title}",
+  "@meetingsMdTranscriptTitle": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "meetingsMdSummaryTitle": "会议总结：{title}",
+  "@meetingsMdSummaryTitle": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "meetingsMdDate": "日期",
+  "meetingsMdDuration": "时长",
+  "meetingsMdMeetingId": "会议 ID",
+  "meetingsMdSummary": "总结",
+  "meetingsMdTranscript": "转写",
+  "meetingsMdNoSummary": "（暂无总结）",
+  "meetingsRetranscribeTitle": "重新转写会议",
+  "meetingsRetranscribeDescription": "使用不同的语言设置重新处理录音，现有转写将被替换。",
+  "meetingsRetranscribeHint": "将使用服务器当前的语音识别模型。指定语言可提高准确率。",
+  "meetingsRetranscribeStart": "开始重新转写",
+  "meetingsRetranscribeRunning": "正在重新转写…",
+  "meetingsRetranscribeComplete": "重新转写完成，共生成 {count} 段",
+  "@meetingsRetranscribeComplete": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "meetingsRetranscribeCancelled": "已取消重新转写",
+  "meetingsRetranscribeAlreadyRunning": "该会议已有正在进行的转写任务",
+  "meetingsTranscriptionLanguage": "转写语言",
+  "meetingsLanguageName": "{code, select, auto{自动检测（保留原语言）} zh{中文} en{英语} ja{日语} ko{韩语} yue{粤语} de{德语} fr{法语} es{西班牙语} ru{俄语} it{意大利语} pt{葡萄牙语} other{{code}}}",
+  "@meetingsLanguageName": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "meetingsJobProgress": "{percent}%",
+  "@meetingsJobProgress": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "summaryCustomPromptLabel": "补充说明（可选）",
+  "summaryCustomPromptHint": "参会人、会议目标、背景信息等，帮助 AI 生成更准确的总结。",
+  "summaryGenerate": "生成总结",
+  "summaryRegenerate": "重新生成",
+  "summaryStop": "停止",
+  "summaryGenerating": "正在生成总结…",
+  "summaryGeneratingHint": "较长的会议可能需要一分钟，期间可以继续查看转写。",
+  "summaryEmptyTitle": "暂无总结",
+  "summaryEmptyDescription": "生成 AI 总结，提取会议要点、决策和待办事项。",
+  "summaryLlmNotReady": "会议总结暂不可用，请稍后再试或联系管理员。",
+  "summaryFailedGeneration": "生成总结失败",
+  "summaryFailedGenerationDetail": "生成总结失败：{error}",
+  "@summaryFailedGenerationDetail": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "summaryFailedEmpty": "生成的总结没有可显示的内容，请重试",
+  "summaryFailedTimeout": "总结生成时间过长，请稍后刷新查看",
+  "summaryCompleted": "总结已生成",
+  "summaryStopped": "已停止生成总结",
+  "summaryStopFailed": "停止失败：{error}",
+  "@summaryStopFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "summaryEdit": "编辑总结",
+  "summaryEditTab": "编辑",
+  "summaryPreviewTab": "预览",
+  "summaryEditHint": "使用 Markdown 编辑总结",
+  "summarySaved": "总结已保存",
+  "summarySaveFailed": "保存失败：{error}",
+  "@summarySaveFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "summaryDiscardTitle": "放弃未保存的修改？",
+  "summaryDiscard": "放弃",
+  "summaryCopied": "总结已复制",
+  "summaryCopyEmpty": "没有可复制的总结内容",
+  "summaryAutoStarted": "已自动开始生成总结",
+  "importDescription": "从音频文件创建新会议，文件将上传到服务器并完成转写。",
+  "importPickFile": "选择音频文件",
+  "importSupportedFormats": "支持格式：{formats}",
+  "@importSupportedFormats": {
+    "placeholders": {
+      "formats": {
+        "type": "String"
+      }
+    }
+  },
+  "importChangeFile": "更换文件",
+  "importMeetingTitle": "会议标题",
+  "importTitleHint": "请输入会议标题",
+  "importLanguageHint": "音频将上传到服务器，并使用服务器当前的语音识别模型转写。",
+  "importStart": "开始导入",
+  "importUploading": "正在上传音频…",
+  "importSubmitting": "已上传，正在提交到服务器…",
+  "importUploadedBackground": "音频已上传，正在后台转写",
+  "importBackgroundHint": "上传完成后即可离开此页面，服务器会在后台完成转写。",
+  "importTranscribed": "「{title}」转写完成，共 {count} 段",
+  "@importTranscribed": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "importTranscribeFailed": "「{title}」转写失败：{message}",
+  "@importTranscribeFailed": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "message": {
+        "type": "String"
+      }
+    }
+  },
+  "importTranscribeLost": "暂时无法获取「{title}」的转写进度，请稍后在会议列表中查看",
+  "@importTranscribeLost": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "importCancelled": "已取消导入",
+  "importDisabled": "导入音频功能未开启",
+  "importFileSize": "{size} MB · 更换文件",
+  "@importFileSize": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "importFailedDetail": "导入失败：{error}",
+  "@importFailedDetail": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  }
+}

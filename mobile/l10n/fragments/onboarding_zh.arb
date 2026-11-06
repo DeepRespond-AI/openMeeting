@@ -1,0 +1,34 @@
+{
+  "onboardingStepProgress": "{current}/{total}",
+  "@onboardingStepProgress": {
+    "description": "Onboarding progress, e.g. 2/4",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "onboardingWelcomeTitle": "欢迎使用深应会议",
+  "onboardingWelcomeBody": "录音、实时转写、AI 会议纪要，一个 App 全部搞定。先选择界面语言。",
+  "onboardingAccountTitle": "登录或注册",
+  "onboardingAccountBody": "使用手机号和短信验证码登录，新用户可直接注册。",
+  "onboardingSignedInAs": "已登录：{name}",
+  "@onboardingSignedInAs": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "onboardingSwitchAccount": "切换账号",
+  "onboardingMicTitle": "允许使用麦克风",
+  "onboardingMicBody": "录制会议需要使用麦克风。音频只上传到你设置的服务器，用于转写和生成纪要。也可以稍后在录音时再授权。",
+  "onboardingMicAllow": "允许访问麦克风",
+  "onboardingMicGranted": "已允许使用麦克风",
+  "onboardingMicDenied": "麦克风权限已被拒绝，请在系统设置中开启。",
+  "onboardingMicOpenSettings": "打开系统设置",
+  "onboardingMicSkip": "暂不授权，稍后再说"
+}

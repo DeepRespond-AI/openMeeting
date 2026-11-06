@@ -1,0 +1,266 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes vibrate {
+  0% {
+    transform: translate(0);
+  }
+
+  20% {
+    transform: translate(-2px, 2px);
+  }
+
+  40% {
+    transform: translate(-2px, -2px);
+  }
+
+  60% {
+    transform: translate(2px, 2px);
+  }
+
+  80% {
+    transform: translate(2px, -2px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+.animate-vibrate {
+  animation: vibrate 0.3s linear;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out forwards;
+}
+
+.delay-75 {
+  animation-delay: 75ms;
+}
+
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-150 {
+  animation-delay: 150ms;
+}
+
+@layer base {
+  /* DR Meeting V2 — Aurora Dark theme (深空夜幕 + 品牌极光渐变). Dark-only. */
+  :root {
+    color-scheme: dark;
+    --background: 224 26% 6%;           /* #0B0D13 深空夜幕 */
+    --foreground: 220 16% 94%;
+    --card: 224 20% 10%;                /* #14161F 玻璃卡片底 */
+    --card-foreground: 220 16% 94%;
+    --popover: 224 18% 12%;
+    --popover-foreground: 220 16% 94%;
+    --primary: 217 91% 60%;             /* #3B82F6 现代亮蓝 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 222 16% 16%;
+    --secondary-foreground: 220 14% 90%;
+    --muted: 222 14% 15%;
+    --muted-foreground: 220 10% 60%;
+    --accent: 221 55% 20%;              /* dark blue tint hover/selected */
+    --accent-foreground: 219 100% 82%;
+    --destructive: 0 74% 58%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 158 64% 45%;
+    --warning: 36 95% 58%;
+    --border: 222 14% 17%;
+    --input: 222 14% 19%;
+    --ring: 217 91% 65%;
+    --radius: 0.875rem;
+    --sidebar: 226 32% 5%;              /* 比主背景更深的导航轨道 */
+    --sidebar-foreground: 220 12% 72%;
+    --chart-1: 217 91% 60%;
+    --chart-2: 190 95% 50%;
+    --chart-3: 158 64% 45%;
+    --chart-4: 36 95% 58%;
+    --chart-5: 262 70% 65%;
+  }
+}
+
+/* ---------- 全局氛围光斑（极光渐变，极低透明度铺底） ---------- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(720px 480px at 12% -8%, rgba(99, 102, 241, 0.14), transparent 65%),
+    radial-gradient(640px 420px at 96% 4%, rgba(34, 211, 238, 0.08), transparent 60%),
+    radial-gradient(760px 560px at 55% 112%, rgba(59, 130, 246, 0.10), transparent 65%);
+}
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  /* html, */
+  body {
+    @apply bg-background text-foreground;
+    overflow: hidden;
+    height: 100%;
+  }
+
+  /* Make the window draggable */
+  .titlebar {
+    -webkit-app-region: drag;
+    app-region: drag;
+  }
+
+  .no-drag {
+    -webkit-app-region: no-drag;
+    app-region: no-drag;
+  }
+
+  /* Theme every scroll container, including portals, dialogs and textareas. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--foreground) / 0.2) transparent;
+  }
+
+  /* Modern Chromium supports the standard properties too; reset them there
+     so the WebKit rules below can style the thumb and remove arrow buttons. */
+  @supports selector(::-webkit-scrollbar) {
+    * {
+      scrollbar-width: auto;
+      scrollbar-color: auto;
+    }
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  *::-webkit-scrollbar-track,
+  *::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: hsl(var(--foreground) / 0.2);
+    border-radius: 999px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--foreground) / 0.34);
+  }
+
+  *::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  /* BlockNote Editor - Override fixed dimensions for responsive layout */
+  .bn-container {
+    width: 100% !important;
+    max-width: none !important;
+    overflow: visible !important;
+  }
+
+  .bn-editor {
+    width: 100% !important;
+    max-width: none !important;
+    overflow: visible !important;
+  }
+
+  /* Disable internal scrolling - let parent handle all scrolling */
+  .ProseMirror {
+    overflow: visible !important;
+  }
+
+  /* Ensure BlockNote content area is responsive */
+  .bn-block-outer {
+    max-width: 100% !important;
+  }
+
+  .bn-default-styles {
+    max-width: none !important;
+  }
+
+  /* Disable scrolling on any BlockNote wrapper elements */
+  [data-node-type] {
+    overflow: visible !important;
+  }
+}
+
+/* Password fields use the app's reveal toggle; hide Edge/WebView2's duplicate. */
+input[type="password"]::-ms-reveal {
+  display: none;
+}
+
+/* ---------- Chromium 自动填充修正（防止输入后白底黑字破坏暗色主题） ---------- */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px hsl(var(--card)) inset;
+  -webkit-text-fill-color: hsl(var(--foreground));
+  caret-color: hsl(var(--foreground));
+  transition: background-color 99999s ease-in-out 0s;
+}
+
+/* ---------- 玻璃拟态工具类 ---------- */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* ---------- 首页入场编排（逐层上浮） ---------- */
+.rise {
+  opacity: 0;
+  animation: rise-in 0.55s cubic-bezier(0.22, 0.8, 0.3, 1) forwards;
+}
+.rise-1 { animation-delay: 0.05s; }
+.rise-2 { animation-delay: 0.13s; }
+.rise-3 { animation-delay: 0.21s; }
+.rise-4 { animation-delay: 0.29s; }
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

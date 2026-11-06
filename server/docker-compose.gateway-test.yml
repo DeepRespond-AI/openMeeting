@@ -1,0 +1,20 @@
+# Isolated acceptance databases, using the production definitions and three different volumes.
+# Run with -p openmeeting-gateway-acceptance and the base compose file; never use the business project name.
+services:
+  user-postgres:
+    ports: ["127.0.0.1:55451:5432"]
+    networks: [user-backend, user-test-access]
+  meeting-postgres:
+    ports: ["127.0.0.1:55452:5432"]
+    networks: [meeting-backend, meeting-test-access]
+  stt-postgres:
+    ports: ["127.0.0.1:55453:5432"]
+    networks: [stt-backend, stt-test-access]
+
+# Docker does not publish host ports for a container attached only to internal
+# networks. These separate test-only bridges permit loopback pytest connections;
+# each database retains its own domain network and its own access bridge.
+networks:
+  user-test-access: {}
+  meeting-test-access: {}
+  stt-test-access: {}

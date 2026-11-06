@@ -1,0 +1,14 @@
+# Launcher icons. Source images are composed by tool/brand_images.py from assets/brand/brand-logo.png.
+# Regenerate: dart run flutter_launcher_icons
+flutter_launcher_icons:
+  android: "ic_launcher"
+  # Legacy (< Android 8) icon: desktop-style white rounded tile.
+  image_path_android: "assets/brand/launcher/icon_1024.png"
+  # Android 8+ adaptive icon: white background + logo inside the safe zone.
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/brand/launcher/icon_foreground_1024.png"
+  ios: true
+  # iOS icons must be opaque and full-bleed (the system applies the mask).
+  image_path_ios: "assets/brand/launcher/icon_ios_1024.png"
+  remove_alpha_ios: true
+  background_color_ios: "#FFFFFF"

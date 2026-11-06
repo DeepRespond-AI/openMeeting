@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Merged into the app manifest. AudioPlaybackCapture requires RECORD_AUDIO as well. -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+
+    <application>
+        <!-- Holds the MediaProjection while capturing system audio (Android 14: the projection
+             must be obtained from a foreground service of type mediaProjection). -->
+        <service
+            android:name="cn.deeprespond.system_audio_capture.SystemAudioCaptureService"
+            android:exported="false"
+            android:foregroundServiceType="mediaProjection|microphone" />
+    </application>
+</manifest>

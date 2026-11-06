@@ -1,0 +1,13 @@
+# Native launch screen (shown before Flutter draws SplashPage). Regenerate:
+#   dart run flutter_native_splash:create
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/brand/launcher/splash_logo.png
+  android_12:
+    color: "#FFFFFF"
+    image: assets/brand/launcher/splash_android12.png
+    icon_background_color: "#FFFFFF"
+  android: true
+  ios: true
+  web: false
+  fullscreen: false

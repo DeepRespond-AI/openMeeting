@@ -1,0 +1,218 @@
+{
+  "env": "prod",
+  "defaultServerUrl": "",
+  "network": {
+    "connectTimeoutMs": 10000,
+    "requestTimeoutMs": 60000,
+    "transferTimeoutMs": 14400000,
+    "retry": {
+      "maxRetries": 3,
+      "backoffMs": [
+        500,
+        1000,
+        2000
+      ]
+    },
+    "audioUploadRetry": {
+      "maxRetries": 3,
+      "backoffMs": [
+        4000,
+        8000,
+        16000
+      ]
+    }
+  },
+  "heartbeat": {
+    "intervalSec": 15,
+    "backgroundIntervalSec": 60
+  },
+  "polling": {
+    "summaryIntervalSec": 5,
+    "summaryMaxPolls": 200,
+    "jobIntervalSec": 1,
+    "jobMaxConsecutiveErrors": 60
+  },
+  "pagination": {
+    "transcriptPageSize": 100,
+    "meetingSearchDebounceMs": 300
+  },
+  "auth": {
+    "phonePattern": "^1[3-9]\\d{9}$",
+    "nameMaxLength": 32,
+    "phonePrefixes": [
+      "+86",
+      "0086",
+      "86"
+    ],
+    "defaultCodeLength": 6,
+    "defaultResendIntervalSec": 60,
+    "defaultPasswordMinLength": 8,
+    "defaultPasswordMaxLength": 64,
+    "phoneMaskPrefixLength": 3,
+    "phoneMaskSuffixLength": 4
+  },
+  "audio": {
+    "sampleRate": 16000,
+    "channels": 1,
+    "aacBitrate": 32000,
+    "levelUpdateIntervalMs": 100,
+    "levelFloorDb": -60
+  },
+  "vad": {
+    "frameMs": 30,
+    "thresholdDbAboveNoise": 10,
+    "noiseFloorPercentile": 15,
+    "noiseFloorWindowSec": 10,
+    "silenceToEndMs": 500,
+    "paddingMs": 200,
+    "minSpeechMs": 300,
+    "maxSegmentSec": 25,
+    "splitSearchWindowSec": 3,
+    "minThresholdDb": -50
+  },
+  "transcription": {
+    "defaultLanguage": "auto",
+    "languages": [
+      "auto",
+      "zh",
+      "en",
+      "ja",
+      "ko",
+      "yue",
+      "de",
+      "fr",
+      "es",
+      "ru"
+    ],
+    "autoLanguageCode": "auto"
+  },
+  "recording": {
+    "defaultSource": "microphone",
+    "titleFormat": "yyyy-MM-dd_HH-mm-ss",
+    "systemAudioMicGain": 1,
+    "systemAudioDuckingRatio": 0.6,
+    "keepLocalAudioDefault": true,
+    "audioFileExtension": "m4a",
+    "audioUploadFileName": "audio.m4a",
+    "audioContentType": "audio/mp4",
+    "segmentContentType": "application/octet-stream",
+    "recordingsDirName": "recordings",
+    "pendingQueueDirName": "pending_segments",
+    "stopDrainTimeoutMs": 3000,
+    "waveformBars": 40,
+    "transcriptScrollAnimationMs": 250,
+    "notificationChannelId": "recording",
+    "foregroundServiceId": 4001
+  },
+  "features": {
+    "systemAudioCapture": true,
+    "importAudio": true,
+    "autoSummaryDefault": true,
+    "showDevCode": false,
+    "standaloneMessages": false
+  },
+  "ui": {
+    "defaultLocaleMode": "system",
+    "snackBarDurationMs": 3000
+  },
+  "player": {
+    "speeds": [
+      1,
+      1.25,
+      1.5,
+      2,
+      0.75
+    ],
+    "skipSeconds": 10
+  },
+  "importFile": {
+    "allowedExtensions": [
+      "mp4",
+      "m4a",
+      "wav",
+      "mp3",
+      "flac",
+      "ogg",
+      "aac",
+      "mkv",
+      "webm",
+      "wma"
+    ]
+  },
+  "meetingsUi": {
+    "relativeDateMaxDays": 7
+  },
+  "systemAudio": {
+    "frameMs": 20,
+    "jitterBufferMs": 120,
+    "maxBufferMs": 1000,
+    "micActiveRmsThreshold": 0.01,
+    "duckingAttackMs": 50,
+    "duckingReleaseMs": 400,
+    "softClipKnee": 0.8,
+    "levelFloorDb": -60,
+    "androidCaptureUsages": [
+      "media",
+      "game",
+      "unknown"
+    ],
+    "androidMicSource": "voiceRecognition",
+    "androidFallbackCaptureSampleRate": 48000,
+    "androidNotificationChannelId": "system_audio_capture",
+    "androidNotificationId": 7301,
+    "iosChunkMs": 200,
+    "iosStartTimeoutMs": 60000,
+    "iosStopTimeoutMs": 3000,
+    "iosPollIntervalMs": 250,
+    "iosMaxPendingChunks": 600,
+    "iosKeepAliveInBackground": true
+  },
+  "update": {
+    "checkIntervalMin": 240,
+    "promptCooldownHours": 24,
+    "apkFileName": "update.apk"
+  },
+  "live": {
+    "rtcReleaseTimeoutMs": 15000,
+    "rtcReleasePollMs": 400,
+    "waitingPollMs": 3000,
+    "wsPingMs": 15000,
+    "maxReconnects": 5,
+    "reconnectMs": 2000,
+    "titleMax": 50,
+    "nameMax": 20,
+    "chatMax": 200,
+    "attachmentMaxBytes": 20971520,
+    "scheduleRangeDays": 30,
+    "defaultDurationMin": 30,
+    "minDurationMin": 5,
+    "maxDurationMin": 720,
+    "imPageSize": 50,
+    "imTextMax": 2000,
+    "voiceLimitSec": 120,
+    "reminderLeadMin": 10,
+    "reminderPollMs": 60000,
+    "recordingChunkMs": 5000,
+    "recordingMaxPending": 120,
+    "recordingFrameTimeoutMs": 10000,
+    "scheduleMaxDays": 3650,
+    "noticeDedupLimit": 500,
+    "noticeHistoryLimit": 3,
+    "avatarMaxBytes": 5242880,
+    "avatarExtensions": [
+      "png",
+      "jpg",
+      "jpeg",
+      "webp"
+    ],
+    "rtcSampleMs": 500,
+    "rtcStaleMs": 5000,
+    "rtcSpeakingLevel": 0.025,
+    "rtcSpeakingHoldMs": 900,
+    "rtcFairRttMs": 200,
+    "rtcPoorRttMs": 500,
+    "rtcFairLossPercent": 2,
+    "rtcPoorLossPercent": 5,
+    "screenTrackTimeoutMs": 12000
+  }
+}

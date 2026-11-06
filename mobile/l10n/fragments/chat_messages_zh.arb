@@ -1,0 +1,77 @@
+{
+  "imMessageActions": "消息操作",
+  "@imMessageActions": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageCopy": "复制",
+  "@imMessageCopy": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageCopied": "已复制",
+  "@imMessageCopied": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageDelete": "删除",
+  "@imMessageDelete": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageCancel": "取消",
+  "@imMessageCancel": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageConfirm": "确定",
+  "@imMessageConfirm": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageDeleteTitle": "是否删除该消息？",
+  "@imMessageDeleteTitle": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageDeleteDescription": "仅从你的聊天记录中删除，其他参会者仍可看到该消息。",
+  "@imMessageDeleteDescription": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageRecalledSelf": "你撤回了一条消息",
+  "@imMessageRecalledSelf": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageRecalledOther": "{name}撤回了一条消息",
+  "@imMessageRecalledOther": {
+    "description": "Chat message layout and actions",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "imMessageRecallExpiredMinutes": "无法撤回{minutes}分钟前发送的消息",
+  "@imMessageRecallExpiredMinutes": {
+    "description": "Chat message layout and actions",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "imMessageRecallExpiredSeconds": "无法撤回{seconds}秒前发送的消息",
+  "@imMessageRecallExpiredSeconds": {
+    "description": "Chat message layout and actions",
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "imMessageRecallUnavailable": "当前消息无法撤回",
+  "@imMessageRecallUnavailable": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageSending": "发送中…",
+  "@imMessageSending": {
+    "description": "Chat message layout and actions"
+  },
+  "imMessageSendFailed": "发送失败",
+  "@imMessageSendFailed": {
+    "description": "Chat message layout and actions"
+  }
+}

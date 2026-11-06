@@ -1,0 +1,91 @@
+{
+  "systemAudioNotificationChannelName": "内录",
+  "@systemAudioNotificationChannelName": {
+    "description": "Android notification channel name for the system-audio capture foreground service"
+  },
+  "systemAudioNotificationTitle": "深应会议正在内录",
+  "@systemAudioNotificationTitle": {
+    "description": "Android foreground-service notification title while capturing system audio"
+  },
+  "systemAudioNotificationText": "正在采集手机播放的声音，点按返回应用",
+  "@systemAudioNotificationText": {
+    "description": "Android foreground-service notification body while capturing system audio"
+  },
+  "systemAudioBroadcastStoppedByApp": "录音已结束，内录直播已停止。",
+  "@systemAudioBroadcastStoppedByApp": {
+    "description": "iOS: message of the system alert shown when the app ends the screen broadcast"
+  },
+  "systemAudioBroadcastNotStartedFromApp": "请先在深应会议的录音页选择「允许内录」并开始录音，再开始直播。",
+  "@systemAudioBroadcastNotStartedFromApp": {
+    "description": "iOS: shown when the broadcast was started from Control Center instead of from the app"
+  },
+  "systemAudioAndroidConsentTitle": "允许内录",
+  "@systemAudioAndroidConsentTitle": {
+    "description": "Title of the explanation shown before the Android screen-capture consent dialog"
+  },
+  "systemAudioAndroidConsentBody": "接下来系统会询问是否允许深应会议录制或投放屏幕上的内容。请选择「整个屏幕」并点「开始」。深应会议只采集声音，不录制画面。录音期间通知栏会显示内录通知。",
+  "@systemAudioAndroidConsentBody": {
+    "description": "Explanation shown before the Android MediaProjection consent dialog"
+  },
+  "systemAudioAndroidLimitations": "通话中对方的声音（例如微信、腾讯会议的语音或视频通话）以及禁止被录制的 App 无法内录。这类场景请打开免提，由麦克风收音。",
+  "@systemAudioAndroidLimitations": {
+    "description": "Android system-audio capture limitations"
+  },
+  "systemAudioAndroidUnsupported": "内录需要 Android 10 及以上版本。",
+  "@systemAudioAndroidUnsupported": {
+    "description": "Shown on Android 9 and below"
+  },
+  "systemAudioIosHowToStart": "在弹出的系统面板中选择「深应会议」，点「开始直播」，倒计时结束后开始内录。录音期间状态栏会显示红色指示。",
+  "@systemAudioIosHowToStart": {
+    "description": "iOS: how to start the broadcast for system-audio capture"
+  },
+  "systemAudioIosMicHint": "如需同时录入你自己的声音，请在面板中打开麦克风。",
+  "@systemAudioIosMicHint": {
+    "description": "iOS: the broadcast picker's microphone toggle controls whether the mic is mixed in"
+  },
+  "systemAudioIosLimitations": "部分 App 的通话音频和受保护的内容会被系统静音，无法内录。这类场景请打开免提，由麦克风收音。",
+  "@systemAudioIosLimitations": {
+    "description": "iOS system-audio capture limitations"
+  },
+  "systemAudioIosStopHint": "可以在深应会议中停止录音，也可以点状态栏的红色指示停止直播。",
+  "@systemAudioIosStopHint": {
+    "description": "iOS: how the broadcast can be stopped"
+  },
+  "systemAudioIosSimulatorUnsupported": "模拟器不支持内录，请在真机上使用。",
+  "@systemAudioIosSimulatorUnsupported": {
+    "description": "iOS simulator cannot run broadcast extensions"
+  },
+  "systemAudioErrorUserCancelled": "已取消内录授权。",
+  "@systemAudioErrorUserCancelled": {
+    "description": "User declined the consent dialog or did not start the broadcast"
+  },
+  "systemAudioErrorPermissionDenied": "没有录音权限，无法内录。请在系统设置中允许深应会议使用麦克风。",
+  "@systemAudioErrorPermissionDenied": {
+    "description": "RECORD_AUDIO / microphone permission denied"
+  },
+  "systemAudioErrorUnsupported": "当前设备不支持内录。",
+  "@systemAudioErrorUnsupported": {
+    "description": "System-audio capture unsupported on this device"
+  },
+  "systemAudioErrorBusy": "内录正被占用或无法启动，请稍后重试。",
+  "@systemAudioErrorBusy": {
+    "description": "Capture already running or audio input busy"
+  },
+  "systemAudioErrorPlatform": "内录启动失败：{detail}",
+  "@systemAudioErrorPlatform": {
+    "description": "Generic native failure",
+    "placeholders": {
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
+  "systemAudioStoppedExternally": "内录已在系统中被停止，录音已结束。",
+  "@systemAudioStoppedExternally": {
+    "description": "The projection/broadcast was stopped outside the app"
+  },
+  "systemAudioFallbackToMicrophone": "改为仅麦克风录音",
+  "@systemAudioFallbackToMicrophone": {
+    "description": "Action offered when system-audio capture cannot start"
+  }
+}

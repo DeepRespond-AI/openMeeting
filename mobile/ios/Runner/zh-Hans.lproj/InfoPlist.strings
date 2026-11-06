@@ -1,0 +1,5 @@
+/* Localized Info.plist values (registered in the Xcode project as a variant group). */
+"CFBundleDisplayName" = "深应会议";
+"CFBundleName" = "深应会议";
+"NSCameraUsageDescription" = "深应会议需要使用摄像头进行视频会议。";
+"NSMicrophoneUsageDescription" = "深应会议需要使用麦克风录制会议音频，用于实时转写和生成会议纪要。";

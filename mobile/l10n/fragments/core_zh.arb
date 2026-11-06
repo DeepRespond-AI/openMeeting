@@ -1,0 +1,124 @@
+{
+  "appName": "深应会议",
+  "commonTextTooLong": "最多输入 {max} 个字符。",
+  "@commonTextTooLong": {"placeholders": {"max": {"type": "int"}}},
+  "@appName": {
+    "description": "App name"
+  },
+  "appTagline": "AI 会议助手",
+  "@appTagline": {
+    "description": "Short tagline under the logo"
+  },
+  "commonOk": "确定",
+  "commonCancel": "取消",
+  "commonConfirm": "确认",
+  "commonSave": "保存",
+  "commonSaving": "保存中…",
+  "commonDelete": "删除",
+  "commonEdit": "编辑",
+  "commonRename": "重命名",
+  "commonClose": "关闭",
+  "commonRetry": "重试",
+  "commonBack": "返回",
+  "commonNext": "下一步",
+  "commonContinue": "继续",
+  "commonDone": "完成",
+  "commonSkip": "跳过",
+  "commonCopy": "复制",
+  "commonCopied": "已复制",
+  "commonShare": "分享",
+  "commonSearch": "搜索",
+  "commonRefresh": "刷新",
+  "commonStart": "开始",
+  "commonStop": "停止",
+  "commonLoading": "加载中…",
+  "commonProcessing": "处理中…",
+  "commonEmpty": "暂无内容",
+  "commonEnabled": "已开启",
+  "commonDisabled": "已关闭",
+  "commonComingSoon": "该功能正在开发中",
+  "@commonComingSoon": {
+    "description": "Shown on placeholder pages"
+  },
+  "languageLabel": "语言",
+  "languageSystem": "跟随系统",
+  "languageZh": "简体中文",
+  "@languageZh": {
+    "description": "Name of Chinese, shown in its own language"
+  },
+  "languageEn": "English",
+  "@languageEn": {
+    "description": "Name of English, shown in its own language"
+  },
+  "timeJustNow": "刚刚",
+  "timeMinutesAgo": "{count} 分钟前",
+  "@timeMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeHoursAgo": "{count} 小时前",
+  "@timeHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeDaysAgo": "{count} 天前",
+  "@timeDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeToday": "今天",
+  "timeYesterday": "昨天",
+  "errorGeneric": "出现问题，请重试。",
+  "errorWithDetail": "错误：{detail}",
+  "@errorWithDetail": {
+    "placeholders": {
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
+  "errorNetwork": "无法连接服务器，请检查网络或服务器地址",
+  "errorTimeout": "请求超时，请稍后重试",
+  "errorBadRequest": "请求有误",
+  "errorUnauthorized": "登录已失效，请重新登录",
+  "errorForbidden": "没有权限执行此操作",
+  "errorNotFound": "内容不存在或已被删除",
+  "errorConflict": "操作冲突，请刷新后重试",
+  "errorPayloadTooLarge": "内容过大，服务器拒绝接收",
+  "errorInvalidInput": "输入内容无效，请检查后重试",
+  "errorRateLimited": "操作过于频繁，请稍后再试",
+  "errorUnavailable": "服务暂不可用，请稍后再试",
+  "errorServer": "服务器出错，请稍后再试",
+  "errorCancelled": "已取消",
+  "errorNotConfigured": "尚未设置服务器地址",
+  "errorUnknown": "发生未知错误",
+  "authSessionExpired": "登录已过期，请重新登录",
+  "navOnboarding": "欢迎",
+  "navLogin": "登录",
+  "navMeetings": "会议",
+  "navMeetingDetail": "会议详情",
+  "navRecording": "录音",
+  "navImport": "导入音频",
+  "navSettings": "设置",
+  "onboardingGetStarted": "开始使用",
+  "meetingsEmpty": "还没有会议记录",
+  "meetingsUntitled": "未命名会议",
+  "transcriptionLanguageName": "{code, select, auto{自动识别} zh{中文} en{英语} ja{日语} ko{韩语} yue{粤语} de{德语} fr{法语} es{西班牙语} ru{俄语} other{{code}}}",
+  "@transcriptionLanguageName": {
+    "description": "Name of a transcription language code (AppConfig.transcription.languages)",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  }
+}

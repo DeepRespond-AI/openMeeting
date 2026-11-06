@@ -1,0 +1,88 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      server-url:
+        description: 'Production HTTPS gateway embedded in the desktop binaries'
+        type: string
+        required: true
+      sign-binaries:
+        description: 'Use configured Windows/macOS OS code-signing certificates'
+        type: boolean
+        default: false
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+    outputs:
+      release-id: ${{ steps.release.outputs.release-id }}
+      version: ${{ steps.release.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node scripts/ci/check-versions.mjs
+      - name: Validate release inputs before creating a tag
+        env:
+          OPENMEETING_SERVER_URL: ${{ inputs.server-url }}
+          OPENMEETING_SIGN_UPDATER: 'true'
+          TAURI_SIGNING_PUBLIC_KEY: ${{ vars.TAURI_SIGNING_PUBLIC_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+        run: node frontend/scripts/prepare-ci-build.mjs --validate-only
+      - name: Create or resume the source-version draft
+        id: release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await require('./scripts/ci/prepare-release.cjs')({github, context, core});
+
+  build:
+    needs: prepare
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: windows-latest
+            target: x86_64-pc-windows-msvc
+            args: --bundles nsis
+          - platform: macos-latest
+            target: aarch64-apple-darwin
+            args: ''
+          - platform: ubuntu-24.04
+            target: x86_64-unknown-linux-gnu
+            args: --bundles deb,appimage
+    uses: ./.github/workflows/build.yml
+    with:
+      platform: ${{ matrix.platform }}
+      target: ${{ matrix.target }}
+      build-args: ${{ matrix.args }}
+      server-url: ${{ inputs.server-url }}
+      ref: ${{ github.sha }}
+      sign-updater: true
+      sign-binaries: ${{ inputs.sign-binaries }}
+      release-id: ${{ needs.prepare.outputs.release-id }}
+    secrets: inherit
+
+  summary:
+    needs: [prepare, build]
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Summarize draft for review
+        env:
+          RELEASE_VERSION: ${{ needs.prepare.outputs.version }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          printf 'Draft v%s built from the selected source commit.\n' "$RELEASE_VERSION" >> "$GITHUB_STEP_SUMMARY"
+          printf 'Review installers, signatures and updater metadata at https://github.com/%s/releases before publishing.\n' "$REPOSITORY" >> "$GITHUB_STEP_SUMMARY"

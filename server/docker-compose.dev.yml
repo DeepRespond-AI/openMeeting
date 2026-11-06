@@ -1,0 +1,55 @@
+# Development overlay: bind each service's source and restart only its Python process.
+# docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+# Keep credentials, databases, data volumes and service dependencies from the base file.
+x-reload-env: &reload-env
+  # Reliable change detection for Windows/Docker Desktop bind mounts.
+  WATCHFILES_FORCE_POLLING: "true"
+
+services:
+  gateway_ms:
+    environment: *reload-env
+    volumes:
+      - type: bind
+        source: ./gateway_ms
+        target: /srv/gateway_ms
+        read_only: true
+    command: ["python", "-m", "uvicorn", "gateway_ms.main:app", "--host", "0.0.0.0", "--port", "39110", "--proxy-headers", "--forwarded-allow-ips", "*", "--reload", "--reload-dir", "/srv/gateway_ms", "--reload-delay", "1", "--timeout-graceful-shutdown", "5"]
+
+  user_ms:
+    environment: *reload-env
+    volumes:
+      - type: bind
+        source: ./user_ms
+        target: /srv/user_ms
+        read_only: true
+      - type: bind
+        source: ./service_net
+        target: /srv/service_net
+        read_only: true
+    command: ["python", "-m", "uvicorn", "user_ms.main:app", "--host", "0.0.0.0", "--port", "39113", "--reload", "--reload-dir", "/srv/user_ms", "--reload-dir", "/srv/service_net", "--reload-delay", "1", "--timeout-graceful-shutdown", "5"]
+
+  meeting_ms:
+    environment: *reload-env
+    volumes:
+      - type: bind
+        source: ./meeting_ms
+        target: /srv/meeting_ms
+        read_only: true
+      - type: bind
+        source: ./service_net
+        target: /srv/service_net
+        read_only: true
+    command: ["python", "-m", "uvicorn", "meeting_ms.main:app", "--host", "0.0.0.0", "--port", "39107", "--reload", "--reload-dir", "/srv/meeting_ms", "--reload-dir", "/srv/service_net", "--reload-delay", "1", "--timeout-graceful-shutdown", "5"]
+
+  stt_ms:
+    environment: *reload-env
+    volumes:
+      - type: bind
+        source: ./stt_ms
+        target: /srv/stt_ms
+        read_only: true
+      - type: bind
+        source: ./service_net
+        target: /srv/service_net
+        read_only: true
+    command: ["python", "-m", "uvicorn", "stt_ms.main:app", "--host", "0.0.0.0", "--port", "39109", "--reload", "--reload-dir", "/srv/stt_ms", "--reload-dir", "/srv/service_net", "--reload-delay", "1", "--timeout-graceful-shutdown", "5"]

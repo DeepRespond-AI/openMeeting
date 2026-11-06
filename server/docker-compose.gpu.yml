@@ -1,0 +1,14 @@
+# GPU override: docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d --build
+# （仅 stt_ms 使用 GPU，其余服务不变）
+services:
+  stt_ms:
+    build:
+      context: .
+      dockerfile: stt_ms/Dockerfile.cuda
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]

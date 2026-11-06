@@ -1,0 +1,288 @@
+'use client';
+
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo, ReactNode, useRef } from 'react';
+import { SelectedDevices } from '@/components/DeviceSelection';
+import { configService } from '@/services/configService';
+import { invoke } from '@tauri-apps/api/core';
+import Analytics from '@/lib/analytics';
+import { BetaFeatures, BetaFeatureKey, loadBetaFeatures, saveBetaFeatures } from '@/types/betaFeatures';
+
+export interface StorageLocations {
+  recordings: string;
+}
+
+export interface NotificationSettings {
+  recording_notifications: boolean;
+  time_based_reminders: boolean;
+  meeting_reminders: boolean;
+  respect_do_not_disturb: boolean;
+  notification_sound: boolean;
+  system_permission_granted: boolean;
+  consent_given: boolean;
+  manual_dnd_mode: boolean;
+  notification_preferences: {
+    show_recording_started: boolean;
+    show_recording_stopped: boolean;
+    show_recording_paused: boolean;
+    show_recording_resumed: boolean;
+    show_transcription_complete: boolean;
+    show_meeting_reminders: boolean;
+    show_system_errors: boolean;
+    meeting_reminder_minutes: number[];
+  };
+}
+
+interface ConfigContextType {
+  // Device configuration
+  selectedDevices: SelectedDevices;
+  setSelectedDevices: (devices: SelectedDevices) => void;
+
+  // Language preference
+  selectedLanguage: string;
+  setSelectedLanguage: (lang: string) => void;
+
+  // UI preferences
+  showConfidenceIndicator: boolean;
+  toggleConfidenceIndicator: (checked: boolean) => void;
+
+  // Beta features
+  betaFeatures: BetaFeatures;
+  toggleBetaFeature: (featureKey: BetaFeatureKey, enabled: boolean) => void;
+
+  // Summary configuration
+  isAutoSummary: boolean;
+  toggleIsAutoSummary: (checked: boolean) => void;
+
+  // Preference settings (lazy loaded)
+  notificationSettings: NotificationSettings | null;
+  storageLocations: StorageLocations | null;
+  isLoadingPreferences: boolean;
+  loadPreferences: () => Promise<void>;
+  updateNotificationSettings: (settings: NotificationSettings) => Promise<void>;
+}
+
+// Model / provider configuration now lives on the OpenMeeting server (see ServerContext).
+const ConfigContext = createContext<ConfigContextType | undefined>(undefined);
+
+
+export function ConfigProvider({ children }: { children: ReactNode }) {
+  // Device configuration state
+  const [selectedDevices, setSelectedDevices] = useState<SelectedDevices>({
+    micDevice: null,
+    systemDevice: null
+  });
+
+  // Language preference state
+  const [selectedLanguage, setSelectedLanguage] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('primaryLanguage');
+      return saved || 'auto';
+    }
+    return 'auto';
+  });
+
+  // UI preferences state
+  const [showConfidenceIndicator, setShowConfidenceIndicator] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('showConfidenceIndicator');
+      return saved !== null ? saved === 'true' : true;
+    }
+    return true;
+  });
+
+  // Summary configs
+  const [isAutoSummary, setisAutoSummary] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('isAutoSummary');
+      return saved !== null ? saved === 'true' : false
+    }
+    return false;
+  });
+
+  // Beta features state (localStorage)
+  const [betaFeatures, setBetaFeatures] = useState<BetaFeatures>(() => {
+    return loadBetaFeatures();
+  });
+
+  // Preference settings state (lazy loaded)
+  const [notificationSettings, setNotificationSettings] = useState<NotificationSettings | null>(null);
+  const [storageLocations, setStorageLocations] = useState<StorageLocations | null>(null);
+  const [isLoadingPreferences, setIsLoadingPreferences] = useState(false);
+  const preferencesLoadedRef = useRef(false);
+  const isLoadingRef = useRef(false);
+
+  // Sync language preference to Rust on mount (fixes startup desync bug)
+  useEffect(() => {
+    if (selectedLanguage) {
+      invoke('set_language_preference', { language: selectedLanguage })
+        .then(() => {
+          console.log('[ConfigContext] Synced language preference to Rust on startup:', selectedLanguage);
+        })
+        .catch(err => {
+          console.error('[ConfigContext] Failed to sync language preference to Rust on startup:', err);
+        });
+    }
+  }, []); 
+
+  // Load device preferences on mount
+  useEffect(() => {
+    const loadDevicePreferences = async () => {
+      try {
+        const prefs = await configService.getRecordingPreferences();
+        if (prefs && (prefs.preferred_mic_device || prefs.preferred_system_device)) {
+          setSelectedDevices({
+            micDevice: prefs.preferred_mic_device,
+            systemDevice: prefs.preferred_system_device
+          });
+          console.log('Loaded device preferences:', prefs);
+        }
+      } catch (error) {
+        console.log('No device preferences found or failed to load:', error);
+      }
+    };
+    loadDevicePreferences();
+  }, []);
+
+  // Toggle confidence indicator with localStorage persistence
+  const toggleConfidenceIndicator = useCallback((checked: boolean) => {
+    setShowConfidenceIndicator(checked);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('showConfidenceIndicator', checked.toString());
+    }
+    // Trigger a custom event to notify other components
+    window.dispatchEvent(new CustomEvent('confidenceIndicatorChanged', { detail: checked }));
+  }, []);
+
+  const toggleIsAutoSummary = useCallback((checked: boolean) => {
+    setisAutoSummary(checked);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('isAutoSummary', checked.toString());
+    }
+  }, [])
+
+  // Toggle beta feature with localStorage persistence and analytics
+  const toggleBetaFeature = useCallback((featureKey: BetaFeatureKey, enabled: boolean) => {
+    setBetaFeatures(prev => {
+      const updated = { ...prev, [featureKey]: enabled };
+      saveBetaFeatures(updated);
+
+      // Track analytics with specific feature
+      Analytics.track('beta_feature_toggled', {
+        feature: featureKey,
+        enabled: enabled.toString(),
+      }).catch(err => console.error('Failed to track beta feature toggle:', err));
+
+      return updated;
+    });
+  }, []);
+
+  // Lazy load preference settings (only loads if not already cached)
+  const loadPreferences = useCallback(async () => {
+    // If already loaded, don't reload
+    if (preferencesLoadedRef.current) {
+      return;
+    }
+
+    // If currently loading, don't start another load
+    if (isLoadingRef.current) {
+      return;
+    }
+
+    isLoadingRef.current = true;
+    setIsLoadingPreferences(true);
+    try {
+      // Load notification settings from backend
+      let settings: NotificationSettings | null = null;
+      try {
+        settings = await invoke<NotificationSettings>('get_notification_settings');
+        setNotificationSettings(settings);
+      } catch (notifError) {
+        console.error('[ConfigContext] Failed to load notification settings:', notifError);
+        // Use default values if notification settings fail to load
+        setNotificationSettings(null);
+      }
+
+      // Load storage locations (recordings are cached locally before upload)
+      const recordingsDir = await invoke<string>('get_default_recordings_folder_path');
+      setStorageLocations({ recordings: recordingsDir });
+
+      // Mark as loaded
+      preferencesLoadedRef.current = true;
+    } catch (error) {
+      console.error('[ConfigContext] Failed to load preferences:', error);
+    } finally {
+      isLoadingRef.current = false;
+      setIsLoadingPreferences(false);
+    }
+  }, []);
+
+  // Update notification settings
+  const updateNotificationSettings = useCallback(async (settings: NotificationSettings) => {
+    try {
+      await invoke('set_notification_settings', { settings });
+      setNotificationSettings(settings);
+    } catch (error) {
+      console.error('[ConfigContext] Failed to update notification settings:', error);
+      throw error; // Re-throw so component can handle error
+    }
+  }, []);
+
+  // Wrapper for setSelectedLanguage that persists to localStorage and syncs to Rust
+  const handleSetSelectedLanguage = useCallback((lang: string) => {
+    setSelectedLanguage(lang);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('primaryLanguage', lang);
+    }
+    // Sync with Rust in-memory state for live recording
+    invoke('set_language_preference', { language: lang }).catch(err =>
+      console.error('Failed to sync language preference to Rust:', err)
+    );
+  }, []);
+
+  const value: ConfigContextType = useMemo(() => ({
+    isAutoSummary,
+    toggleIsAutoSummary,
+    selectedDevices,
+    setSelectedDevices,
+    selectedLanguage,
+    setSelectedLanguage: handleSetSelectedLanguage,
+    showConfidenceIndicator,
+    toggleConfidenceIndicator,
+    betaFeatures,
+    toggleBetaFeature,
+    notificationSettings,
+    storageLocations,
+    isLoadingPreferences,
+    loadPreferences,
+    updateNotificationSettings,
+  }), [
+    isAutoSummary,
+    toggleIsAutoSummary,
+    selectedDevices,
+    selectedLanguage,
+    handleSetSelectedLanguage,
+    showConfidenceIndicator,
+    toggleConfidenceIndicator,
+    betaFeatures,
+    toggleBetaFeature,
+    notificationSettings,
+    storageLocations,
+    isLoadingPreferences,
+    loadPreferences,
+    updateNotificationSettings,
+  ]);
+
+  return (
+    <ConfigContext.Provider value={value}>
+      {children}
+    </ConfigContext.Provider>
+  );
+}
+
+export function useConfig() {
+  const context = useContext(ConfigContext);
+  if (context === undefined) {
+    throw new Error('useConfig must be used within a ConfigProvider');
+  }
+  return context;
+}
